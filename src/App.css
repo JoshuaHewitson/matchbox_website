@@ -1,0 +1,195 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-10px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+@keyframes expand {
+	0% {
+    transform: scale(0.1);
+    border: 3px #2fe6a6 solid;
+    opacity: 0.8
+	}
+	100% {
+    transform: scale(1);
+    border: 3px #2fe6a6 solid;
+    opacity: 0
+	}
+}
+
+@keyframes expand1 {
+	0% {
+    transform: scale(0.1);
+    border: 2px #2fe6a6 solid;
+    opacity: 0.8
+	}
+	100% {
+    transform: scale(1.5);
+    border: 2px #2fe6a6 solid;
+    opacity: 0
+	}
+}
+@keyframes expand2 {
+	0% {
+    transform: scale(0.1);
+    border: 1px #2fe6a6 solid;
+    opacity: 0.8
+	}
+	100% {
+    transform: scale(2);
+    border: 1px #2fe6a6 solid;
+    opacity: 0
+	}
+}
+
+@keyframes appear {
+	0% {
+    transform: scale(0.2);
+    opacity: 1
+	}
+	50% {
+    transform: scale(1.2);
+    opacity: 1
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1
+	}
+}
+
+.button2 {
+  background-color: transparent
+}
+
+.button2:hover {
+  background-color: transparent
+}
+
+.backgroundCircle {
+  position: 'fixed';
+  width: 500px;
+  height: 500px;
+  opacity: 1;
+	box-sizing: border-box;
+	border: 5px #2fe6a6 solid;
+  border-radius: 50%;
+  transform: scale(0.1);
+	animation: expand 6.6s ease-in-out infinite;
+}
+
+.backgroundCircle1 {
+  position: 'fixed';
+  width: 500px;
+  height: 500px;
+  opacity: 1;
+	box-sizing: border-box;
+	border: 5px #2fe6a6 solid;
+  border-radius: 50%;
+  transform: scale(0.1);
+	animation: expand1 6s ease-in-out infinite;
+}
+
+.backgroundCircle2 {
+  position: 'fixed';
+  width: 500px;
+  height: 500px;
+  opacity: 1;
+	box-sizing: border-box;
+	border: 5px #2fe6a6 solid;
+  border-radius: 50%;
+  transform: scale(0.1);
+	animation: expand2 6.3s ease-in-out infinite;
+}
+
+.backgroundCircle3 {
+  position: 'fixed';
+  width: 400px;
+  height: 400px;
+  opacity: 1;
+  box-sizing: border-box;
+  background-color: #2fe6a6;
+	border: 5px #2fe6a6 solid;
+  border-radius: 50%;
+}
+
+.backgroundCircle4 {
+  position: 'fixed';
+  width: 350px;
+  height: 350px;
+  opacity: 1;
+  box-sizing: border-box;
+  background-color: #2f8980;
+  border-radius: 50%;
+}
+
+.backgroundCircle5 {
+  position: 'fixed';
+  width: 530px;
+  height: 530px;
+  opacity: 1;
+	box-sizing: border-box;
+	border: 1px #2fe6a6 solid;
+  border-radius: 50%;
+}
+
+.backgroundCircle6 {
+  position: 'fixed';
+  width: 590px;
+  height: 590px;
+  opacity: 0.5;
+	box-sizing: border-box;
+	border: 1px #2fe6a6 solid;
+  border-radius: 50%;
+}
+
+.backgroundCircle7 {
+  position: 'fixed';
+  width: 700px;
+  height: 700px;
+  opacity: 0.2;
+	box-sizing: border-box;
+	border: 1px #2fe6a6 solid;
+  border-radius: 50%;
+}
+
+.backgroundCircle8 {
+  position: 'fixed';
+  width: 530px;
+  height: 530px;
+  opacity: 0.5;
+	box-sizing: border-box;
+	background-color: #2fe6a6;
+  border-radius: 50%;
+}
+
+.phoneImage {
+  src: 'phoneOutline2';
+}
+
+.slide-container {
+	transform: translatey(0px);
+	animation: float 2s ease-in-out infinite;
+}
+
+.appear {
+  animation: appear 0.5s ease-in-out;
+}
+
+.phone-image-container {
+  width: '100%';
+  margin-top: 20;
+}
+
+.App-link {
+  color: #09d3ac;
+}
