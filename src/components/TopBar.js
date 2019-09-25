@@ -95,6 +95,7 @@ class TopBar extends Component {
                 {this.props.width > 1000 && this.renderButton('About us', 4)}
                 {this.props.width > 1000 && this.renderButton('Contact', 5)}
                 {this.props.width < 1000 && <Grid />}
+                {this.props.width < 1000 && <Grid />}
               </Grid>
             </Grid>
           </Toolbar>
