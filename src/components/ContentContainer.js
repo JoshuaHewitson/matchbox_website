@@ -12,9 +12,9 @@ const ContentContainer = (props) => {
         justify='center'
         alignItems='center'
         style={{
-          flex: 1,
-          backgroundColor: backgroundColor
-        // border: 'solid #dddddd 0.5px'
+          flex: 1
+          // backgroundColor: backgroundColor
+          // border: 'solid #dddddd 0.5px'
         }}
       >
         {props.children}

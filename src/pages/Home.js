@@ -11,7 +11,9 @@ import testPic1 from '../assets/testPic1.png'
 import testPic2 from '../assets/testPic2.png'
 import plant1 from '../assets/plant1.svg'
 import plant2 from '../assets/plant2.svg'
-import person1 from '../assets/person1.svg'
+import person1 from '../assets/person3.svg'
+import person2 from '../assets/person4.svg'
+import person3 from '../assets/person5.svg'
 import greenBackgroundShape1 from '../assets/greenBackgroundShape1.svg'
 import building1 from '../assets/building1.svg'
 import {
@@ -24,7 +26,8 @@ import {
   TextContainer,
   PageSection,
   TextSection,
-  PageIndicatorDots
+  PageIndicatorDots,
+  Footer
 } from '../components'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { styleConstants as sc } from '../config'
@@ -139,7 +142,7 @@ class Home extends Component {
             image={testPic1}
             num={1}
             heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download and use. You can sign in with your email, or with your Facebook / Google account.'
+            paragraph1='Matchbox is free to download and use. You can sign in with your email, Facebook or Google account.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -147,7 +150,7 @@ class Home extends Component {
             num={2}
             image={testPic2}
             heading='Set your filters'
-            paragraph1='Set up your search filters. Filters are settings on your profile screen, which are always saved, and can be changed anytime.'
+            paragraph1='Set up your search filters. Effortlessly switch between buying and renting with specific filters suited to your needs. Filters are always saved and can be changed anytime.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -155,7 +158,7 @@ class Home extends Component {
             num={3}
             image={testPic1}
             heading='Start swiping'
-            paragraph1='Swipe through the resulting properties in your feed and match with the ones you like.'
+            paragraph1='Swipe through your filtered list of properties and match with the ones you like.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0 }}>
@@ -163,8 +166,7 @@ class Home extends Component {
             num={4}
             image={testPic1}
             heading='It’s a match!'
-            paragraph1='If you click the match button you will instantly match with any property. You can then instant message the Seller, landlord or agent responsible.'
-            paragraph2='You can book viewing times and even send out an offer letter with our easy-to-use template.'
+            paragraph1='Matching with a property opens a chat with the landlord/agent responsible for the property. You can instant message, schedule viewing times and even send out an offer letter with our easy-to-use template - all in-app.'
           />
         </div>
       </TextContainer>
@@ -187,7 +189,7 @@ class Home extends Component {
             num={1}
             image={testPic1}
             heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download and use. You can sign in with your email, or with your Facebook / Google account.'
+            paragraph1='Matchbox is free to download and use. You can sign in with your email, Facebook or Google account.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -195,16 +197,24 @@ class Home extends Component {
             num={2}
             image={testPic2}
             heading='Create a listing'
-            paragraph1='Creating a listing is completely free. Just add the details of your property and take some pictures with your phone.'
-            paragraph2='If you want an agent to do everything for you, it’s even easier. Just creat a listing seeking agents. To get started all you need is a single photo!'
+            paragraph1='Creating a listing is completely free. Add your details, such as location, property type, number of rooms and other amenities. Upload pictures from your phone, or use our guided photography to take some in real-time.'
+            paragraph2='Don’t want to sell privately? Choose to make your property visible to estate agents so they can find you!'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={3}
             image={testPic1}
-            heading='It’s a match!'
-            paragraph1='Once someone matches with your property, you can instant message them, schedule viewing times, and accept an offer to purchase.'
+            heading='It’s a match'
+            paragraph1='Once someone has matched with your property, a chat opens which allows you to talk to them directly.'
+          />
+        </div>
+        <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
+          <Step
+            num={4}
+            image={testPic1}
+            heading='Sold!'
+            paragraph1='Schedule viewing times, negotiate prices and accept an offer to purchase - all in-app.'
           />
         </div>
       </TextContainer>
@@ -227,7 +237,7 @@ class Home extends Component {
             num={1}
             image={testPic1}
             heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download. Sign up and verify that you are an agent. Then indicate which agency you are with (or if you’re independent).'
+            paragraph1='Matchbox is free to download. Sign up and verify that you are an agent.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -261,23 +271,31 @@ class Home extends Component {
   renderAboutUs = () => {
     return (
       <TextContainer>
-        <div style={{ marginBottom: 20, marginTop: 20 }}>
-          <HighlightLine />
-        </div>
-        <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+        <Grid style={{ maxWidth: 400 }}>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          <div style={{ marginBottom: 40 }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
             Our story
+            </Typography>
+          </div>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          The problem is that buying or selling property can be hard. and scary. and expensive. We’ve all almost smashed our computers in frustration, because the available platforms just don’t get it.
           </Typography>
-        </div>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The problem is that buying or selling property can be hard. and scary. and expensive. And the available platforms just don’t get it.
-        </Typography>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The solution is an easy to use app, that makes finding a home effortless. Technology is amazing and it can help us with basically anything. So why shouldn’t you have access to people buying and selling properties all around you. That is the question the backend developer asked the frontend developer and after a while, the lawyer agreed.
-        </Typography>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          The solution is an easy-to-use app, that makes finding a home intuitive and effortless. We generally dislike answering the phone, so let’s chat in-app and in our own time. When you have grown up in the era of smartphones and AI, it seems obvious that your next move should be a swipe away. We all use our phones every day and we instinctively know what’s easy to use.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Why should you need a laptop to have access to people buying and selling properties all around you? Almost half of all South Africans own smartphones, whilst less than 10% of households have access to a computer.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          We believe that everyone should have the ability to market their properties and find homes in their price range, free of charge. We also believe that estate agents play an invaluable role in helping people through this process, and therefore shouldn’t be charged until they actually make a sale.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           And so Matchbox was born. An easy and affordable way for people to move, in their pockets.
-        </Typography>
+          </Typography>
+        </Grid>
 
       </TextContainer>
     )
@@ -286,24 +304,25 @@ class Home extends Component {
   renderContact = () => {
     return (
       <TextContainer>
-        <div style={{ marginBottom: 20, marginTop: 20 }}>
-          <HighlightLine />
-        </div>
-        <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+        <Grid style={{ maxWidth: 400 }}>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          <div style={{ marginBottom: 40 }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
             Contact us
-          </Typography>
-        </div>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+            </Typography>
+          </div>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           Want to know more? Have some feedback for us? We’d love to hear from you!
-        </Typography>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          Contact us below (enter some box thing where they can send a message), or send an email our way - info@matchbox.app
-        </Typography>
-        <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Send an email our way - info@matchbox.app
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           One of us loves doing admin, we promise we’ll reply!
-        </Typography>
-
+          </Typography>
+        </Grid>
       </TextContainer>
     )
   }
@@ -332,10 +351,11 @@ class Home extends Component {
         <div ref={(ref) => { this.pageRefs[0] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
-              <TextSection />
+              <TextSection width={this.state.width} />
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
-              {this.renderPhone(phoneOutline2)}
+              {/* this.renderPhone(phoneOutline2) */}
+              <SlideShow />
             </ContentContainer>
           </PageSection>
         </div>
@@ -360,7 +380,7 @@ class Home extends Component {
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
-                <img class='appear' src={person1} style={{ marginTop: 20 }} />
+                <img class='appear' src={person2} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
@@ -373,7 +393,7 @@ class Home extends Component {
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
-                <img class='appear' src={person1} style={{ marginTop: 20 }} />
+                <img class='appear' src={person3} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
@@ -386,7 +406,7 @@ class Home extends Component {
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
-                <img class='appear' src={person1} style={{ marginTop: 20 }} />
+                <img class='appear' src={person2} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
@@ -405,18 +425,16 @@ class Home extends Component {
           </PageSection>
         </div>
 
-        <div style={{ height: 200, backgroundColor: sc.LIGHT_GREY }}>
-          <Grid container justify='center' alignItems='flex-end' style={{ height: '100%', padding: 20 }}>
-            <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>Copyright © 2019 Matchbox Holdings (PTY) Ltd. All rights reserved.</Typography>
-          </Grid>
-        </div>
+        <Footer width={this.state.width} />
 
         {/* <div style={{ position: 'fixed', top: '75%', width: '100%', height: '25%', backgroundColor: 'white' }} /> */}
+        {/*
         <div style={{ transform: 'rotate(-90deg)', transformOrigin: 'left top 0', position: 'fixed', top: '540px', left: '50px', width: '25%', height: '5%', color: sc.BODY_TEXT_COLOR }}>
           <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>Hold your breath.</Typography>
           <Typography variant='caption' style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon</Typography>
           <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}> to IOS and Android</Typography>
         </div>
+        */}
       </div>
     )
   }

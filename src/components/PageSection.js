@@ -18,7 +18,8 @@ const PageSection = (props) => {
           width: '100%',
           height: '100%',
           maxWidth: 950,
-          minHeight: 600
+          marginBottom: 100
+          // minHeight: 600
           // borderLeft: 'solid #dddddd 0.5px'
         }}
       >

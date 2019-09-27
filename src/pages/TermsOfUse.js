@@ -3,30 +3,13 @@ import Grid from '@material-ui/core/Grid'
 // import windowSize from 'react-window-size'
 // import Zoom from '@material-ui/core/Zoom'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Typography'
-import phoneOutline1 from '../assets/phoneOutline6.svg'
-import phoneOutline2 from '../assets/phoneOutline3.svg'
-import phoneOutline3 from '../assets/phoneOutline4.svg'
-import testPic1 from '../assets/testPic1.png'
-import testPic2 from '../assets/testPic2.png'
-import plant1 from '../assets/plant1.svg'
-import plant2 from '../assets/plant2.svg'
-import person1 from '../assets/person1.svg'
-import greenBackgroundShape1 from '../assets/greenBackgroundShape1.svg'
-import building1 from '../assets/building1.svg'
 import {
-  TopBar,
-  SlideShow,
-  Heading,
+  Footer,
   ContentContainer,
   HighlightLine,
-  Step,
   TextContainer,
-  PageSection,
-  TextSection,
-  PageIndicatorDots
+  PageSection
 } from '../components'
-import ScrollAnimation from 'react-animate-on-scroll'
 import { styleConstants as sc } from '../config'
 import 'animate.css/animate.min.css'
 import '../App.css'
@@ -153,11 +136,7 @@ class TermsOfUse extends Component {
           </PageSection>
         </div>
 
-        <div style={{ height: 200, backgroundColor: sc.LIGHT_GREY }}>
-          <Grid container justify='center' alignItems='flex-end' style={{ height: '100%', padding: 20 }}>
-            <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>Copyright © 2019 Matchbox Holdings (PTY) Ltd. All rights reserved.</Typography>
-          </Grid>
-        </div>
+        <Footer width={this.state.width} />
 
         {/* <div style={{ position: 'fixed', top: '75%', width: '100%', height: '25%', backgroundColor: 'white' }} /> */}
         <div style={{ transform: 'rotate(-90deg)', transformOrigin: 'left top 0', position: 'fixed', top: '540px', left: '50px', width: '25%', height: '5%', color: sc.BODY_TEXT_COLOR }}>

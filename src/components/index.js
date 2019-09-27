@@ -9,6 +9,7 @@ import TextContainer from './TextContainer'
 import ContentContainer from './ContentContainer'
 import PageIndicatorDots from './PageIndicatorDots'
 import AppBarMenu from './AppBarMenu'
+import Footer from './Footer'
 
 export {
   TextSection,
@@ -21,5 +22,6 @@ export {
   TextContainer,
   ContentContainer,
   PageIndicatorDots,
-  AppBarMenu
+  AppBarMenu,
+  Footer
 }

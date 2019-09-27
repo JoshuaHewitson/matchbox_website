@@ -1,54 +1,43 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import Slider from 'react-animated-slider'
 import 'react-animated-slider/build/horizontal.css'
+import Grid from '@material-ui/core/Grid'
+import phoneBackground from '../assets/phoneBackground.svg'
 import slide1 from '../assets/phoneOutline3.svg'
 import slide2 from '../assets/phoneOutline4.svg'
 import slide3 from '../assets/phoneOutline6.svg'
+import slide4 from '../assets/phoneOutline7.svg'
 import '../App.css'
 
-const images = [
-  slide1,
-  slide2,
-  slide3
+const slides = [
+  <img key={0} class='slideAppear' style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }} src={slide1} />,
+  <img key={1} class='slideAppear' style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }} src={slide2} />,
+  <img key={2} class='slideAppear' style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }} src={slide3} />,
+  <img key={3} class='slideAppear' style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }} src={slide4} />
 ]
 
-const fadeProperties = {
-  duration: 5000,
-  transitionDuration: 1000,
-  infinite: true,
-  indicators: false,
-  arrows: false,
-  onChange: (oldIndex, newIndex) => {
-    console.log(`fade transition from ${oldIndex} to ${newIndex}`)
+class SlideShow extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      index: 0
+    }
   }
-}
 
-const zoomOutProperties = {
-  duration: 5000,
-  transitionDuration: 400,
-  infinite: true,
-  indicators: false,
-  scale: 1.1,
-  arrows: false
-}
-
-const sliderPros = {
-  autoplay: 2000,
-  previousButton: null,
-  nextButton: null
-  // disabled: true
-}
-
-const SlideShow = () => {
-  return (
-    <div className='slide-container' style={{ width: '100%', height: 1000, paddingTop: 20, backgroundColor: 'red' }}>
-      <Slider {...sliderPros} style={{ height: 1000 }}>
-        {images.map((item, index) => {
-          return (<img class='phoneImage' key={index} style={{ height: 1000 }} src={images[index]} />)
-        })}
-      </Slider>
-    </div>
-  )
+  render () {
+    const newIndex = this.state.index === slides.length - 1 ? 0 : this.state.index + 1
+    setTimeout(() => {
+      this.setState({
+        index: newIndex
+      })
+    }, 3000)
+    return (
+      <Grid class='slide-container' style={{ width: '70%' }}>
+        {slides[this.state.index]}
+        <img src={phoneBackground} style={{ position: 'relative', top: 0, left: 0, zIndex: 1 }} />
+      </Grid>
+    )
+  }
 }
 
 export default SlideShow
