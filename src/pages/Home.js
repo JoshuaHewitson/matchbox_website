@@ -358,6 +358,14 @@ class Home extends Component {
               <SlideShow />
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT2 > this.state.width &&
+            <PageSection>
+              <img src={building1} style={{ position: 'absolute', marginTop: 200, right: 0, width: '60%' }} />
+              <img src={plant2} style={{ position: 'absolute', marginTop: 200, left: 0, width: '40%' }} />
+              <ContentContainer primary width={this.state.width}>
+                <SlideShow />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <div ref={(ref) => { this.pageRefs[1] = ref }}>
@@ -371,6 +379,12 @@ class Home extends Component {
               </Grid>
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <div ref={(ref) => { this.pageRefs[2] = ref }}>
@@ -384,6 +398,12 @@ class Home extends Component {
               </Grid>
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person2} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <div ref={(ref) => { this.pageRefs[3] = ref }}>
@@ -397,6 +417,12 @@ class Home extends Component {
               </Grid>
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person3} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <div ref={(ref) => { this.pageRefs[4] = ref }}>
@@ -410,6 +436,12 @@ class Home extends Component {
               </Grid>
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person2} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <div ref={(ref) => { this.pageRefs[5] = ref }}>
@@ -423,6 +455,12 @@ class Home extends Component {
               </Grid>
             </ContentContainer>
           </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
         </div>
 
         <Footer width={this.state.width} />

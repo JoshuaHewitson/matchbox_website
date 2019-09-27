@@ -19,7 +19,7 @@ const TextSection = (props) => {
           style={{
             padding: 20,
             marginTop: 60,
-            marginBottom: 30,
+            marginBottom: -70,
             borderRadius: 10,
             flex: 1,
             // minWidth: 500,
@@ -52,7 +52,6 @@ const TextSection = (props) => {
             */}
           </Grid>
         </Grid>
-        <SlideShow />
       </Grid>
     )
   } else {
