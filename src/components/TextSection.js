@@ -5,6 +5,7 @@ import Zoom from '@material-ui/core/Zoom'
 import person1 from '../assets/person5.svg'
 import appleLogo from '../assets/appleLogo.svg'
 import Heading from './Heading'
+import SlideShow from './SlideShow'
 import Typography from '@material-ui/core/Typography'
 import { styleConstants as sc } from '../config'
 
@@ -18,7 +19,7 @@ const TextSection = (props) => {
           style={{
             padding: 20,
             marginTop: 60,
-            marginBottom: 50,
+            marginBottom: 30,
             borderRadius: 10,
             flex: 1,
             // minWidth: 500,
@@ -47,9 +48,7 @@ const TextSection = (props) => {
             */}
           </Grid>
         </Grid>
-        <Grid style={{ width: '80%' }}>
-          <img class='appear' src={person1} style={{ marginTop: 20 }} />
-        </Grid>
+        <SlideShow />
       </Grid>
     )
   } else {
