@@ -83,7 +83,7 @@ class TopBar extends Component {
                       this.props.handleViewPageSection(this.props.pageRefs[0], 0)
                     }}
                   >
-                    <img src={logoText} style={{ height: 22 }} />
+                    <img src={logoText} style={{ height: 16 }} />
                   </MatchboxButton>
                   <Grid container justify='center'>
                     {this.props.selected === 0 && <HighlightLine />}

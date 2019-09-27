@@ -39,6 +39,10 @@ const TextSection = (props) => {
             Users can create listings, instant message, schedule viewings and even generate an offer to purchase - all in-app.
             </Typography>
             {/*
+            <div style={{ height: 20 }} />
+            <Typography variant='h5' paragraph style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon!</Typography>
+            <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android stores.</Typography>
+
             <Grid style={{ width: '10%' }}>
               <img class='appear' src={appleLogo} style={{ marginTop: 20 }} />
             </Grid>
@@ -56,7 +60,7 @@ const TextSection = (props) => {
       <Grid
         style={{
           padding: 10,
-          marginBottom: 50,
+          marginBottom: 0,
           borderRadius: 10,
           flex: 1,
           // minWidth: 500,
@@ -65,6 +69,7 @@ const TextSection = (props) => {
         }}
       >
         <Heading text='Want to buy, sell or rent?' />
+        <div style={{ height: 20 }} />
         <Typography variant='h5' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             We're the app for you.
         </Typography>
@@ -74,6 +79,10 @@ const TextSection = (props) => {
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
             Users can create listings, instant message, schedule viewings and even generate an offer to purchase - all in-app.
         </Typography>
+        {/*
+        <div style={{ height: 20 }} />
+        <Typography variant='h5' paragraph style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon!</Typography>
+        <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android stores.</Typography>
         {/*
         <Typography variant='subtitle1' style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon.</Typography>
         <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android.</Typography>
