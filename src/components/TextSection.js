@@ -76,7 +76,7 @@ const TextSection = (props) => {
             Matchbox is a sleek mobile app that connects private buyers, sellers and estate agents.
         </Typography>
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Users can create listings, instant message, request a Matcbox Buddy and schedule viewings - all in-app.
+            Users can create listings, instant message, request a Matchbox Buddy and schedule viewings - all in-app.
         </Typography>
         {/*
         <div style={{ height: 20 }} />
