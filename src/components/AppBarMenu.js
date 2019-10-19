@@ -76,10 +76,10 @@ export default function AppBarMenu (props) {
           {props.renderButton('Get verified', 3)}
         </StyledMenuItem>
         <StyledMenuItem>
-          {props.renderButton('About Us', 4)}
+          {props.renderButton('Matchbox Buddies', 4)}
         </StyledMenuItem>
         <StyledMenuItem>
-          {props.renderButton('Contact', 5)}
+          {props.renderButton('About Us/Contact', 5)}
         </StyledMenuItem>
       </StyledMenu>
     </Grid>
