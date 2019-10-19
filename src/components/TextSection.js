@@ -28,7 +28,7 @@ const TextSection = (props) => {
           }}
         >
           <Grid>
-            <Heading text='The easiest way to view property' />
+            <Heading text='The easiest way to view property.' />
             <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             Coming soon to both Android and IOS stores.
             </Typography>
@@ -67,7 +67,7 @@ const TextSection = (props) => {
           backgroundColor: 'white'
         }}
       >
-        <Heading text='The easiest way to view property' />
+        <Heading text='The easiest way to view property.' />
         <div style={{ height: 20 }} />
         <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             Coming soon to both Android and IOS stores.
