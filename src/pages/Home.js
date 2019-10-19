@@ -272,7 +272,7 @@ class Home extends Component {
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           We believe that viewing properties should be easy, safe and enjoyable. Finding a new home should be an exciting experience - and so Matchbox was born. An easy and reliable way to view properties, in your pocket.
           </Typography>
-<div style={{ marginBottom: 20, marginTop: 20 }}>
+<div style={{ marginBottom: 20, marginTop: 100 }}>
             <HighlightLine />
           </div>
           <div style={{ marginBottom: 40 }}>
