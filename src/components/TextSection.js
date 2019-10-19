@@ -28,15 +28,15 @@ const TextSection = (props) => {
           }}
         >
           <Grid>
-            <Heading text='Want to buy, sell or rent?' />
+            <Heading text='The easiest way to view property' />
             <Typography variant='h5' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            We're the app for you.
+            Coming soon to both Android and IOS stores.
             </Typography>
             <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Matchbox is a sleek mobile app that connects private buyers, sellers and estate agents.
+            Matchbox is a sleek mobile app that makes everything about viewing property, easy.
             </Typography>
             <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Users can create listings, instant message, schedule viewings and even generate an offer to purchase - all in-app.
+            We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
             </Typography>
             {/*
             <div style={{ height: 20 }} />
@@ -67,16 +67,16 @@ const TextSection = (props) => {
           backgroundColor: 'white'
         }}
       >
-        <Heading text='Want to buy, sell or rent?' />
+        <Heading text='The easiest way to view property' />
         <div style={{ height: 20 }} />
         <Typography variant='h5' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            We're the app for you.
+            Coming soon to both Android and IOS stores.
         </Typography>
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Matchbox is a sleek mobile app that connects private buyers, sellers and estate agents.
+            Matchbox is a sleek mobile app that makes everything about viewing property, easy.
         </Typography>
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Users can create listings, instant message, request a Matchbox Buddy and schedule viewings - all in-app.
+            We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
         </Typography>
         {/*
         <div style={{ height: 20 }} />
