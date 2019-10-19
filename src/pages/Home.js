@@ -134,7 +134,7 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
-            Buying / Renting?
+            Looking for properties? 
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -181,7 +181,7 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
-            Selling / Renting out?
+           Don’t have time to go to a viewing? Don’t want to attend a viewing alone?
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -196,25 +196,16 @@ class Home extends Component {
           <Step
             num={2}
             image={testPic2}
-            heading='Create a listing'
-            paragraph1='Creating a listing is completely free. Add your details, such as location, property type, number of rooms and other amenities. Upload pictures from your phone, or use our guided photography to take some in real-time.'
-            paragraph2='Don’t want to sell privately? Choose to make your property visible to estate agents so they can find you!'
+            heading='Select “Request a Buddy”'
+            paragraph1='Specify when/where you want them to attend a viewing'
+            paragraph2='Choose whether you want your Matchbox Buddy to go view the property for you, or whether you want them to accompany you to a viewing.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={3}
             image={testPic1}
-            heading='It’s a match'
-            paragraph1='Once someone has matched with your property, a chat opens which allows you to talk to them directly.'
-          />
-        </div>
-        <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
-          <Step
-            num={4}
-            image={testPic1}
-            heading='Sold!'
-            paragraph1='Schedule viewing times, negotiate prices and accept an offer to purchase - all in-app.'
+            heading='Only pay once a viewing has been accepted!'
           />
         </div>
       </TextContainer>
@@ -229,39 +220,31 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
-            Agent?
+            Want to verify your property/chat to buyers?
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={1}
             image={testPic1}
-            heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download. Sign up and verify that you are an agent.'
+            heading='Request verification'
+            paragraph1='We send a Matchbox Buddy to your property to verify that your listing is an accurate representation of the property.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={2}
             image={testPic2}
-            heading='Create a listing / find properties'
-            paragraph1='You can either upload the properties on your books, or you can swipe through a list of properties with sellers who are looking to find estate agents.'
+            heading='Start chatting'
+            paragraph1='We notify you once someone has matched with your property and a chat opens which allows you to talk to them directly.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={3}
             image={testPic1}
-            heading='Match with a buyer'
-            paragraph1='Chat, schedule viewings, sell! We only charge a fee when you’ve actually sold your property on the app - so it’s completely risk free.'
-          />
-        </div>
-        <div style={{ marginLeft: 0, marginRight: 0 }}>
-          <Step
-            num={4}
-            image={testPic1}
-            heading='Match with a seller'
-            paragraph1='Chat, become their agent and go back to step 3.'
+            heading=' Five times lucky'
+            paragraph1='Your first five matches are free! If you want to chat with more people, simply select one of our monthly payment packages '
           />
         </div>
       </TextContainer>
