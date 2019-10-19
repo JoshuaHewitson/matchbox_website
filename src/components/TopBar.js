@@ -89,9 +89,9 @@ class TopBar extends Component {
                     {this.props.selected === 0 && <HighlightLine />}
                   </Grid>
                 </Grid>
-                {this.props.width > 1000 && this.renderButton('Buying / Renting', 1)}
-                {this.props.width > 1000 && this.renderButton('Selling / renting out', 2)}
-                {this.props.width > 1000 && this.renderButton('Agents', 3)}
+                {this.props.width > 1000 && this.renderButton('Looking for property', 1)}
+                {this.props.width > 1000 && this.renderButton('Request a buddy', 2)}
+                {this.props.width > 1000 && this.renderButton('Get verified', 3)}
                 {this.props.width > 1000 && this.renderButton('About us', 4)}
                 {this.props.width > 1000 && this.renderButton('Contact', 5)}
                 {this.props.width < 1000 && <Grid />}
