@@ -272,17 +272,7 @@ class Home extends Component {
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           We believe that viewing properties should be easy, safe and enjoyable. Finding a new home should be an exciting experience - and so Matchbox was born. An easy and reliable way to view properties, in your pocket.
           </Typography>
-        </Grid>
-
-      </TextContainer>
-    )
-  }
-
-  renderContact = () => {
-    return (
-      <TextContainer>
-        <Grid style={{ maxWidth: 400 }}>
-          <div style={{ marginBottom: 20, marginTop: 20 }}>
+<div style={{ marginBottom: 20, marginTop: 20 }}>
             <HighlightLine />
           </div>
           <div style={{ marginBottom: 40 }}>
@@ -298,6 +288,33 @@ class Home extends Component {
           </Typography>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           One of us loves doing admin, we promise we’ll reply!
+          </Typography>
+        </Grid>
+
+      </TextContainer>
+    )
+  }
+
+  renderBuddySteps = () => {
+    return (
+      <TextContainer>
+        <Grid style={{ maxWidth: 400 }}>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          <div style={{ marginBottom: 40 }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
+            Matchbox buddies
+            </Typography>
+          </div>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          We send objective Matchbox Buddies to view and verify properties, so you never have to worry about property pictures being out of date, incorrect locations or straight-out fake listings.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Matchbox Buddies are able to add approval stamps to properties for things like safety, noise level, location and more! Look out for these stamps on selected properties.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Matchbox Buddies have all been briefed on safety issues and are knowledgeable about general property viewing tips - in order to give you the best viewing experience.
           </Typography>
         </Grid>
       </TextContainer>
@@ -402,7 +419,26 @@ class Home extends Component {
             </PageSection>}
         </div>
 
-        <div ref={(ref) => { this.pageRefs[4] = ref }}>
+<div ref={(ref) => { this.pageRefs[4] = ref }}>
+          <PageSection>
+            <ContentContainer primary width={this.state.width}>
+              {this.renderBuddySteps()}
+            </ContentContainer>
+            <ContentContainer primary={false} width={this.state.width}>
+              <Grid style={{ width: '80%' }}>
+                <img class='appear' src={person1} style={{ marginTop: 20 }} />
+              </Grid>
+            </ContentContainer>
+          </PageSection>
+          {sc.WIDTH_BREAKPOINT > this.state.width &&
+            <PageSection>
+              <ContentContainer primary width={this.state.width}>
+                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
+              </ContentContainer>
+            </PageSection>}
+        </div>
+
+        <div ref={(ref) => { this.pageRefs[5] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
               {this.renderAboutUs()}
@@ -421,24 +457,6 @@ class Home extends Component {
             </PageSection>}
         </div>
 
-        <div ref={(ref) => { this.pageRefs[5] = ref }}>
-          <PageSection>
-            <ContentContainer primary width={this.state.width}>
-              {this.renderContact()}
-            </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
-              <Grid style={{ width: '80%' }}>
-                <img class='appear' src={person1} style={{ marginTop: 20 }} />
-              </Grid>
-            </ContentContainer>
-          </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
-            <PageSection>
-              <ContentContainer primary width={this.state.width}>
-                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
-              </ContentContainer>
-            </PageSection>}
-        </div>
 
         <Footer width={this.state.width} />
 
