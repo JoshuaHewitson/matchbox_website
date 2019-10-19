@@ -133,7 +133,7 @@ class Home extends Component {
           <HighlightLine />
         </div>
         <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
             Looking for properties? 
           </Typography>
         </div>
@@ -180,7 +180,7 @@ class Home extends Component {
           <HighlightLine />
         </div>
         <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
            Don’t have time to go to a viewing? Don’t want to attend a viewing alone?
           </Typography>
         </div>
@@ -219,7 +219,7 @@ class Home extends Component {
           <HighlightLine />
         </div>
         <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
             Want to verify your property/chat to buyers?
           </Typography>
         </div>
@@ -259,24 +259,18 @@ class Home extends Component {
             <HighlightLine />
           </div>
           <div style={{ marginBottom: 40 }}>
-            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
             Our story
             </Typography>
           </div>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The problem is that buying or selling property can be hard. and scary. and expensive. We’ve all almost smashed our computers in frustration, because the available platforms just don’t get it.
+          The problem with buying or selling property isn’t the sale in itself. The problem is viewing those properties. Viewing properties online can be frustrating, with clumsy filters and inaccurate photos. Going to viewings is a hassle, either because you don’t have time to go yourself, or you don’t want to go on your own.
           </Typography>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The solution is an easy-to-use app, that makes finding a home intuitive and effortless. We generally dislike answering the phone, so let’s chat in-app and in our own time. When you have grown up in the era of smartphones and AI, it seems obvious that your next move should be a swipe away. We all use our phones every day and we instinctively know what’s easy to use.
+          The solution is an easy-to-use app that makes viewing properties safe and effortless. Easily swipe through the exact properties you’re looking for. Don’t waste time going to viewings when you’re unsure about the property, let someone go on your behalf. And don’t feel like you need to worry about your safety (or your judgment) when going to viewings, just bring a Matchbox Buddy with you.
           </Typography>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          Why should you need a laptop to have access to people buying and selling properties all around you? Almost half of all South Africans own smartphones, whilst less than 10% of households have access to a computer.
-          </Typography>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          We believe that everyone should have the ability to market their properties and find homes in their price range, free of charge. We also believe that estate agents play an invaluable role in helping people through this process, and therefore shouldn’t be charged until they actually make a sale.
-          </Typography>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          And so Matchbox was born. An easy and affordable way for people to move, in their pockets.
+          We believe that viewing properties should be easy, safe and enjoyable. Finding a new home should be an exciting experience - and so Matchbox was born. An easy and reliable way to view properties, in your pocket.
           </Typography>
         </Grid>
 
@@ -292,7 +286,7 @@ class Home extends Component {
             <HighlightLine />
           </div>
           <div style={{ marginBottom: 40 }}>
-            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 200, fontWeight: 'bold' }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
             Contact us
             </Typography>
           </div>
