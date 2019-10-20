@@ -29,7 +29,7 @@ const TextSection = (props) => {
         >
           <Grid>
             <Heading text='The easiest way to view property.' />
-            <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
+            <Typography variant='h6' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             Coming soon to both Android and IOS stores.
             </Typography>
             <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
