@@ -382,7 +382,7 @@ class PostListings extends Component {
     console.log(listing)
 
     const firebaseDB = fire.firestore()
-    const listingDocRef = firebaseDB.collection('sale_listings').doc()
+    const listingDocRef = firebaseDB.collection('rental_listings').doc()
     const metaData = {
       email: this.state.email,
       fb_profile_url: this.state.fb_profile_url,
