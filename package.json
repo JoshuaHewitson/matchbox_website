@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "animate.css": "^3.7.2",
+    "firebase": "^7.2.1",
     "react": "^16.9.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-animated-slider": "^1.1.4",
