@@ -23,6 +23,17 @@ const FooterButton = withStyles(theme => ({
   }
 }))(Button)
 
+const FooterButtonHidden = withStyles(theme => ({
+  root: {
+    backgroundColor: 'transparent',
+    color: 'transparent',
+    '&:hover': {
+      backgroundColor: 'transparent',
+      transform: 'scale(1.05)'
+    }
+  }
+}))(Button)
+
 const Footer = (props) => {
   return (
     <div style={{ backgroundColor: sc.LIGHT_GREY }}>
@@ -43,6 +54,11 @@ const Footer = (props) => {
               <FooterButton onClick={() => changePath(props, '/terms_of_use')}>
               Terms of use
               </FooterButton>
+            </Grid>
+            <Grid container>
+              <FooterButtonHidden onClick={() => changePath(props, '/post_listing')}>
+              Post listing
+              </FooterButtonHidden>
             </Grid>
           </Grid>
         </ContentContainer>
