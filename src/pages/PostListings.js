@@ -139,7 +139,7 @@ class PostListings extends Component {
           id={inputId}
           label={label}
           placeholder={placeholder}
-          value={this.state.images[index]}
+          value={this.state.images[index].src}
           onChange={(event) => this.handleImageInputChange(index, event)}
           margin='normal'
         />
