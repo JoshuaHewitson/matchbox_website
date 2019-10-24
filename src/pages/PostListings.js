@@ -258,7 +258,7 @@ class PostListings extends Component {
 
   handleImageInputChange = (index, event) => {
     var images = this.state.images
-    images[index] = event.target.value
+    images[index] = { src: event.target.value }
     this.setState({ images: images })
   }
 
