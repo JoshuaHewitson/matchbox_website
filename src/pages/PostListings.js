@@ -376,7 +376,7 @@ class PostListings extends Component {
       property_type,
       suburb,
       scraped_from,
-      description
+      description: description.replace(/(\r\n|\n|\r)/gm, '**') // newline symbol for db \n doesn't work becuse it is converted, then ignored (I think)
     }
     this.setState({ success: true, error: false })
     console.log(listing)
