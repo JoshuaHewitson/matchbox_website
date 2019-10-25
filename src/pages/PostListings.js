@@ -37,7 +37,7 @@ class PostListings extends Component {
       extra_filters: {
         furnished: false,
         garden: false,
-        pets_allowed: false,
+        off_street_parking: false,
         swimming_pool: false
       },
       images: [''],
@@ -184,13 +184,13 @@ class PostListings extends Component {
         <FormControlLabel
           control={
             <Checkbox
-              checked={this.state.extra_filters.pets_allowed}
-              onChange={(event) => this.handleCheckboxChange('pets_allowed', event)}
-              value={this.state.extra_filters.pets_allowed}
+              checked={this.state.extra_filters.off_street_parking}
+              onChange={(event) => this.handleCheckboxChange('off_street_parking', event)}
+              value={this.state.extra_filters.off_street_parking}
               color={sc.PRIMARY_COLOR}
             />
           }
-          label='Pets allowed'
+          label='Off-street parking'
         />
         <FormControlLabel
           control={
