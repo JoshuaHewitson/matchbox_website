@@ -289,7 +289,7 @@ class PostListings extends Component {
   }
 
   checkPropertyType = (value) => {
-    return value === 'house' || value === 'apaptment' || value === 'room_in_shared_residence'
+    return value === 'house' || value === 'apartment' || value === 'room_in_shared_residence'
   }
 
   checkSuburb = (value) => {
