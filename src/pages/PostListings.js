@@ -395,7 +395,7 @@ class PostListings extends Component {
       users: ['FB_USER_' + this.state.first_name + '_' + this.state.last_name],
       price: parseInt(price, 10),
       public: true,
-      thumbnail_src: this.state.images[0],
+      thumbnail_src: this.state.images[0].src,
       property_type: this.state.property_type,
       suburb: this.state.suburb
     }
