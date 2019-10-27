@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
 // import windowSize from 'react-window-size'
 // import Zoom from '@material-ui/core/Zoom'
 import Typography from '@material-ui/core/Typography'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
+import Grid from '@material-ui/core/Grid'
 import {
   Footer,
   ContentContainer,
@@ -130,9 +132,22 @@ class PostListings extends Component {
     )
   }
 
+  removeImageSrc = (index) => {
+    const images = this.state.images
+    var newImages = []
+    for (var i = 0; i < images.length; i++) {
+      if (i !== index) {
+        newImages.push(images[i])
+      }
+    }
+    this.setState({
+      images: newImages
+    })
+  }
+
   renderImageInput = (label, index, inputId, placeholder, extraProps) => {
     return (
-      <div>
+      <Grid container style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         <TextField
           {...extraProps}
           style={{ minWidth: 400 }}
@@ -143,10 +158,10 @@ class PostListings extends Component {
           onChange={(event) => this.handleImageInputChange(index, event)}
           margin='normal'
         />
-        {/* <label for='agencyInput'>{label}</label>
-        <input value={this.state[name]} onChange={e => this.handleChange(e)} name={name} class='form-control' id={inputId} placeholder={placeholder} />
-    */}
-      </div>
+        <IconButton aria-label='search' style={{ width: 50, height: 50 }} onClick={() => this.removeImageSrc(index)}>
+          x
+        </IconButton>
+      </Grid>
     )
   }
 
