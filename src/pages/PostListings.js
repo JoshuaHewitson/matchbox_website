@@ -38,9 +38,9 @@ class PostListings extends Component {
       agency: 'none',
       extra_filters: {
         furnished: false,
-        garden: false,
+        wifi_included: false,
         off_street_parking: false,
-        swimming_pool: false
+        electicity_included: false
       },
       images: [''],
       num_bedrooms: '',
@@ -188,13 +188,13 @@ class PostListings extends Component {
         <FormControlLabel
           control={
             <Checkbox
-              checked={this.state.extra_filters.garden}
-              onChange={(event) => this.handleCheckboxChange('garden', event)}
-              value={this.state.extra_filters.garden}
+              checked={this.state.extra_filters.wifi_included}
+              onChange={(event) => this.handleCheckboxChange('wifi_included', event)}
+              value={this.state.extra_filters.wifi_included}
               color={sc.PRIMARY_COLOR}
             />
           }
-          label='Garden'
+          label='Wifi included'
         />
         <FormControlLabel
           control={
@@ -210,13 +210,13 @@ class PostListings extends Component {
         <FormControlLabel
           control={
             <Checkbox
-              checked={this.state.extra_filters.swimming_pool}
-              onChange={(event) => this.handleCheckboxChange('swimming_pool', event)}
-              value={this.state.extra_filters.swimming_pool}
+              checked={this.state.extra_filters.electricity_included}
+              onChange={(event) => this.handleCheckboxChange('electricity_included', event)}
+              value={this.state.extra_filters.electricity_included}
               color={sc.PRIMARY_COLOR}
             />
           }
-          label='Swimming pool'
+          label='Electricity included'
         />
       </FormGroup>
     )
