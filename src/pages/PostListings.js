@@ -6,6 +6,10 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import {
@@ -25,6 +29,7 @@ class PostListings extends Component {
   constructor () {
     super()
     this.state = ({
+      type: 'prop24',
       user: null,
       error: false,
       errorText: 'there is an error',
@@ -35,12 +40,13 @@ class PostListings extends Component {
       last_name: '',
       cell_number: '',
       email: '',
+      url: '',
       agency: 'none',
       extra_filters: {
         furnished: false,
         wifi_included: false,
         off_street_parking: false,
-        electicity_included: false
+        electricity_included: false
       },
       images: [''],
       num_bedrooms: '',
@@ -52,10 +58,13 @@ class PostListings extends Component {
       description: '',
       // extra public info
       parking_spaces: '',
-      square_meters: ''
-
+      square_meters: '',
+      floor_size: '',
+      scraped_data: ''
     })
     this.authListener = this.authListener.bind(this)
+    this.propertyTypes = ['house', 'apartment', 'room_in_shared_residence']
+    this.suburbs = ['stellenbosch_central', 'die_boord', 'welgevonden', 'la_colline', 'onder_papegaaiberg', 'universiteitsoord']
   }
 
   componentDidMount () {
@@ -129,6 +138,25 @@ class PostListings extends Component {
         <input value={this.state[name]} onChange={e => this.handleChange(e)} name={name} class='form-control' id={inputId} placeholder={placeholder} />
     */}
       </div>
+    )
+  }
+
+  renderSelect = (label, name, values, selectId, extraProps) => {
+    return (
+      <FormControl style={{ minWidth: 400 }}>
+        <InputLabel id={selectId + 'label'}>{label}</InputLabel>
+        <Select
+          {...extraProps}
+          labelId={selectId + 'label'}
+          id='selectId'
+          value={this.state[name]}
+          onChange={(event) => this.handleChange(name, event)}
+        >
+          {values.map(value => {
+            return <MenuItem key={value} value={value}>{value}</MenuItem>
+          })}
+        </Select>
+      </FormControl>
     )
   }
 
@@ -228,37 +256,96 @@ class PostListings extends Component {
     this.setState({ images: images })
   }
 
+  changePostingType = (type) => {
+    this.setState({
+      type,
+      error: false,
+      errorText: 'there is an error',
+      first_name: '',
+      last_name: '',
+      cell_number: '',
+      email: '',
+      url: '',
+      agency: 'none',
+      extra_filters: {
+        furnished: false,
+        wifi_included: false,
+        off_street_parking: false,
+        electricity_included: false
+      },
+      images: [''],
+      num_bedrooms: '',
+      num_bathrooms: '',
+      price: '',
+      property_type: '',
+      suburb: '',
+      scraped_from: '',
+      description: '',
+      // extra public info
+      parking_spaces: '',
+      square_meters: '',
+      scraped_data: ''
+    })
+  }
+
   renderPostListing = () => {
-    return (
-      <TextContainer>
-        <div style={{ marginBottom: 20, marginTop: 20 }}>
-          <HighlightLine />
-        </div>
-        {this.renderHeading('post a listing :)')}
-        {this.renderInput('First name', 'first_name', 'firstNameInput', 'Enter first name')}
-        {this.renderInput('Last name', 'last_name', 'lastNameInput', 'Enter last name')}
-        {this.renderInput('FB Profile URL', 'fb_profile_url', 'fbProfileUrlInput', 'Enter facebook profile url')}
-        {this.renderInput('Cell number', 'cell_number', 'cellNumberInput', 'Enter cell number')}
-        {this.renderInput('Email', 'email', 'emailInput', 'Enter email', { type: 'email' })}
-        {this.renderInput('Agency - none if not agent', 'agency', 'agencyInput', 'Enter agency')}
-        {this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms')}
-        {this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms')}
-        {this.renderInput('Price', 'price', 'priceInput', 'Enter price')}
-        {this.renderInput('Property type', 'property_type', 'propertyTypeInput', 'Enter property type')}
-        {this.renderInput('Suburb', 'suburb', 'suburbInput', 'Enter suburb')}
-        {this.renderInput('Scraped from', 'scraped_from', 'scrapedFromInput', 'Enter scraped from')}
-        {this.renderInput('Description', 'description', 'descriptionInput', 'Enter description', { multiline: true })}
-        <div style={{ height: 20 }} />
-        {this.renderCheckBoxes()}
-        <div style={{ height: 20 }} />
-        <Typography variant='heading6'>Images: </Typography>
-        {this.renderImagesInputs(this.state.images)}
-        <Button onClick={() => this.handleAddImageSrc()}>add image src</Button>
-        <button type='submit' onClick={e => this.handleSubmit(e, this.state)} class='btn btn-primary'>Submit</button>
-        {this.state.error && this.renderError(this.state.errorText)}
-        {this.state.success && this.renderSuccess(this.state.success)}
-      </TextContainer>
-    )
+    return this.state.type === 'manual'
+      ? (
+        <TextContainer>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          {this.renderHeading('post a listing :)')}
+          {this.renderInput('First name', 'first_name', 'firstNameInput', 'Enter first name')}
+          {this.renderInput('Last name', 'last_name', 'lastNameInput', 'Enter last name')}
+          {this.renderInput('FB Profile URL', 'url', 'fbProfileUrlInput', 'Enter facebook profile url')}
+          {this.renderInput('Cell number', 'cell_number', 'cellNumberInput', 'Enter cell number')}
+          {this.renderInput('Email', 'email', 'emailInput', 'Enter email', { type: 'email' })}
+          {this.renderInput('Agency - none if not agent', 'agency', 'agencyInput', 'Enter agency')}
+          {this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms')}
+          {this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms')}
+          {this.renderInput('Price', 'price', 'priceInput', 'Enter price')}
+          {this.renderSelect('Property type', 'property_type', this.propertyTypes, 'propertyTypeSelect', 'Select property type')}
+          <div style={{ height: 10 }} />
+          {this.renderSelect('Suburb', 'suburb', this.suburbs, 'suburbSelect', 'Select suburb')}
+          {this.renderInput('Scraped from', 'scraped_from', 'scrapedFromInput', 'Enter scraped from')}
+          {this.renderInput('Description', 'description', 'descriptionInput', 'Enter description', { multiline: true })}
+          <div style={{ height: 20 }} />
+          {this.renderCheckBoxes()}
+          <div style={{ height: 20 }} />
+          <Typography variant='heading6'>Images: </Typography>
+          {this.renderImagesInputs(this.state.images)}
+          <Button onClick={() => this.handleAddImageSrc()}>add image src</Button>
+          <div style={{ height: 20 }} />
+          <button type='submit' onClick={e => this.handleSubmitManual(e, this.state)} class='btn btn-primary'>Submit</button>
+          {this.state.error && this.renderError(this.state.errorText)}
+          {this.state.success && this.renderSuccess(this.state.success)}
+          <div style={{ height: 50 }} />
+          <Button onClick={() => this.changePostingType('prop24')}>Change posting method</Button>
+        </TextContainer>
+      )
+      : (
+        <TextContainer>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          {this.renderHeading('post listing - prop 24 JSON :)')}
+          {this.renderInput('Scraped data', 'scraped_data', 'scrapedDataInput', 'Paste scraped data', { multiline: true })}
+          {this.renderSelect('Property type', 'property_type', this.propertyTypes, 'propertyTypeSelect', 'Select property type')}
+          <div style={{ height: 10 }} />
+          {this.renderSelect('Suburb', 'suburb', this.suburbs, 'suburbSelect', 'Select suburb')}
+          {this.renderInput('Agency - none if not agent', 'agency', 'agencyInput', 'Enter agency')}
+          {this.renderInput('Prop 24 URL', 'url', 'prop24UrlInput', 'Enter prop24 url')}
+          <div style={{ height: 20 }} />
+          {this.renderCheckBoxes()}
+          <div style={{ height: 20 }} />
+          <button type='submit' onClick={e => this.handleSubmitProp24(e)} class='btn btn-primary'>Submit</button>
+          {this.state.error && this.renderError(this.state.errorText)}
+          {this.state.success && this.renderSuccess(this.state.success)}
+          <div style={{ height: 50 }} />
+          <Button onClick={() => this.changePostingType('manual')}>Change posting method</Button>
+        </TextContainer>
+      )
   }
 
   handleChange = (name, event) => {
@@ -289,7 +376,7 @@ class PostListings extends Component {
     return value.length > 0
   }
 
-  checkFBProfileUrl = (value) => {
+  checkUrl = (value) => {
     return value.length > 0
   }
 
@@ -319,100 +406,129 @@ class PostListings extends Component {
     return value.length > 0
   }
 
-  handleSubmit = (e, state) => {
-    // console.log(e)
-    e.preventDefault()
-    const {
-      agency,
-      first_name,
-      last_name,
-      fb_profile_url,
-      extra_filters,
-      images,
-      num_bedrooms,
-      num_bathrooms,
-      price,
-      property_type,
-      suburb,
-      scraped_from,
-      description
-    } = state
-    if (!this.checkAgency(agency)) {
+  checkForErrors = (state) => {
+    if (!this.checkAgency(state.agency)) {
       this.setState({ error: true, errorText: 'please add agency' })
-      return
+      return true
     }
-    if (!this.checkFirstName(first_name)) {
+    if (!this.checkFirstName(state.first_name)) {
       this.setState({ error: true, errorText: 'please add first name' })
-      return
+      return true
     }
-    if (!this.checkLastName(last_name)) {
+    if (!this.checkLastName(state.last_name)) {
       this.setState({ error: true, errorText: 'please add last name' })
-      return
+      return true
     }
-    if (!this.checkFBProfileUrl(fb_profile_url)) {
-      this.setState({ error: true, errorText: 'please add fb profile url' })
-      return
+    if (!this.checkUrl(state.url)) {
+      this.setState({ error: true, errorText: 'please add url' })
+      return true
     }
-    if (!this.checkNumRooms(num_bedrooms)) {
+    if (!this.checkNumRooms(state.num_bedrooms)) {
       this.setState({ error: true, errorText: 'please fix bedrooms/bathrooms' })
-      return
+      return true
     }
-    if (!this.checkNumRooms(num_bathrooms)) {
+    if (!this.checkNumRooms(state.num_bathrooms)) {
       this.setState({ error: true, errorText: 'please fix bedrooms/bathrooms' })
-      return
+      return true
     }
-    if (!this.checkPrice(price)) {
+    if (!this.checkPrice(state.price)) {
       this.setState({ error: true, errorText: 'please fix price' })
-      return
+      return true
     }
-    if (!this.checkPropertyType(property_type)) {
+    if (!this.checkPropertyType(state.property_type)) {
       this.setState({ error: true, errorText: 'please fix property type options: house, apartment, or room_in_shared_residence' })
-      return
+      return true
     }
-    if (!this.checkSuburb(suburb)) {
+    if (!this.checkSuburb(state.suburb)) {
       this.setState({ error: true, errorText: 'please fix suburb options: ...(not sure yet)' })
-      return
+      return true
     }
-    if (!this.checkScrapedFrom(scraped_from)) {
+    if (!this.checkScrapedFrom(state.scraped_from)) {
       this.setState({ error: true, errorText: 'please fix scraped from' })
-      return
+      return true
     }
-    if (!this.checkDescription(description)) {
+    if (!this.checkDescription(state.description)) {
       this.setState({ error: true, errorText: 'please fix description' })
-      return
+      return true
     }
+    return false
+  }
+
+  handleSubmitProp24 = (e) => {
+    e.preventDefault()
+    const listingData = JSON.parse(this.state.scraped_data)
+    // console.log(listingData)
+    var agentNames = listingData.agentName.replace(/\b([a-z])/g, x => { return x.toLowerCase() }).split(' ')
+    if (listingData.agentName === '') agentNames = ['no', 'name']
+    const firstName = agentNames[0]
+    const lastName = agentNames[agentNames.length - 1]
+    console.log(firstName, lastName)
+    console.log(this.state.first_name)
+    this.setState({
+      first_name: firstName,
+      last_name: lastName,
+      email: listingData.agentEmail,
+      cell_number: listingData.agentNumbers[0],
+      floor_size: listingData.floorSize,
+      thumbnail_src: listingData.images[0].src + '/Crop320x213',
+      images: listingData.images,
+      num_bedrooms: parseInt(listingData.bedrooms, 10),
+      num_bathrooms: parseInt(listingData.bathrooms, 10),
+      price: parseInt(listingData.price, 10),
+      scraped_from: 'prop24',
+      description: listingData.description
+    }, () => this.handleSubmit())
+  }
+
+  handleSubmitManual = (e, state) => {
+    e.preventDefault()
+    this.setState({
+      thumbnail_src: state.images[0].src
+    })
+    this.handleSubmit()
+  }
+
+  handleSubmit = () => {
+    console.log(this.state.first_name, this.state.last_name)
+    if (this.checkForErrors(this.state)) return
     const listing = {
-      agency,
-      extra_filters,
-      images,
-      num_bedrooms: parseInt(num_bedrooms, 10),
-      num_bathrooms: parseInt(num_bathrooms, 10),
-      price: parseInt(price, 10),
-      property_type,
-      suburb,
-      scraped_from,
-      description: description.replace(/(\r\n|\n|\r)/gm, '**') // newline symbol for db \n doesn't work becuse it is converted, then ignored (I think)
+      agency: this.state.agency,
+      extra_filters: this.state.extra_filters,
+      images: this.state.images,
+      num_bedrooms: parseInt(this.state.num_bedrooms, 10),
+      num_bathrooms: parseInt(this.state.num_bathrooms, 10),
+      price: parseInt(this.state.price, 10),
+      property_type: this.state.property_type,
+      suburb: this.state.suburb,
+      scraped_from: this.state.scraped_from,
+      description: this.state.description.replace(/(\r\n|\n|\r)/gm, '**') // newline symbol for db \n doesn't work becuse it is converted, then ignored (I think)
     }
+    if (this.state.floor_size !== '') listing.floor_size = this.state.floor_size
     this.setState({ success: true, error: false })
-    console.log(listing)
+    // console.log(listing)
 
     const firebaseDB = fire.firestore()
     const listingDocRef = firebaseDB.collection('rental_listings').doc()
     const metaData = {
       email: this.state.email,
-      fb_profile_url: this.state.fb_profile_url,
       cell_number: this.state.cell_number,
       id: listingDocRef.id,
+      url: this.state.url,
       num_views: 0,
       num_matches: 0,
       name: this.state.first_name + '_' + this.state.last_name,
-      owner: 'FB_USER_' + this.state.first_name + '_' + this.state.last_name,
-      users: ['FB_USER_' + this.state.first_name + '_' + this.state.last_name],
-      price: parseInt(price, 10),
+      price: parseInt(this.state.price, 10),
       public: true,
-      thumbnail_src: this.state.images[0].src,
+      thumbnail_src: this.state.thumbnail_src,
       property_type: this.state.property_type,
       suburb: this.state.suburb
+    }
+    if (this.state.type === 'manual') {
+      metaData.owner = 'FB_USER_' + this.state.first_name + '_' + this.state.last_name
+      metaData.users = ['FB_USER_' + this.state.first_name + '_' + this.state.last_name]
+    } else {
+      metaData.owner = 'PROP24_USER_' + this.state.first_name + '_' + this.state.last_name
+      metaData.users = ['PROP24_USER_' + this.state.first_name + '_' + this.state.last_name]
     }
     listingDocRef.set(listing)
       .then((u) => {
@@ -420,6 +536,8 @@ class PostListings extends Component {
       }).catch((error) => {
         console.log(error)
       })
+    console.log(listing)
+    console.log(metaData)
   }
 
   render () {
