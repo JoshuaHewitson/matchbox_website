@@ -41,8 +41,10 @@ const scrape = () => {
     (document.querySelectorAll('.p24_sidebarAgentContactNumber') || []).forEach(number => agentNumbers.push(number.innerText.trim()))
     // const location = document.querySelector('pull-left').innerText.trim()
     // console.log(location)
-    const bedrooms = document.querySelector('li[title="Bedrooms"]').innerText.trim()
-    const bathrooms = document.querySelector('li[title="Bathrooms"]').innerText.trim()
+    const bedrooms = (document.querySelector('li[title="Bedrooms"]') || defaultElement).innerText.trim()
+    const bathrooms = (document.querySelector('li[title="Bathrooms"]') || defaultElement).innerText.trim()
+    if (bedrooms === '') console.log('no bedrooms')
+    if (bedrooms === '') console.log('no bathrooms')
     const floorSize = (document.querySelector('li[title="Floor Size"]') || defaultElement).innerText.replace(/(m|²)/g, '').trim()
     const description = (document.querySelector('.js_readMoreText') || defaultElement).innerText
     document.querySelectorAll('#main-gallery a.js_lightboxImageSrc').forEach(image => {
