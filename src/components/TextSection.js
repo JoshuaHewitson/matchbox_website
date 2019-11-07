@@ -29,14 +29,28 @@ const TextSection = (props) => {
         >
           <Grid>
             <Heading text='The easiest way to view property.' />
-            <Typography variant='h6' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
+            {/* <Typography variant='h6' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             Coming soon to both Android and IOS stores.
-            </Typography>
+        </Typography> */}
             <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
             Matchbox is a sleek mobile app that makes everything about viewing property, easy.
             </Typography>
             <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
             We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
+            </Typography>
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://play.google.com/store/apps/details?id=app.matchbox&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+            >
+              <img
+                style={{ maxWidth: 200, marginLeft: -15 }}
+                alt='Get it on Google Play'
+                src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+              />
+            </a>
+            <Typography variant='caption' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
+            Coming soon to IOS App Store.
             </Typography>
             {/*
             <div style={{ height: 20 }} />
@@ -69,14 +83,28 @@ const TextSection = (props) => {
       >
         <Heading text='The easiest way to view property.' />
         <div style={{ height: 20 }} />
-        <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
+        {/* <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
             Coming soon to both Android and IOS stores.
-        </Typography>
+      </Typography> */}
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
             Matchbox is a sleek mobile app that makes everything about viewing property, easy.
         </Typography>
         <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
             We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
+        </Typography>
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href='https://play.google.com/store/apps/details?id=app.matchbox&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+        >
+          <img
+            style={{ maxWidth: 200, marginLeft: -15 }}
+            alt='Get it on Google Play'
+            src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+          />
+        </a>
+        <Typography variant='caption' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
+            Coming soon to IOS App Store.
         </Typography>
         {/*
         <div style={{ height: 20 }} />

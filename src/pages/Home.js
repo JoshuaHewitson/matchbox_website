@@ -134,7 +134,7 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-            Looking for properties? 
+            Looking for properties?
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -272,7 +272,7 @@ class Home extends Component {
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           We believe that viewing properties should be easy, safe and enjoyable. Finding a new home should be an exciting experience - and so Matchbox was born. An easy and reliable way to view properties, in your pocket.
           </Typography>
-<div style={{ marginBottom: 20, marginTop: 100 }}>
+          <div style={{ marginBottom: 20, marginTop: 100 }}>
             <HighlightLine />
           </div>
           <div style={{ marginBottom: 40 }}>
@@ -419,15 +419,15 @@ class Home extends Component {
             </PageSection>}
         </div>
 
-<div ref={(ref) => { this.pageRefs[4] = ref }}>
+        <div ref={(ref) => { this.pageRefs[4] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
               {this.renderBuddySteps()}
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
-                <img class='appear' src={person1} style={{ marginTop: 20 }} />
-              </Grid>
+        <img class='appear' src={person1} style={{ marginTop: 20 }} />
+      </Grid>
             </ContentContainer>
           </PageSection>
           {sc.WIDTH_BREAKPOINT > this.state.width &&
@@ -456,7 +456,6 @@ class Home extends Component {
               </ContentContainer>
             </PageSection>}
         </div>
-
 
         <Footer width={this.state.width} />
 
