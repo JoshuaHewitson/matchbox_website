@@ -35,7 +35,7 @@ const scrape = () => {
     const agentNumbers = []
     const images = []
     const title = document.querySelector('h1').innerText
-    const price = document.querySelector('.panel-body .p24_price').innerText.replace(/(R|\s)/g, '').trim()
+    const price = document.querySelector('.p24_mBM .p24_price').innerText.replace(/(R|\s)/g, '').trim()
     const agentName = (document.querySelector('.js-P24_AgentName') || defaultElement).innerText
     const agentEmail = (document.querySelector('.js-P24_Email') || defaultElement).innerText;
     (document.querySelectorAll('.p24_sidebarAgentContactNumber') || []).forEach(number => agentNumbers.push(number.innerText.trim()))

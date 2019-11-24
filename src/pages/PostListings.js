@@ -25,6 +25,8 @@ import { styleConstants as sc } from '../config'
 import fire from '../config/Firebase'
 import '../App.css'
 
+const COLLECTION_NAME = 'sale_listings' // 'rental_listings'
+
 class PostListings extends Component {
   constructor () {
     super()
@@ -509,7 +511,7 @@ class PostListings extends Component {
     // console.log(listing)
 
     const firebaseDB = fire.firestore()
-    const listingDocRef = firebaseDB.collection('rental_listings').doc()
+    const listingDocRef = firebaseDB.collection(COLLECTION_NAME).doc()
     const metaData = {
       email: this.state.email,
       cell_number: this.state.cell_number,
@@ -533,7 +535,7 @@ class PostListings extends Component {
     }
     listingDocRef.set(listing)
       .then((u) => {
-        listingDocRef.collection('rental_listing_info').doc('meta').set(metaData)
+        listingDocRef.collection(COLLECTION_NAME + '_info').doc('meta').set(metaData)
       }).catch((error) => {
         console.log(error)
       })
