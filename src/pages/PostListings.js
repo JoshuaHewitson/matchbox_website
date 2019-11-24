@@ -514,6 +514,7 @@ class PostListings extends Component {
     const listingDocRef = firebaseDB.collection(COLLECTION_NAME).doc()
     const metaData = {
       email: this.state.email,
+      created_at: firebaseDB.Timestamp.now(),
       cell_number: this.state.cell_number,
       id: listingDocRef.id,
       url: this.state.url,
