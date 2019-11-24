@@ -23,6 +23,7 @@ import {
 import TextField from '@material-ui/core/TextField'
 import { styleConstants as sc } from '../config'
 import fire from '../config/Firebase'
+import firebase from 'firebase'
 import '../App.css'
 
 const COLLECTION_NAME = 'sale_listings' // 'rental_listings'
@@ -514,7 +515,7 @@ class PostListings extends Component {
     const listingDocRef = firebaseDB.collection(COLLECTION_NAME).doc()
     const metaData = {
       email: this.state.email,
-      created_at: firebaseDB.Timestamp.now(),
+      created_at: firebase.firestore.Timestamp.now(),
       cell_number: this.state.cell_number,
       id: listingDocRef.id,
       url: this.state.url,
