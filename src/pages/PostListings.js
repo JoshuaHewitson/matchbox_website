@@ -68,7 +68,7 @@ class PostListings extends Component {
     this.authListener = this.authListener.bind(this)
     this.propertyTypes = ['house', 'apartment', 'room_in_shared_residence']
     // this.suburbs = ['stellenbosch_central', 'die_boord', 'welgevonden', 'la_colline', 'onder_papegaaiberg', 'universiteitsoord']
-    this.suburbs = ['green_point', 'sea_point', 'bantry_bay', 'mouille_point', 'foreshore', 'fresnaye', 'clifton']
+    this.suburbs = ['green_point', 'sea_point', 'bantry_bay', 'mouille_point', 'foreshore', 'fresnaye', 'clifton', 'de_waterkant']
   }
 
   componentDidMount () {
