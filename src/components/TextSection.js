@@ -8,6 +8,66 @@ import Heading from './Heading'
 import SlideShow from './SlideShow'
 import Typography from '@material-ui/core/Typography'
 import { styleConstants as sc } from '../config'
+import appStoreBadge from '../assets/App_Store_Badge.svg'
+import heading from '../assets/heading.svg'
+
+const googlePlayButton = () => {
+  return (
+    <a
+      target='_blank'
+      rel='noopener noreferrer'
+      href='https://play.google.com/store/apps/details?id=app.matchbox&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+      style={{ height: 65 }}
+    >
+      <img
+        style={{ maxHeight: 65, marginLeft: -15, marginBottom: -11 }}
+        alt='Get it on Google Play'
+        src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
+      />
+    </a>
+  )
+}
+
+const appStoreButton = () => {
+  return (
+    <a
+      target='_blank'
+      rel='noopener noreferrer'
+      href='https://apps.apple.com/us/app/matchbox-property/id1486366818?ls=1'
+      style={{ height: 100 }}
+    >
+      <img
+        style={{ height: 43 }}
+        alt='Download on the App Store'
+        src={appStoreBadge}
+      />
+    </a>
+  )
+}
+
+const renderContent = () => {
+  return (
+    <div>
+      {/* <Heading text='The smartest way to buy property.' /> */}
+      <img
+        style={{ height: 150, marginLeft: -15 }}
+        alt='the smartest way to buy property'
+        src={heading}
+      />
+      <div style={{ height: 40 }} />
+      <Typography variant='h6' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
+        We believe that buying property is one of the most important commitments you can make.
+      </Typography>
+      <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
+        Our data ensures that your decision is a smart one.
+      </Typography>
+      <div>
+        {googlePlayButton()}
+        {appStoreButton()}
+      </div>
+    </div>
+  )
+}
 
 const TextSection = (props) => {
   if (props.width < sc.WIDTH_BREAKPOINT) {
@@ -28,42 +88,7 @@ const TextSection = (props) => {
           }}
         >
           <Grid>
-            <Heading text='The easiest way to view property.' />
-            {/* <Typography variant='h6' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            Coming soon to both Android and IOS stores.
-        </Typography> */}
-            <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Matchbox is a sleek mobile app that makes everything about viewing property, easy.
-            </Typography>
-            <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
-            </Typography>
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href='https://play.google.com/store/apps/details?id=app.matchbox&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
-            >
-              <img
-                style={{ maxWidth: 200, marginLeft: -15 }}
-                alt='Get it on Google Play'
-                src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
-              />
-            </a>
-            <Typography variant='caption' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            Coming soon to IOS App Store.
-            </Typography>
-            {/*
-            <div style={{ height: 20 }} />
-            <Typography variant='h5' paragraph style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon!</Typography>
-            <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android stores.</Typography>
-
-            <Grid style={{ width: '10%' }}>
-              <img class='appear' src={appleLogo} style={{ marginTop: 20 }} />
-            </Grid>
-            <Typography variant='subtitle1' style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon.</Typography>
-            <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android.</Typography>
-
-            */}
+            {renderContent()}
           </Grid>
         </Grid>
       </Grid>
@@ -81,42 +106,7 @@ const TextSection = (props) => {
           backgroundColor: 'white'
         }}
       >
-        <Heading text='The easiest way to view property.' />
-        <div style={{ height: 20 }} />
-        {/* <Typography variant='h6' align='left' paragraph style={{ maxWidth: 250, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            Coming soon to both Android and IOS stores.
-      </Typography> */}
-        <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            Matchbox is a sleek mobile app that makes everything about viewing property, easy.
-        </Typography>
-        <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
-            We show you all the available properties in your area, verify them for you, go to viewings on your behalf or attend viewings with you.
-        </Typography>
-        <a
-          target='_blank'
-          rel='noopener noreferrer'
-          href='https://play.google.com/store/apps/details?id=app.matchbox&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
-        >
-          <img
-            style={{ maxWidth: 200, marginLeft: -15 }}
-            alt='Get it on Google Play'
-            src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
-          />
-        </a>
-        <Typography variant='caption' align='left' paragraph style={{ maxWidth: 450, fontWeight: 'bold', color: sc.BODY_TEXT_COLOR }}>
-            Coming soon to IOS App Store.
-        </Typography>
-        {/*
-        <div style={{ height: 20 }} />
-        <Typography variant='h5' paragraph style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon!</Typography>
-        <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android stores.</Typography>
-        {/*
-        <Typography variant='subtitle1' style={{ color: sc.DARK_COLOR, fontWeight: 'bold' }}> Coming soon.</Typography>
-        <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}> To IOS and Android.</Typography>
-        <Grid style={{ width: '10%' }}>
-          <img class='appear' src={appleLogo} style={{ maxWidth: 30, marginBottom: 10 }} />
-        </Grid>
-        */}
+        {renderContent()}
       </Grid>
     )
   }

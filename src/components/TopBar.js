@@ -67,7 +67,7 @@ class TopBar extends Component {
         >
           <Toolbar>
             <Grid container justify='center'>
-              <Grid container justify='space-between' alignItems='center' style={{ flex: 1, maxWidth: 1050 }}>
+              <Grid container justify='space-between' alignItems='center' style={{ flex: 1, maxWidth: 950 }}>
                 {this.props.width < 1000 && <AppBarMenu renderButton={(text, num) => this.renderButton(text, num)} />}
                 <Grid>
                   <MatchboxButton
@@ -89,11 +89,10 @@ class TopBar extends Component {
                     {this.props.selected === 0 && <HighlightLine />}
                   </Grid>
                 </Grid>
-                {this.props.width > 1000 && this.renderButton('Looking for property', 1)}
-                {this.props.width > 1000 && this.renderButton('Request a buddy', 2)}
-                {this.props.width > 1000 && this.renderButton('Get verified', 3)}
-                {this.props.width > 1000 && this.renderButton('Matchbox Buddies', 4)}
-                {this.props.width > 1000 && this.renderButton('About Us/Contact', 5)}
+                {this.props.width > 1000 && this.renderButton('How it works', 1)}
+                {this.props.width > 1000 && this.renderButton('Property reports', 2)}
+                {this.props.width > 1000 && this.renderButton('Matchbox analysts', 3)}
+                {this.props.width > 1000 && this.renderButton('About us', 4)}
                 {this.props.width < 1000 && <Grid />}
                 {this.props.width < 1000 && <Grid />}
               </Grid>

@@ -44,11 +44,10 @@ class Home extends Component {
     }
     this.pages = [
       'home',
-      'buying',
-      'selling',
-      'agents',
-      'aboutUs',
-      'contact'
+      'howItWorks',
+      'propertyReports',
+      'matchboxAnalysts',
+      'aboutUs'
     ]
     this.pageRefs = []
   }
@@ -126,7 +125,7 @@ class Home extends Component {
     )
   }
 
-  renderBuyingSteps = () => {
+  renderHowItWorks = () => {
     return (
       <TextContainer>
         <div style={{ marginBottom: 20, marginTop: 20 }}>
@@ -134,15 +133,15 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-            Looking for properties?
+          How it works:
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             image={testPic1}
             num={1}
-            heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download and use. You can sign in with your email, Facebook or Google account.'
+            heading='Download the app'
+            paragraph1='Matchbox is completely free to download and is available on both Android and IOS stores.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -150,7 +149,7 @@ class Home extends Component {
             num={2}
             image={testPic2}
             heading='Set your filters'
-            paragraph1='Set up your search filters. Effortlessly switch between buying and renting with specific filters suited to your needs. Filters are always saved and can be changed anytime.'
+            paragraph1='Set your filters on your profile screen so that you only see properties you ares interested in.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
@@ -166,14 +165,22 @@ class Home extends Component {
             num={4}
             image={testPic1}
             heading='It’s a match!'
-            paragraph1='Matching with a property opens a chat with the landlord/agent responsible for the property. You can instant message, schedule viewing times and even send out an offer letter with our easy-to-use template - all in-app.'
+            paragraph1='Matching with a property lets you chat to the agent/owner responsible for the property.'
+          />
+        </div>
+        <div style={{ marginLeft: 0, marginRight: 0 }}>
+          <Step
+            num={5}
+            image={testPic1}
+            heading='Request a property report'
+            paragraph1='For every property that you match with, you’ll have the option of requesting a detailed property report for that specific listing. You get access to everything you need to know about the property, without stepping foot in it. '
           />
         </div>
       </TextContainer>
     )
   }
 
-  renderSellingSteps = () => {
+  renderPropertyReports = () => {
     return (
       <TextContainer>
         <div style={{ marginBottom: 20, marginTop: 20 }}>
@@ -181,72 +188,57 @@ class Home extends Component {
         </div>
         <div style={{ marginBottom: 40 }}>
           <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-           Don’t have time to go to a viewing? Don’t want to attend a viewing alone?
+          Detailed property report:
           </Typography>
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={1}
             image={testPic1}
-            heading='Download and Sign Up'
-            paragraph1='Matchbox is free to download and use. You can sign in with your email, Facebook or Google account.'
+            heading='It’s personal'
+            paragraph1='For every report we create, one of our analysts personally visited the property and screened it for over 50 specific data points.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={2}
             image={testPic2}
-            heading='Select “Request a Buddy”'
-            paragraph1='Specify when/where you want them to attend a viewing'
-            paragraph2='Choose whether you want your Matchbox Buddy to go view the property for you, or whether you want them to accompany you to a viewing.'
+            heading='It’s useable'
+            paragraph1='We’ve made our reports easy to use and understand, with expert UX and UI design - so you don’t need to be a property expert to understand any of it.'
           />
         </div>
         <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
           <Step
             num={3}
             image={testPic1}
-            heading='Only pay once a viewing has been accepted!'
+            heading='It’s all-inclusive'
+            paragraph1='Our reports include details as small as the amount of plug points per room and as large as the future market prediction for the price of that property.'
           />
         </div>
       </TextContainer>
     )
   }
 
-  renderAgentSteps = () => {
+  renderMatchboxAnalysts = () => {
     return (
       <TextContainer>
-        <div style={{ marginBottom: 20, marginTop: 20 }}>
-          <HighlightLine />
-        </div>
-        <div style={{ marginBottom: 40 }}>
-          <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-            Want to verify your property/chat to buyers?
+        <Grid style={{ maxWidth: 400 }}>
+          <div style={{ marginBottom: 20, marginTop: 20 }}>
+            <HighlightLine />
+          </div>
+          <div style={{ marginBottom: 40 }}>
+            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
+            Matchbox Analysts
+            </Typography>
+          </div>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          We send objective Matchbox Analysts to view and verify properties. They check and analyse the property, gathering over 50 data points of information. We use standardized check-lists to ensure that the information we gather remains completely objective.
           </Typography>
-        </div>
-        <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
-          <Step
-            num={1}
-            image={testPic1}
-            heading='Request verification'
-            paragraph1='We send a Matchbox Buddy to your property to verify that your listing is an accurate representation of the property.'
-          />
-        </div>
-        <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
-          <Step
-            num={2}
-            image={testPic2}
-            heading='Start chatting'
-            paragraph1='We notify you once someone has matched with your property and a chat opens which allows you to talk to them directly.'
-          />
-        </div>
-        <div style={{ marginLeft: 0, marginRight: 0, marginBottom: 40 }}>
-          <Step
-            num={3}
-            image={testPic1}
-            heading=' Five times lucky'
-            paragraph1='Your first five matches are free! If you want to chat with more people, simply select one of our monthly payment packages '
-          />
-        </div>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Interested in becoming a Matchbox Analyst? Simply send us an email to start the process: info@matchbox.app
+          </Typography>
+        </Grid>
+
       </TextContainer>
     )
   }
@@ -264,20 +256,14 @@ class Home extends Component {
             </Typography>
           </div>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The problem with buying or selling property isn’t the sale in itself. The problem is viewing those properties. Viewing properties online can be frustrating, with clumsy filters and inaccurate photos. Going to viewings is a hassle, either because you don’t have time to go yourself, or you don’t want to go on your own.
+          The problem with buying or selling property is that there is a mismatch of information in the market.  Sellers and estate agents tend to be the custodians of information. Buyers then have to rely on the information they choose to divulge, or spend a disproportionate amount of time to find the relevant information for themselves.
           </Typography>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          The solution is an easy-to-use app that makes viewing properties safe and effortless. Easily swipe through the exact properties you’re looking for. Don’t waste time going to viewings when you’re unsure about the property, let someone go on your behalf. And don’t feel like you need to worry about your safety (or your judgment) when going to viewings, just bring a Matchbox Buddy with you.
+          The solution is making data available to buyers in order to correct this asymmetry of information in the market. Easily swipe through the exact properties you’re looking for. Don’t waste time going to viewings when you’re unsure about the property, request a property report and make an informed decision. Buying property is always an investment and you should have all the tools you need to make sure it's a good one.
           </Typography>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          We believe that viewing properties should be easy, safe and enjoyable. Finding a new home should be an exciting experience - and so Matchbox was born. An easy and reliable way to view properties, in your pocket.
-          </Typography>
-          <div style={{ marginBottom: 20, marginTop: 100 }}>
-            <HighlightLine />
-          </div>
-          <div style={{ marginBottom: 40 }}>
-            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-            Contact us
+          <div style={{ marginBottom: 20 }}>
+            <Typography variant='h6' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
+            Contact us:
             </Typography>
           </div>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
@@ -294,43 +280,6 @@ class Home extends Component {
       </TextContainer>
     )
   }
-
-  renderBuddySteps = () => {
-    return (
-      <TextContainer>
-        <Grid style={{ maxWidth: 400 }}>
-          <div style={{ marginBottom: 20, marginTop: 20 }}>
-            <HighlightLine />
-          </div>
-          <div style={{ marginBottom: 40 }}>
-            <Typography variant='h5' align='left' paragraph style={{ maxWidth: 400, fontWeight: 'bold' }}>
-            Matchbox buddies
-            </Typography>
-          </div>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          We send objective Matchbox Buddies to view and verify properties, so you never have to worry about property pictures being out of date, incorrect locations or straight-out fake listings.
-          </Typography>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          Matchbox Buddies are able to add approval stamps to properties for things like safety, noise level, location and more! Look out for these stamps on selected properties.
-          </Typography>
-          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
-          Matchbox Buddies have all been briefed on safety issues and are knowledgeable about general property viewing tips - in order to give you the best viewing experience.
-          </Typography>
-        </Grid>
-      </TextContainer>
-    )
-  }
-
-  /* scroll animation
-  <ScrollAnimation
-                duration={1}
-                animateIn='fadeIn'
-                // animateOut='fadeOut'
-                initiallyVisible={false}
-              >
-                {this.renderBuyingSteps()}
-              </ScrollAnimation>
-  */
 
   render () {
     return (
@@ -365,7 +314,7 @@ class Home extends Component {
         <div ref={(ref) => { this.pageRefs[1] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
-              {this.renderBuyingSteps()}
+              {this.renderHowItWorks()}
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
@@ -384,7 +333,7 @@ class Home extends Component {
         <div ref={(ref) => { this.pageRefs[2] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
-              {this.renderSellingSteps()}
+              {this.renderPropertyReports()}
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
@@ -403,7 +352,7 @@ class Home extends Component {
         <div ref={(ref) => { this.pageRefs[3] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
-              {this.renderAgentSteps()}
+              {this.renderMatchboxAnalysts()}
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
               <Grid style={{ width: '80%' }}>
@@ -422,25 +371,6 @@ class Home extends Component {
         <div ref={(ref) => { this.pageRefs[4] = ref }}>
           <PageSection>
             <ContentContainer primary width={this.state.width}>
-              {this.renderBuddySteps()}
-            </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
-              <Grid style={{ width: '80%' }}>
-        <img class='appear' src={person1} style={{ marginTop: 20 }} />
-      </Grid>
-            </ContentContainer>
-          </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
-            <PageSection>
-              <ContentContainer primary width={this.state.width}>
-                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
-              </ContentContainer>
-            </PageSection>}
-        </div>
-
-        <div ref={(ref) => { this.pageRefs[5] = ref }}>
-          <PageSection>
-            <ContentContainer primary width={this.state.width}>
               {this.renderAboutUs()}
             </ContentContainer>
             <ContentContainer primary={false} width={this.state.width}>
@@ -452,7 +382,7 @@ class Home extends Component {
           {sc.WIDTH_BREAKPOINT > this.state.width &&
             <PageSection>
               <ContentContainer primary width={this.state.width}>
-                <img class='appear' src={person2} style={{ width: '60%', marginTop: 20 }} />
+                <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
               </ContentContainer>
             </PageSection>}
         </div>

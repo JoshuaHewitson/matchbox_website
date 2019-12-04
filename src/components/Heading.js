@@ -10,7 +10,7 @@ const Heading = (props) => {
       <div style={{ marginBottom: 20, marginTop: 20 }}>
         <HighlightLine />
       </div>
-      <Typography variant='h4' align='left' paragraph style={{ maxWidth: 330, fontWeight: 'bold' }}>
+      <Typography variant='h4' align='left' paragraph style={{ maxWidth: 300, fontWeight: 'bold' }}>
         {props.text}
       </Typography>
     </div>

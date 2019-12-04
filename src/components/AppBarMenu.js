@@ -67,19 +67,16 @@ export default function AppBarMenu (props) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-          {props.renderButton('Looking for property', 1)}
+          {props.renderButton('How it works', 1)}
         </StyledMenuItem>
         <StyledMenuItem>
-          {props.renderButton('Request a buddy', 2)}
+          {props.renderButton('Property reports', 2)}
         </StyledMenuItem>
         <StyledMenuItem>
-          {props.renderButton('Get verified', 3)}
+          {props.renderButton('Matchbox analysts', 3)}
         </StyledMenuItem>
         <StyledMenuItem>
-          {props.renderButton('Matchbox Buddies', 4)}
-        </StyledMenuItem>
-        <StyledMenuItem>
-          {props.renderButton('About Us/Contact', 5)}
+          {props.renderButton('About us', 4)}
         </StyledMenuItem>
       </StyledMenu>
     </Grid>
