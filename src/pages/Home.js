@@ -212,7 +212,7 @@ class Home extends Component {
             num={3}
             image={testPic1}
             heading='It’s all-inclusive'
-            paragraph1='Our reports include details as small as the amount of plug points per room and as large as the future market prediction for the price of that property.'
+            paragraph1='Our reports include details as small as the number of plug points per room and as large as the future market prediction for the price of that property.'
           />
         </div>
       </TextContainer>
