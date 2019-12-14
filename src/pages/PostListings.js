@@ -24,6 +24,7 @@ import TextField from '@material-ui/core/TextField'
 import { styleConstants as sc } from '../config'
 import fire from '../config/Firebase'
 import firebase from 'firebase'
+import { withRouter } from 'react-router-dom'
 import '../App.css'
 
 const COLLECTION_NAME = 'sale_listings' // 'rental_listings'
@@ -326,6 +327,7 @@ class PostListings extends Component {
           {this.state.success && this.renderSuccess(this.state.success)}
           <div style={{ height: 50 }} />
           <Button onClick={() => this.changePostingType('prop24')}>Change posting method</Button>
+          <Button onClick={() => this.props.history.push('/graph_plotter')}>Plot a graph</Button>
         </TextContainer>
       )
       : (
@@ -348,6 +350,7 @@ class PostListings extends Component {
           {this.state.success && this.renderSuccess(this.state.success)}
           <div style={{ height: 50 }} />
           <Button onClick={() => this.changePostingType('manual')}>Change posting method</Button>
+          <Button onClick={() => this.props.history.push('/graph_plotter')}>Plot a graph</Button>
         </TextContainer>
       )
   }
@@ -565,4 +568,4 @@ class PostListings extends Component {
   }
 }
 
-export default PostListings
+export default withRouter(PostListings)

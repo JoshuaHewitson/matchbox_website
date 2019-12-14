@@ -232,6 +232,9 @@ class Home extends Component {
             </Typography>
           </div>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Traditionally valuations and price predictions have been elementary and rely a lot on gut feel, rather than actual data. We train machine learning algorithms to produce valuations based on a large number of specific inputs and calculate ROI for different investment opportunities, including AirBnB and buy-to-let. The combination of extensive market data and AI analysis ensures that users have everything they need to make the correct decision.
+          </Typography>
+          <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>
           We send objective Matchbox Analysts to view and verify properties. They check and analyse the property, gathering over 50 data points of information. We use standardized check-lists to ensure that the information we gather remains completely objective.
           </Typography>
           <Typography paragraph variant='body2' style={{ color: sc.BODY_TEXT_COLOR }}>

@@ -11,6 +11,7 @@ import PageIndicatorDots from './PageIndicatorDots'
 import AppBarMenu from './AppBarMenu'
 import Footer from './Footer'
 import Login from './Login'
+import ScatterPlot from './ScatterPlot'
 
 export {
   TextSection,
@@ -25,5 +26,6 @@ export {
   PageIndicatorDots,
   AppBarMenu,
   Footer,
-  Login
+  Login,
+  ScatterPlot
 }
