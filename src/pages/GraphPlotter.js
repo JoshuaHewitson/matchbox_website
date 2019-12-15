@@ -192,6 +192,9 @@ class PostListings extends Component {
         <div style={{ height: 50 }} />
         <Button onClick={() => this.handlePlot(this.state.suburb, this.state.x, this.state.y)}>Plot</Button>
         <ScatterPlot data={this.state.data} {...settings} />
+        <div style={{ marginLeft: -200 }}>
+          <iframe width='120%' height='480px' src='https://poly.google.com/view/3jRv4TICYmG/embed?chrome=min' frameborder='0' allowvr='yes' allow='vr; xr; accelerometer; magnetometer; gyroscope; autoplay;' allowfullscreen mozallowfullscreen='true' webkitallowfullscreen='true' onmousewheel='' />
+        </div>
       </TextContainer>
     )
   }
