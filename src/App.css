@@ -262,6 +262,18 @@ svg {
   margin-top: 20;
 }
 
+.bottomGradient {
+    background: 
+      /* top, transparent red, faked with gradient */ 
+      linear-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(15, 48, 44, 0.8)
+      )
+}
+
 .App-link {
   color: #09d3ac;
 }

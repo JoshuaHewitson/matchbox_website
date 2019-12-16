@@ -4,6 +4,7 @@ import TermsOfUse from './pages/TermsOfUse'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import PostListings from './pages/PostListings'
 import GraphPlotter from './pages/GraphPlotter'
+import Feed from './pages/Feed'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
 
@@ -17,6 +18,7 @@ function App (props) {
           <Route path='/privacy_policy' render={() => <PrivacyPolicy />} />
           <Route path='/post_listing' render={() => <PostListings />} />
           <Route path='/graph_plotter' render={() => <GraphPlotter />} />
+          <Route path='/feed' render={() => <Feed />} />
         </Switch>
       </BrowserRouter>
     </div>

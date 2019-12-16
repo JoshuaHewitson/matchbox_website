@@ -62,8 +62,8 @@ class DataCircles extends React.Component {
         cx={this.props.xScale(coords[0])}
         cy={this.props.yScale(coords[1])}
         fill={sc.PRIMARY_COLOR}
-        // stroke='black' stroke-width='0.5'
-        r={3}
+        stroke='black' stroke-width='0.3'
+        r={4}
         key={Math.random() * 1}
       />
     )

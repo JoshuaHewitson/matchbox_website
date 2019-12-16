@@ -12,6 +12,10 @@ import AppBarMenu from './AppBarMenu'
 import Footer from './Footer'
 import Login from './Login'
 import ScatterPlot from './ScatterPlot'
+import FeedCard from './feed/FeedCard'
+import FeedList from './feed/FeedList'
+import ImageViewer from './feed/ImageViewer'
+import PropertyInfo from './feed/PropertyInfo'
 
 export {
   TextSection,
@@ -27,5 +31,9 @@ export {
   AppBarMenu,
   Footer,
   Login,
-  ScatterPlot
+  ScatterPlot,
+  FeedCard,
+  FeedList,
+  ImageViewer,
+  PropertyInfo
 }
