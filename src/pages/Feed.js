@@ -95,6 +95,14 @@ const MultipleSelect = withStyles({
   }
 })(Select)
 
+const StyledSelect = withStyles({
+  root: {
+    '&:focus': {
+      backgroundColor: 'white'
+    }
+  }
+})(Select)
+
 const StyledInput = withStyles({
   root: {
     '&:focus': {
@@ -111,7 +119,7 @@ const StyledInput = withStyles({
 
 const AirbnbSlider = withStyles({
   root: {
-    color: sc.PRIMARY_COLOR,
+    color: sc.SECONDARY_COLOR_DARK_2,
     height: 3,
     padding: '15px 0'
   },
@@ -139,7 +147,8 @@ const AirbnbSlider = withStyles({
   },
   active: {},
   track: {
-    height: 3
+    height: 3,
+    color: sc.PRIMARY_COLOR
   },
   valueLabel: {
     left: 'calc(-50% + 11px)',
@@ -208,7 +217,7 @@ class Feed extends Component {
       height: window.innerHeight,
       suburb: 'bantry_bay',
       suburbs: ['bantry_bay'],
-      priceRange: [0, 20],
+      priceRange: [20000000, 40000000],
       x: '',
       y: '',
       data: [],
@@ -254,10 +263,15 @@ class Feed extends Component {
     this.setState({ [name]: event.target.value })
   }
 
+  handleChangeSuburb = (name, event) => {
+    this.getData(event.target.value)
+    // const { count, scatterPlotData } = this.countResults(this.state.priceRange)
+    this.setState({ [name]: event.target.value })
+  }
+
   handleUpdatePriceRange = (event, newValue, name) => {
-    const resultsCount = this.countResults(newValue).count
-    const scatterPlotData = this.countResults(newValue).scatterPlotData
-    this.setState({ [name]: newValue, resultsCount: resultsCount, scatterPlotData: scatterPlotData })
+    const { count, scatterPlotData } = this.countResults(newValue)
+    this.setState({ [name]: newValue, resultsCount: count, scatterPlotData: scatterPlotData })
   }
 
   countResults = (newValue) => {
@@ -267,7 +281,7 @@ class Feed extends Component {
       if (this.filterItems(this.state.data[i], newValue)) {
         const x = this.state.data[i].price
         const y = this.state.data[i].floor_size
-        scatterPlotData.push([parseInt(x), parseInt(y)])
+        if (x !== undefined && y !== undefined) scatterPlotData.push([parseInt(x), parseInt(y)])
         count++
       }
     }
@@ -297,6 +311,7 @@ class Feed extends Component {
   }
 
   getData = (suburb) => {
+    var count = 0
     const data = []
     const scatterPlotData = []
     const varX = 'price'
@@ -307,13 +322,16 @@ class Feed extends Component {
       .then((response) => {
         response.forEach(doc => {
           data.push(doc.data())
-          const x = doc.data()[varX]
-          const y = doc.data()[varY]
-          if (x !== undefined && y !== undefined) scatterPlotData.push([parseInt(x), parseInt(y)])
+          if (this.filterItems(doc.data(), this.state.priceRange)) {
+            count++
+            const x = doc.data()[varX]
+            const y = doc.data()[varY]
+            if (x !== undefined && y !== undefined) scatterPlotData.push([parseInt(x), parseInt(y)])
+          }
         })
         var newData = data
         var newScatterPlotData = scatterPlotData
-        this.setState({ data: newData, scatterPlotData: newScatterPlotData })
+        this.setState({ data: newData, scatterPlotData: newScatterPlotData, resultsCount: count })
       }).catch((error) => {
         console.log(error)
       })
@@ -372,17 +390,17 @@ class Feed extends Component {
     return (
       <FormControl style={{ minWidth: 400 }}>
         <InputLabel id={selectId + 'label'}>{label}</InputLabel>
-        <Select
+        <StyledSelect
           {...extraProps}
           labelId={selectId + 'label'}
           id='selectId'
           value={this.state[name]}
-          onChange={(event) => this.handleChange(name, event)}
+          onChange={(event) => this.handleChangeSuburb(name, event)}
         >
           {values.map(value => {
             return <MenuItem key={value} value={value}>{formatSuburb(value)}</MenuItem>
           })}
-        </Select>
+        </StyledSelect>
       </FormControl>
     )
   }
@@ -458,7 +476,7 @@ class Feed extends Component {
               {/* this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms') */}
               {/* this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms') */}
               <div style={{ height: 10 }} />
-              <Button onClick={() => this.getData(this.state.suburb)}>Search</Button>
+              {/* <Button onClick={() => this.getData(this.state.suburb)}>Search</Button> */}
               <ScatterPlot data={this.state.scatterPlotData} filterItems={(item) => this.filterItems(item, this.state.priceRange)} {...graphSettings} />
             </TextContainer>
           </Grid>

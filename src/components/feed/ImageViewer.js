@@ -72,7 +72,14 @@ class ImageViewer extends PureComponent {
         <Grid container justify='center' alignItems='flex-end' class='bottomGradient' style={{ position: 'absolute', flex: 1, top: 0, left: 0, right: 0, bottom: 0 }}>
           <Grid container alignItems='flex-end' style={{ flex: 1, height: '100%', paddingLeft: 10, paddingRight: 10 }}>
             <Grid style={{ width: '100%' }}>
-
+              <Grid container flexDirection='row'>
+                <Grid style={{ flex: 1 }}>
+                  <Typography variant='caption' style={{ color: sc.PRIMARY_COLOR }}>3 bed, 3 bath, 100m² </Typography>
+                </Grid>
+                <Grid container justify='flex-end' style={{ flex: 1 }}>
+                  <Typography variant='caption' style={{ color: sc.PRIMARY_COLOR }}>{this.state.index + 1} / {this.props.images.length} </Typography>
+                </Grid>
+              </Grid>
               <Grid container>
                 {this.renderSpaces(this.props.images.length, this.state.index)}
               </Grid>

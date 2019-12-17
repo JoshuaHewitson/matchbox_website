@@ -126,7 +126,7 @@ svg {
 .axis text {
   font-family: sans-serif;
   font-size: 11px;
-  color: black
+  color: rgb(152, 164, 185)
 }
 
 .controls button {
