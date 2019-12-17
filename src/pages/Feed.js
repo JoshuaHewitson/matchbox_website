@@ -42,7 +42,7 @@ import '../App.css'
 const COLLECTION_NAME = 'sale_listings' // 'rental_listings'
 const graphSettings = {
   width: 400,
-  height: 300,
+  height: 400,
   padding: 30,
   numDataPoints: 100
   // maxRange: () => Math.random() * 1000
@@ -455,8 +455,8 @@ class Feed extends Component {
                 // getAriaLabel={index => (index === 0 ? 'Minimum price' : 'Maximum price')}
                 defaultValue={[20000000, 40000000]}
               />
-              {this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms')}
-              {this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms')}
+              {/* this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms') */}
+              {/* this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms') */}
               <div style={{ height: 10 }} />
               <Button onClick={() => this.getData(this.state.suburb)}>Search</Button>
               <ScatterPlot data={this.state.scatterPlotData} filterItems={(item) => this.filterItems(item, this.state.priceRange)} {...graphSettings} />
