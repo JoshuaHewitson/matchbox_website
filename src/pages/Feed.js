@@ -130,7 +130,6 @@ const AirbnbSlider = withStyles({
       }
     },
     '& .bar': {
-      // display: inline-block !important;
       height: 9,
       width: 1,
       backgroundColor: 'currentColor',
@@ -142,24 +141,46 @@ const AirbnbSlider = withStyles({
   track: {
     height: 3
   },
+  valueLabel: {
+    left: 'calc(-50% + 11px)',
+    // top: -22
+    '& *': {
+      // background: sc.PRIMARY_COLOR_SHADOW,
+      // color: '#000'
+    }
+  },
   rail: {
     color: sc.LIGHT_GREY,
     opacity: 1,
     height: 3
   }
-})(Slider)
+})(props => <Slider valueLabelDisplay='on' {...props} />)
 
 function AirbnbThumbComponent (props) {
   return (
     <span {...props}>
+      {props.children}
       <span className='bar' />
       <span className='bar' />
       <span className='bar' />
     </span>
   )
 }
+
 function valuetext (value) {
-  return `${value}°C`
+  // let priceOut
+  // console.log(priceIn)
+  if (value >= 10000000) {
+    return Math.round(value / 1000000) + 'M'
+  } else if (value >= 1000000) {
+    return (Math.round(value * 2 / 1000000) / 2) + 'M'
+  } else if (value >= 50000) {
+    return Math.round(value / 10000) * 10 + 'K'
+  } else if (value >= 5000) {
+    return Math.round(value / 1000) + 'K'
+  } else {
+    return (Math.round(value / 100) / 10).toFixed(1) + 'K'
+  }
 }
 
 function ValueLabelComponent (props) {
@@ -187,6 +208,7 @@ class Feed extends Component {
       height: window.innerHeight,
       suburb: 'bantry_bay',
       suburbs: ['bantry_bay'],
+      priceRange: [0, 20],
       x: '',
       y: '',
       data: [],
@@ -232,6 +254,31 @@ class Feed extends Component {
     this.setState({ [name]: event.target.value })
   }
 
+  handleUpdatePriceRange = (event, newValue, name) => {
+    const resultsCount = this.countResults(newValue).count
+    const scatterPlotData = this.countResults(newValue).scatterPlotData
+    this.setState({ [name]: newValue, resultsCount: resultsCount, scatterPlotData: scatterPlotData })
+  }
+
+  countResults = (newValue) => {
+    const scatterPlotData = []
+    var count = 0
+    for (var i = 0; i < this.state.data.length; i++) {
+      if (this.filterItems(this.state.data[i], newValue)) {
+        const x = this.state.data[i].price
+        const y = this.state.data[i].floor_size
+        scatterPlotData.push([parseInt(x), parseInt(y)])
+        count++
+      }
+    }
+    return { count, scatterPlotData }
+  }
+
+  filterItems = (item, price) => {
+    if (item.price >= price[0] && item.price <= price[1]) return true
+    return false
+  }
+
   handleChangeMultiple = (name, event) => {
     const { options } = event.target
     const value = []
@@ -254,13 +301,11 @@ class Feed extends Component {
     const scatterPlotData = []
     const varX = 'price'
     const varY = 'floor_size'
-    var count = 0
     const firebaseDB = fire.firestore()
     const listingDocRef = firebaseDB.collection(COLLECTION_NAME).where('suburb', '==', suburb)
     listingDocRef.get()
       .then((response) => {
         response.forEach(doc => {
-          count++
           data.push(doc.data())
           const x = doc.data()[varX]
           const y = doc.data()[varY]
@@ -268,7 +313,7 @@ class Feed extends Component {
         })
         var newData = data
         var newScatterPlotData = scatterPlotData
-        this.setState({ data: newData, scatterPlotData: newScatterPlotData, resultsCount: count })
+        this.setState({ data: newData, scatterPlotData: newScatterPlotData })
       }).catch((error) => {
         console.log(error)
       })
@@ -396,21 +441,25 @@ class Feed extends Component {
               {this.renderHeading(this.state.resultsCount + ' results')}
               {this.renderSelect('Suburb', 'suburb', this.suburbs, 'suburbSelect', 'Select suburb')}
               {/* this.renderInput('Price', 'price', 'priceInput', 'Enter price') */}
-              <div style={{ height: 20 }} />
-              <Typography id='price-slider' gutterBottom>Price</Typography>
+              <div style={{ height: 70 }} />
               <AirbnbSlider
                 ThumbComponent={AirbnbThumbComponent}
-                aria-labelledby='price-slider'
-                getAriaValueText={valuetext}
+                onChangeCommitted={(event, newValue) => this.handleUpdatePriceRange(event, newValue, 'priceRange')}
+                // value={this.state.priceRange}
+                // aria-labelledby='price-slider'
+                // getAriaValueText={valuetext}
+                valueLabelFormat={valuetext}
                 valueLabelDisplay='on'
-                getAriaLabel={index => (index === 0 ? 'Minimum price' : 'Maximum price')}
-                defaultValue={[20, 40]}
+                max={100000000}
+                min={1000000}
+                // getAriaLabel={index => (index === 0 ? 'Minimum price' : 'Maximum price')}
+                defaultValue={[20000000, 40000000]}
               />
               {this.renderInput('Num Bedrooms', 'num_bedrooms', 'numBedrooms', 'Enter num bedrooms')}
               {this.renderInput('Num Bathrooms', 'num_bathrooms', 'numBathrooms', 'Enter num bathrooms')}
               <div style={{ height: 10 }} />
               <Button onClick={() => this.getData(this.state.suburb)}>Search</Button>
-              <ScatterPlot data={this.state.scatterPlotData} {...graphSettings} />
+              <ScatterPlot data={this.state.scatterPlotData} filterItems={(item) => this.filterItems(item, this.state.priceRange)} {...graphSettings} />
             </TextContainer>
           </Grid>
         </Grid>
@@ -419,15 +468,18 @@ class Feed extends Component {
   }
 
   renderCard = (item) => {
-    return (
-      <FeedCard item={item}>
-        <ImageViewer images={item.images} />
-        <PropertyInfo {...item}>
-          <Button style={{ color: 'white', marginTop: 10, marginRight: 10, backgroundColor: sc.LIGHT_GREY }} onClick={() => this.getData(this.state.suburb)}>match</Button>
-          <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginTop: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => this.getData(this.state.suburb)}>Request Report</Button>
-        </PropertyInfo>
-      </FeedCard>
-    )
+    if (this.filterItems(item, this.state.priceRange)) {
+      return (
+        <FeedCard item={item}>
+          <ImageViewer images={item.images} />
+          <PropertyInfo {...item}>
+            <Button style={{ color: 'white', marginTop: 10, marginRight: 10, backgroundColor: sc.LIGHT_GREY }} onClick={() => this.getData(this.state.suburb)}>match</Button>
+            <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginTop: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => this.getData(this.state.suburb)}>Request Report</Button>
+          </PropertyInfo>
+        </FeedCard>
+      )
+    }
+    return null
   }
 
   renderFeedCards = () => {
