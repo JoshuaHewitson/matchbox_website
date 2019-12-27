@@ -74,7 +74,7 @@ class ImageViewer extends PureComponent {
             <Grid style={{ width: '100%' }}>
               <Grid container flexDirection='row'>
                 <Grid style={{ flex: 1 }}>
-                  <Typography variant='caption' style={{ color: sc.PRIMARY_COLOR }}>3 bed, 3 bath, 100m² </Typography>
+                  <Typography variant='caption' style={{ color: sc.PRIMARY_COLOR }}>{this.props.numBedrooms} bed, {this.props.numBathrooms} bath, {this.props.floorSize}m² </Typography>
                 </Grid>
                 <Grid container justify='flex-end' style={{ flex: 1 }}>
                   <Typography variant='caption' style={{ color: sc.PRIMARY_COLOR }}>{this.state.index + 1} / {this.props.images.length} </Typography>

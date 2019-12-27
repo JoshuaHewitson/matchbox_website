@@ -105,10 +105,13 @@ html {
 	}
 }
 
-.dot {
-  color: #2fe6a6;
-  width: 1;
-  height: 1
+.dot { transition: all .1s ease-in-out }
+.dot:hover { fill: #2fe6a6; stroke-width: 1.5 }
+
+.labelText {
+  transition: all .1s ease-in-out;
+  fill: rgb(15, 48, 44);
+  font-size: 12px;
 }
 
 svg {
@@ -125,7 +128,7 @@ svg {
 
 .axis text {
   font-family: sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   color: rgb(152, 164, 185)
 }
 

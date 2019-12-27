@@ -275,7 +275,7 @@ function TabPanel (props) {
   )
 }
 
-class Feed extends Component {
+class Admin extends Component {
   constructor (props) {
     super(props)
     this.state = ({
@@ -296,6 +296,7 @@ class Feed extends Component {
     })
     // this.suburbs = ['green_point', 'sea_point', 'bantry_bay', 'mouille_point', 'foreshore', 'fresnaye', 'clifton', 'de_waterkant']
     this.variables = ['price', 'floor_size', 'num_bedrooms', 'num_bathrooms']
+    this.blocks = ['the_docklands', 'dockside', 'dockdockdock', 'etc']
     this.numRoomsOptions = ['any', '1', '2', '3', '4', '5', '6+']
     this.cardRefs = {}
   }
@@ -370,6 +371,10 @@ class Feed extends Component {
     window.scrollTo(0, 0)
   }
 
+  handleChangeBlock = (key, event) => {
+    this.props.actions.feed.setBlock(key, event.target.value)
+  }
+
   handleUpdatePriceRange = (event, newValue, name) => {
     this.props.actions.feed.filterFeedData(newValue, this.props.filters.bedrooms, this.props.filters.bathrooms)
     this.props.actions.filters.setPriceRange(newValue)
@@ -438,6 +443,25 @@ class Feed extends Component {
           margin='normal'
         />
       </div>
+    )
+  }
+
+  renderSelectBlock = (label, item, values, selectId, extraProps) => {
+    return (
+      <FormControl style={{ minWidth: 300 }}>
+        <InputLabel id={selectId + 'label'}>{label}</InputLabel>
+        <StyledSelect
+          {...extraProps}
+          labelId={selectId + 'label'}
+          id='selectId'
+          value={this.props.feed.data.get(item.key).block}
+          onChange={(event) => this.handleChangeBlock(item.key, event)}
+        >
+          {values.map(value => {
+            return <MenuItem key={value} value={value}>{value}</MenuItem>
+          })}
+        </StyledSelect>
+      </FormControl>
     )
   }
 
@@ -620,19 +644,8 @@ class Feed extends Component {
         <PropertyInfo onClick={() => this.props.history.push('/view_property/' + item.key)} {...item}>
           <Grid container flexDirection='row' alignItems='center'>
             <FormGroup style={{ marginTop: 10, marginRight: 10 }}>
-              <FormControlLabel
-                control={
-                  <StyledCheckBox
-                    // checked={item.shortlisted}
-                    // onChange={(event) => { item.shortlisted = true }}
-                    // value={item.shortlisted}
-                    color={sc.PRIMARY_COLOR}
-                  />
-                }
-                label='Shortlist'
-              />
+              {this.renderSelectBlock('Block', item, this.props.filters.blocks[this.props.filters.suburb], 'blockSelect', 'Select block')}
             </FormGroup>
-            <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginTop: 10, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => {}}>Request Report</Button>
           </Grid>
         </PropertyInfo>
       </FeedCard>
@@ -663,8 +676,8 @@ class Feed extends Component {
         // alignitems='center'
         style={{ width: '100%', height: '100%', backgroundColor: sc.LIGHT_GREY }}
       >
-        <TopNavigationBar value='feed' position='static' onChange={id => this.handleChangePath(id)} />
-        <TopNavigationBar value='feed' position='fixed' />
+        <TopNavigationBar value='admin' position='static' onChange={id => this.handleChangePath(id)} />
+        <TopNavigationBar value='admin' position='fixed' />
         <Grid
           container
           style={{
@@ -713,4 +726,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Feed))
+)(withRouter(Admin))

@@ -7,7 +7,7 @@ import ImageViewer from './ImageViewer'
 const renderDescription = (value) => {
   if (value) {
     return (
-      <Typography noWrap displayBlock variant='caption' style={{ color: sc.BODY_TEXT_COLOR, whiteSpace: 'pre-line', maxHeight: 150 }}>{value.replace(/(\*\*)/gm, '\n')}</Typography>
+      <Typography noWrap displayBlock variant='caption' style={{ color: sc.BODY_TEXT_COLOR, whiteSpace: 'pre-line' }}>{value.replace(/(\*\*)/gm, '\n')}</Typography>
     )
   }
 }
@@ -62,17 +62,20 @@ const formatSuburb = (string = 'not set') => {
 }
 
 const PropertyInfo = (props) => {
+  const descriptionHeight = props.full ? 5000 : 110
   return (
     <Grid style={{ flex: 1, padding: 20, overflow: 'hidden' }}>
-      {renderPrice(props.price)}
-      <div style={{ height: 10 }} />
-      <Typography variant='h6' style={{ color: sc.DARK_COLOR }}>{getPropertTypeDisplayText(props.property_type)} in {formatSuburb(props.suburb)}</Typography>
-      {renderBedroomsAndBathrooms(props.num_bedrooms, props.num_bathrooms)}
-      <div style={{ height: 10 }} />
-      <Divider />
-      <div style={{ height: 5 }} />
-      <div style={{ maxHeight: 110, maxWidth: 600, overflow: 'hidden' }}>
-        {renderDescription(props.description)}
+      <div onClick={props.onClick}>
+        {renderPrice(props.price)}
+        <div style={{ height: 10 }} />
+        <Typography variant='h6' style={{ color: sc.DARK_COLOR }}>{getPropertTypeDisplayText(props.property_type)} in {formatSuburb(props.suburb)}</Typography>
+        {renderBedroomsAndBathrooms(props.num_bedrooms, props.num_bathrooms)}
+        <div style={{ height: 10 }} />
+        <Divider />
+        <div style={{ height: 5 }} />
+        <div style={{ maxHeight: descriptionHeight, maxWidth: 600, overflow: 'hidden' }}>
+          {renderDescription(props.description)}
+        </div>
       </div>
       <Divider />
       {props.children}

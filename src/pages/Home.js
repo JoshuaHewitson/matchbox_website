@@ -288,7 +288,7 @@ class Home extends Component {
     return (
       <div style={{ backgroundColor: 'white' }}>
         {sc.WIDTH_BREAKPOINT < this.state.width && this.renderBackgroundCircles()}
-        <TopBar selected={this.state.selected} position='static' width={this.state.width} pageRefs={this.pageRefs} handleViewPageSection={(ref, pageNum) => this.handleViewPageSection(ref, pageNum)} />
+        <div style={{ position: 'static', width: this.state.width, height: 20 }} />
         <TopBar selected={this.state.selected} position='fixed' width={this.state.width} pageRefs={this.pageRefs} handleViewPageSection={(ref, pageNum) => this.handleViewPageSection(ref, pageNum)} />
         {sc.WIDTH_BREAKPOINT2 < this.state.width &&
           <div style={{ position: 'fixed', right: 30, top: '30%' }}>

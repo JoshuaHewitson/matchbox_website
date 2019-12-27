@@ -16,6 +16,8 @@ import FeedCard from './feed/FeedCard'
 import FeedList from './feed/FeedList'
 import ImageViewer from './feed/ImageViewer'
 import PropertyInfo from './feed/PropertyInfo'
+import TopNavigationBar from './TopNavigationBar'
+import PriceSlider from './filters/PriceSlider'
 
 export {
   TextSection,
@@ -35,5 +37,7 @@ export {
   FeedCard,
   FeedList,
   ImageViewer,
-  PropertyInfo
+  PropertyInfo,
+  TopNavigationBar,
+  PriceSlider
 }

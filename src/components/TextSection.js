@@ -1,5 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 // import windowSize from 'react-window-size'
 import Zoom from '@material-ui/core/Zoom'
 import person1 from '../assets/person5.svg'
@@ -61,6 +62,7 @@ const renderContent = () => {
       <Typography variant='subtitle1' paragraph align='left' style={{ maxWidth: 310, color: sc.BODY_TEXT_COLOR }}>
         Our data ensures that your decision is a smart one.
       </Typography>
+      {/* <Button style={{ color: 'white', width: '70%', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginBottom: 10, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => this.getData(this.state.suburb)}>Find property</Button> */}
       <div>
         {googlePlayButton()}
         {appStoreButton()}
