@@ -61,13 +61,13 @@ function * sagaLoadSearchResults () {
 }
 
 function * sagaFilterData (action) {
-  const filteredData = {}
+  const filteredData = []
   var count = 0
   const data = yield select((state) => state.get('feed').data)
   const { priceRange, bedrooms, bathrooms } = action.payload
   for (var i = 0; i < data.size; i++) {
     const item = data.valueSeq().get(i)
-    if (item, priceRange, bedrooms, bathrooms) {
+    if (filterItem(item, priceRange, bedrooms, bathrooms)) {
       filteredData.push(item)
       count++
     }
