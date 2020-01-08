@@ -4,6 +4,8 @@ import * as types from '../actions/Types'
 import {
   setFeedData,
   setFeedFilteredData,
+  setFeedAveragePrice,
+  setFeedAveragePPSM,
   setFeedCount,
   setFeedLoading,
   setFeedLoadingFailed
@@ -36,6 +38,9 @@ function * sagaLoadSearchResults () {
   const data = {}
   const filteredData = []
   var count = 0
+  var ppsmCount = 0
+  var priceTotal = 0
+  var ppsmTotal = 0
   const filters = yield select((state) => state.get('filters'))
   try {
     yield put(setFeedLoading(true))
@@ -46,12 +51,20 @@ function * sagaLoadSearchResults () {
       data[doc.id] = item
       if (filterItem(item, filters.priceRange, filters.bedrooms, filters.bathrooms)) {
         filteredData.push(item)
+        priceTotal += item.price
+        if (item.floor_size) {
+          console.log(item.floor_size)
+          ppsmTotal += item.price / item.floor_size
+          ppsmCount++
+        }
         count++
       }
     })
     yield put(setFeedData(OrderedMap(data)))
     yield put(setFeedFilteredData(filteredData))
     yield put(setFeedCount(count))
+    yield put(setFeedAveragePrice(priceTotal / count))
+    yield put(setFeedAveragePPSM(ppsmTotal / ppsmCount))
     yield put(setFeedLoading(false))
   } catch (e) {
     yield put(setFeedLoading(false))
@@ -63,16 +76,27 @@ function * sagaLoadSearchResults () {
 function * sagaFilterData (action) {
   const filteredData = []
   var count = 0
+  var priceTotal = 0
+  var ppsmCount = 0
+  var ppsmTotal = 0
   const data = yield select((state) => state.get('feed').data)
   const { priceRange, bedrooms, bathrooms } = action.payload
   for (var i = 0; i < data.size; i++) {
     const item = data.valueSeq().get(i)
     if (filterItem(item, priceRange, bedrooms, bathrooms)) {
       filteredData.push(item)
+      priceTotal += item.price
+      if (item.floor_size) {
+        console.log(item.floor_size)
+        ppsmTotal += item.price / item.floor_size
+        ppsmCount++
+      }
       count++
     }
   }
   yield put(setFeedCount(count))
+  yield put(setFeedAveragePrice(priceTotal / count))
+  yield put(setFeedAveragePPSM(ppsmTotal / ppsmCount))
   yield put(setFeedFilteredData(filteredData))
 }
 

@@ -1,14 +1,14 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
+import { Grid, Box, Typography } from '@material-ui/core'
 import { styleConstants as sc } from '../../config'
-import { Typography } from '@material-ui/core'
+
 import { withStyles } from '@material-ui/core/styles'
 import ImageViewer from './ImageViewer'
 
 const iOSBoxShadow =
   '0 3px 1px rgba(47,137,128,0.1),0 4px 8px rgba(47,137,128,0.13),0 0 0 1px rgba(47,137,128,0.02)'
 
-const GridCard = withStyles(theme => ({
+const Card = withStyles(theme => ({
   root: {
     // backgroundColor: 'white',
     transition: 'all .07s ease-in-out',
@@ -18,13 +18,13 @@ const GridCard = withStyles(theme => ({
       boxShadow: '0 3px 1px rgba(47,137,128,0.1),0 4px 8px rgba(15, 48, 44,0.2),0 0 0 1px rgba(47,137,128,0.05)'
     }
   }
-}))(Grid)
+}))(Box)
 
 const FeedCard = (props) => {
   return (
-    <GridCard
+    <Card
       ref={ref => props.addRef(ref, props.item.key)}
-      container // alignItems='center' justify='center'
+      // container // alignItems='center' justify='center'
       style={{
         width: '100%',
         // padding: 10,
@@ -37,10 +37,14 @@ const FeedCard = (props) => {
         backgroundColor: 'white'
       }}
     >
-      <Grid container flexDirection='row' style={{ maxWidth: 1000 }}>
-        {props.children}
-      </Grid>
-    </GridCard>
+      {props.expanded
+        ? <Grid style={{ maxWidth: 1000 }}>
+          {props.children}
+          </Grid>
+        : <Grid container flexDirection='row' style={{ maxWidth: 1000 }}>
+          {props.children}
+          </Grid>}
+    </Card>
   )
 }
 

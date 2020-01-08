@@ -4,8 +4,7 @@ import 'react-animated-slider/build/horizontal.css'
 import * as d3 from 'd3'
 import { styleConstants as sc } from '../config'
 import '../App.css'
-import { Tooltip } from '@material-ui/core'
-import { withStyles, makeStyles } from '@material-ui/core/styles'
+import { BootstrapTooltip } from './StyledMaterialUI'
 
 // Calculate a linear regression from the data
 
@@ -103,21 +102,6 @@ const labelFormat = (value) => {
   } else {
     return (Math.round(value / 100) / 10).toFixed(1) + 'K'
   }
-}
-
-const useStylesBootstrap = makeStyles(theme => ({
-  arrow: {
-    color: sc.SECONDARY_COLOR_DARK_2
-  },
-  tooltip: {
-    backgroundColor: sc.SECONDARY_COLOR_DARK_2
-  }
-}))
-
-function BootstrapTooltip (props) {
-  const classes = useStylesBootstrap()
-
-  return <Tooltip arrow classes={classes} {...props} />
 }
 
 class Axis extends React.Component {

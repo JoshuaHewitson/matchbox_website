@@ -66,33 +66,24 @@ function ThumbComponent (props) {
 }
 
 function labelFormat (value) {
-  if (value >= 10000000) {
-    return Math.round(value / 1000000) + 'M'
-  } else if (value >= 1000000) {
-    return (Math.round(value * 2 / 1000000) / 2) + 'M'
-  } else if (value >= 50000) {
-    return Math.round(value / 10000) * 10 + 'K'
-  } else if (value >= 5000) {
-    return Math.round(value / 1000) + 'K'
-  } else {
-    return (Math.round(value / 100) / 10).toFixed(1) + 'K'
-  }
+  return value.toFixed(0) + '%'
 }
 
-const PriceSlider = (props) => {
+const PercentageSlider = (props) => {
   return (
     <StyledSlider
       ThumbComponent={ThumbComponent}
-      onChangeCommitted={(event, pricerange) => props.onChangeCommitted(pricerange)}
+      {...props}
+      // onChangeCommitted={(event, newValue) => props.onChangeCommitted(event, newValue)}
       // onChange={(event, newValue) => { this.priceRange = newValue }}
       // value={this.priceRange}
       valueLabelFormat={labelFormat}
       valueLabelDisplay='on'
-      max={constants.SALE_FILTER_PRICE_MAX}
-      min={constants.SALE_FILTER_PRICE_MIN}
-      defaultValue={props.defaultValue}
+      max={100}
+      min={0}
+      // defaultValue={props.defaultValue}
     />
   )
 }
 
-export default PriceSlider
+export default PercentageSlider

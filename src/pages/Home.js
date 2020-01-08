@@ -38,9 +38,7 @@ class Home extends Component {
   constructor () {
     super()
     this.state = {
-      selected: 0,
-      width: window.innerWidth,
-      height: window.innerHeight
+      selected: 0
     }
     this.pages = [
       'home',
@@ -54,20 +52,14 @@ class Home extends Component {
 
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.updateWindowDimensions)
   }
 
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll)
-    window.removeEventListener('resize', this.updateWindowDimensions)
-  }
-
-  updateWindowDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight })
   }
 
   handleScroll = (e) => {
-    const newPage = this.calcCurrentPage(e.srcElement.scrollingElement.scrollTop, this.pageRefs, this.state.height)
+    const newPage = this.calcCurrentPage(e.srcElement.scrollingElement.scrollTop, this.pageRefs, this.props.height)
     if (newPage !== this.state.newPage) {
       this.setState({
         selected: newPage
@@ -287,28 +279,28 @@ class Home extends Component {
   render () {
     return (
       <div style={{ backgroundColor: 'white' }}>
-        {sc.WIDTH_BREAKPOINT < this.state.width && this.renderBackgroundCircles()}
-        <div style={{ position: 'static', width: this.state.width, height: 20 }} />
-        <TopBar selected={this.state.selected} position='fixed' width={this.state.width} pageRefs={this.pageRefs} handleViewPageSection={(ref, pageNum) => this.handleViewPageSection(ref, pageNum)} />
-        {sc.WIDTH_BREAKPOINT2 < this.state.width &&
+        {sc.WIDTH_BREAKPOINT < this.props.width && this.renderBackgroundCircles()}
+        <div style={{ position: 'static', width: this.props.width, height: 20 }} />
+        <TopBar selected={this.state.selected} position='fixed' width={this.props.width} pageRefs={this.pageRefs} handleViewPageSection={(ref, pageNum) => this.handleViewPageSection(ref, pageNum)} />
+        {sc.WIDTH_BREAKPOINT2 < this.props.width &&
           <div style={{ position: 'fixed', right: 30, top: '30%' }}>
             <PageIndicatorDots selected={this.state.selected} pageRefs={this.pageRefs} pages={this.pages} handleViewPageSection={(ref, pageNum) => this.handleViewPageSection(ref, pageNum)} />
           </div>}
         <div ref={(ref) => { this.pageRefs[0] = ref }}>
           <PageSection>
-            <ContentContainer primary width={this.state.width}>
-              <TextSection width={this.state.width} />
+            <ContentContainer primary width={this.props.width}>
+              <TextSection width={this.props.width} />
             </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
+            <ContentContainer primary={false} width={this.props.width}>
               {/* this.renderPhone(phoneOutline2) */}
               <SlideShow />
             </ContentContainer>
           </PageSection>
-          {sc.WIDTH_BREAKPOINT2 > this.state.width &&
+          {sc.WIDTH_BREAKPOINT2 > this.props.width &&
             <PageSection>
               <img src={building1} style={{ position: 'absolute', marginTop: 200, right: 0, width: '60%' }} />
               <img src={plant2} style={{ position: 'absolute', marginTop: 200, left: 0, width: '40%' }} />
-              <ContentContainer primary width={this.state.width}>
+              <ContentContainer primary width={this.props.width}>
                 <SlideShow />
               </ContentContainer>
             </PageSection>}
@@ -316,18 +308,18 @@ class Home extends Component {
 
         <div ref={(ref) => { this.pageRefs[1] = ref }}>
           <PageSection>
-            <ContentContainer primary width={this.state.width}>
+            <ContentContainer primary width={this.props.width}>
               {this.renderHowItWorks()}
             </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
+            <ContentContainer primary={false} width={this.props.width}>
               <Grid style={{ width: '80%' }}>
                 <img class='appear' src={person1} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
+          {sc.WIDTH_BREAKPOINT > this.props.width &&
             <PageSection>
-              <ContentContainer primary width={this.state.width}>
+              <ContentContainer primary width={this.props.width}>
                 <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
               </ContentContainer>
             </PageSection>}
@@ -335,18 +327,18 @@ class Home extends Component {
 
         <div ref={(ref) => { this.pageRefs[2] = ref }}>
           <PageSection>
-            <ContentContainer primary width={this.state.width}>
+            <ContentContainer primary width={this.props.width}>
               {this.renderPropertyReports()}
             </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
+            <ContentContainer primary={false} width={this.props.width}>
               <Grid style={{ width: '80%' }}>
                 <img class='appear' src={person2} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
+          {sc.WIDTH_BREAKPOINT > this.props.width &&
             <PageSection>
-              <ContentContainer primary width={this.state.width}>
+              <ContentContainer primary width={this.props.width}>
                 <img class='appear' src={person2} style={{ width: '60%', marginTop: 20 }} />
               </ContentContainer>
             </PageSection>}
@@ -354,18 +346,18 @@ class Home extends Component {
 
         <div ref={(ref) => { this.pageRefs[3] = ref }}>
           <PageSection>
-            <ContentContainer primary width={this.state.width}>
+            <ContentContainer primary width={this.props.width}>
               {this.renderMatchboxAnalysts()}
             </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
+            <ContentContainer primary={false} width={this.props.width}>
               <Grid style={{ width: '80%' }}>
                 <img class='appear' src={person3} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
+          {sc.WIDTH_BREAKPOINT > this.props.width &&
             <PageSection>
-              <ContentContainer primary width={this.state.width}>
+              <ContentContainer primary width={this.props.width}>
                 <img class='appear' src={person3} style={{ width: '60%', marginTop: 20 }} />
               </ContentContainer>
             </PageSection>}
@@ -373,24 +365,24 @@ class Home extends Component {
 
         <div ref={(ref) => { this.pageRefs[4] = ref }}>
           <PageSection>
-            <ContentContainer primary width={this.state.width}>
+            <ContentContainer primary width={this.props.width}>
               {this.renderAboutUs()}
             </ContentContainer>
-            <ContentContainer primary={false} width={this.state.width}>
+            <ContentContainer primary={false} width={this.props.width}>
               <Grid style={{ width: '80%' }}>
                 <img class='appear' src={person2} style={{ marginTop: 20 }} />
               </Grid>
             </ContentContainer>
           </PageSection>
-          {sc.WIDTH_BREAKPOINT > this.state.width &&
+          {sc.WIDTH_BREAKPOINT > this.props.width &&
             <PageSection>
-              <ContentContainer primary width={this.state.width}>
+              <ContentContainer primary width={this.props.width}>
                 <img class='appear' src={person1} style={{ width: '60%', marginTop: 20 }} />
               </ContentContainer>
             </PageSection>}
         </div>
 
-        <Footer width={this.state.width} />
+        <Footer width={this.props.width} />
 
         {/* <div style={{ position: 'fixed', top: '75%', width: '100%', height: '25%', backgroundColor: 'white' }} /> */}
         {/*

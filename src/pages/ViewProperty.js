@@ -12,7 +12,7 @@ import {
   Login,
   ImageViewer,
   PropertyInfo,
-  TopBar
+  TopNavigationBar
 } from '../components'
 
 import TextField from '@material-ui/core/TextField'
@@ -21,6 +21,8 @@ import fire from '../config/Firebase'
 import RadioGroup from '@material-ui/core/RadioGroup'
 // import { useParams } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import Link from '@material-ui/core/Link'
 import '../App.css'
 
 const COLLECTION_NAME = 'sale_listings' // 'rental_listings'
@@ -132,6 +134,17 @@ class ViewProperty extends Component {
   render () {
     return (
       <div style={{ backgroundColor: 'white' }}>
+        <TopNavigationBar value='feed' position='static' onChange={id => this.handleChangePath(id)} />
+        <TopNavigationBar value='feed' position='fixed' />
+        <Breadcrumbs aria-label='breadcrumb'>
+          <Link color='inherit' href='/'>
+        Matchbox
+          </Link>
+          <Link color='inherit' href='/feed'>
+        Find property
+          </Link>
+          <Typography color='textPrimary'>{this.props.id}</Typography>
+        </Breadcrumbs>
         <Grid
           container
           // justify='center'

@@ -32,6 +32,20 @@ export const setFeedCount = (count) => ({
   }
 })
 
+export const setFeedAveragePrice = (price) => ({
+  type: types.SET_FEED_AVERAGE_PRICE,
+  payload: {
+    price
+  }
+})
+
+export const setFeedAveragePPSM = (ppsm) => ({
+  type: types.SET_FEED_AVERAGE_PPSM,
+  payload: {
+    ppsm
+  }
+})
+
 export const filterFeedData = (priceRange, bedrooms, bathrooms) => ({
   type: types.FILTER_FEED_DATA,
   payload: {

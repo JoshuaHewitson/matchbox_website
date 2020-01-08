@@ -22,9 +22,8 @@ const changePath = (props, path) => {
   props.history.push(path)
 }
 
-function Page (props) {
+const Page = (props) => {
   const { id, id2 } = useParams()
-  console.log('its me your looking foooor', id, id2)
   return (
     <div>
       {/*
@@ -35,25 +34,33 @@ function Page (props) {
       {id === 'privacy_policy' && <PrivacyPolicy />}
       {id === 'post_listing' && <PostListings />}
       {id === 'graph_plotter' && <GraphPlotter />}
-      {id === 'feed' && <Feed />}
+      {id === 'feed' && <Feed feedState='search_results' width={props.width} height={props.height} />}
       {id === 'admin' && <Admin />}
-      {id === 'view_property' && <ViewProperty id={id2} />}
+      {id === 'view_property' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
     </div>
   )
 }
 
-function HomePage (props) {
+const HomePage = (props) => {
   const { id } = useParams()
   return (
     <div>
       <TopNavigationBar value={id} position='static' onChange={id => changePath(props, id)} />
       <TopNavigationBar value={id} position='fixed' />
-      <Home />
+      <Home width={props.width} height={props.height} />
     </div>
   )
 }
 
 class Matchbox extends PureComponent {
+  constructor () {
+    super()
+    this.state = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+  }
+
   authListener () {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -69,15 +76,24 @@ class Matchbox extends PureComponent {
 
   componentWillMount () {
     this.authListener()
+    window.addEventListener('resize', this.updateWindowDimensions)
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.updateWindowDimensions)
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight })
   }
 
   render () {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path='/' exact component={HomePage} />
-          <Route path='/:id' exact render={() => <Page />} />
-          <Route path='/:id/:id2' render={() => <Page />} />
+          <Route path='/' exact render={() => <HomePage width={this.state.width} height={this.state.height} />} />
+          <Route path='/:id' exact render={() => <Page width={this.state.width} height={this.state.height} />} />
+          <Route path='/:id/:id2' render={() => <Page width={this.state.width} height={this.state.height} />} />
         </Switch>
       </BrowserRouter>
     )

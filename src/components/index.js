@@ -18,6 +18,11 @@ import ImageViewer from './feed/ImageViewer'
 import PropertyInfo from './feed/PropertyInfo'
 import TopNavigationBar from './TopNavigationBar'
 import PriceSlider from './filters/PriceSlider'
+import PercentageSlider from './filters/PercentageSlider'
+import Price from './Price'
+import Filters from './filters/Filters'
+import SidePanel from './filters/SidePanel'
+import CardFocusedPanel from './filters/CardFocusedPanel'
 
 export {
   TextSection,
@@ -39,5 +44,10 @@ export {
   ImageViewer,
   PropertyInfo,
   TopNavigationBar,
-  PriceSlider
+  PriceSlider,
+  PercentageSlider,
+  Price,
+  Filters,
+  CardFocusedPanel,
+  SidePanel
 }

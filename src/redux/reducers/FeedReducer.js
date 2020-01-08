@@ -5,6 +5,8 @@ const initialState = Record({
   data: [],
   filtered_data: [],
   count: 0,
+  average_price: 0,
+  average_ppsm: 0,
   loading: true,
   loading_failed: false
 })
@@ -17,6 +19,10 @@ const feed = (state = initialState(), action) => {
       return state.set('filtered_data', action.payload.data)
     case types.SET_FEED_COUNT:
       return state.set('count', action.payload.count)
+    case types.SET_FEED_AVERAGE_PRICE:
+      return state.set('average_price', action.payload.price)
+    case types.SET_FEED_AVERAGE_PPSM:
+      return state.set('average_ppsm', action.payload.ppsm)
     case types.SET_FEED_LOADING:
       return state.set('loading', action.payload.feedState)
     case types.SET_FEED_LOADING_FAILED:
