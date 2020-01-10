@@ -23,6 +23,7 @@ import Price from './Price'
 import Filters from './filters/Filters'
 import SidePanel from './filters/SidePanel'
 import CardFocusedPanel from './filters/CardFocusedPanel'
+import Divider from './Divider'
 
 export {
   TextSection,
@@ -49,5 +50,6 @@ export {
   Price,
   Filters,
   CardFocusedPanel,
-  SidePanel
+  SidePanel,
+  Divider
 }

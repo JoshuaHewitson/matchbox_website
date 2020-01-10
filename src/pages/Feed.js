@@ -51,7 +51,8 @@ const Card = (props) => {
     <FeedCard expanded={props.expanded} item={props.item} key={props.item.key} addRef={(ref, key) => { props.cardRefs[key] = ref }}>
       <ImageViewer numBedrooms={props.item.num_bedrooms} numBathrooms={props.item.num_bathrooms} floorSize={props.item.floor_size} images={props.item.images} />
       <PropertyInfo onClick={() => props.onClick(props.item.key)} {...props.item}>
-        <Grid container flexDirection='row' alignItems='center'>
+        <Grid container flexDirection='row' alignItems='center' justify='center'>
+          {/*
           <FormGroup style={{ marginTop: 10, marginRight: 10 }}>
             <FormControlLabel
               control={
@@ -65,6 +66,7 @@ const Card = (props) => {
               label='Shortlist'
             />
           </FormGroup>
+            */}
           <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginTop: 10, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => {}}>Request Report</Button>
         </Grid>
       </PropertyInfo>
@@ -78,7 +80,8 @@ const CardExpanded = (props) => {
       <Grid container>
         <ImageViewer numBedrooms={props.item.num_bedrooms} numBathrooms={props.item.num_bathrooms} floorSize={props.item.floor_size} images={props.item.images} />
       </Grid>
-      <Grid container flexDirection='row' alignItems='center' justify='flex-end' style={{ padding: 20, paddingBottom: 10 }}>
+      <Grid container flexDirection='row' alignItems='center' style={{ padding: 20, paddingBottom: 10 }}>
+        {/*
         <FormGroup style={{ marginRight: 10 }}>
           <FormControlLabel
             control={
@@ -92,6 +95,7 @@ const CardExpanded = (props) => {
             label='Shortlist'
           />
         </FormGroup>
+        */}
         <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => {}}>Request Report</Button>
       </Grid>
       <Grid container>
@@ -105,7 +109,7 @@ class Feed extends Component {
   constructor (props) {
     super(props)
     this.state = ({
-      user: null,
+      premium_user: true,
       filterTabIndex: 0,
       cardFocusedTabIndex: 0,
       suburb: 'bantry_bay',
@@ -193,6 +197,7 @@ class Feed extends Component {
               <SidePanel height={this.props.height}>
                 <Filters
                   filters={this.props.filters}
+                  premium_user={this.state.premium_user}
                   feedLoading={this.props.feed.loading}
                   feedCount={this.props.feed.count}
                   scatterPlotData={this.props.feed.filtered_data}
@@ -230,6 +235,7 @@ class Feed extends Component {
                 <SidePanel height={this.props.height}>
                   <CardFocusedPanel
                     filters={this.props.filters}
+                    premium_user={this.state.premium_user}
                     feedLoading={this.props.feed.loading}
                     handleBackButton={() => this.props.history.push('/feed')}
                     scatterPlotData={[]}
@@ -245,6 +251,7 @@ class Feed extends Component {
                 <SidePanel height={this.props.height}>
                   <CardFocusedPanel
                     filters={this.props.filters}
+                    premium_user={this.state.premium_user}
                     item={this.props.feed.data.get(this.props.id)}
                     averagePrice={this.props.feed.average_price}
                     averagePPSM={this.props.feed.average_ppsm}
@@ -277,24 +284,12 @@ class Feed extends Component {
     }
   }
 
-  renderFeed = () => {
+  render () {
     return (
       <div style={{ backgroundColor: sc.LIGHT_GREY }}>
         <TopNavigationBar value='feed' position='static' onChange={id => this.handleChangePath(id)} />
         <TopNavigationBar value='feed' position='fixed' />
         {this.renderFeedStateContent(this.props.feedState)}
-      </div>
-    )
-  }
-
-  render () {
-    console.log(this.props.filters.suburb)
-    return (
-      <div style={{ backgroundColor: 'white' }}>
-        <div>
-          {this.renderFeed()}
-        </div>
-
       </div>
     )
   }

@@ -21,19 +21,27 @@ import {
   StyledExpansionPanelSummary
 } from '../StyledMaterialUI'
 
-const perAnnumIncome = (monthlyIncome, voidRate) => {
+const calcPerAnnumIncome = (monthlyIncome, voidRate) => {
   return (1 - voidRate) * 12 * monthlyIncome
 }
 
-const grossYield = (perAnnumIncome, price) => {
+const calcGrossYield = (perAnnumIncome, price) => {
   return perAnnumIncome / price
 }
 
-const nettYield = (perAnnumIncome, totalCosts, price) => {
+const calcNettYield = (perAnnumIncome, totalCosts, price) => {
   return (perAnnumIncome - totalCosts) / price
 }
+const calcLoanPresentValue = (depositPercentage, price) => {
+  return (1 - depositPercentage) * price
+}
 
-const monthlyBondPayments = (P, period, interestRate) => {
+const calcCashOnCash = (cash, profit) => {
+  console.log(cash, profit)
+  return profit / cash
+}
+
+const calcMonthlyBondPayments = (P, period, interestRate) => {
   var n = period * 365
   const i = (Math.pow(1 + (interestRate / n), n) - 1) / 12
   n = period * 12
@@ -64,26 +72,23 @@ class RoiCalculationsTab extends PureComponent {
     }
   }
 
-  handleChangeDeposit = (value = 0) => {
-    console.log(value)
-    if (isNaN(value)) value = 0
-    this.setState({ deposit: this.props.item.price * value * 0.01 })
+  calcCosts = () => {
+    return (this.state.rates_and_taxes_included ? this.state.rates_and_taxes * 12 : 0) +
+      (this.state.levies_included ? this.state.levies * 12 : 0) +
+      (this.state.repairs_costs_included ? this.state.repairs_costs : 0) +
+      (this.state.managing_agent_costs_included ? this.state.managing_agent_costs * 12 : 0)
   }
 
-  calcTotalCosts = () => {
-    return monthlyBondPayments((1 - this.state.deposit_percentage) * this.props.item.price, this.state.period, this.state.interest_rate) * 12 +
-    (this.state.rates_and_taxes_included ? this.state.rates_and_taxes * 12 : 0) +
-    (this.state.levies_included ? this.state.levies * 12 : 0) +
-    (this.state.repairs_costs_included ? this.state.repairs_costs : 0) +
-    (this.state.managing_agent_costs_included ? this.state.managing_agent_costs * 12 : 0)
+  calcTotalCosts = (monthlyBondPayments) => {
+    return monthlyBondPayments * 12 + this.calcCosts()
   }
 
-  renderCosts = () => {
+  renderCosts = (monthlyBondPayments) => {
     return (
       <Grid style={{ flex: 1, marginLeft: -10, marginRight: -10, paddingTop: 20 }}>
-        <StyledExpansionPanel>
+        <StyledExpansionPanel defaultExpanded>
           <StyledExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Price label='Costs per annum ' value={this.calcTotalCosts()} size='medium' />
+            <Price display={this.props.premium_user} label='Costs per annum ' value={this.calcTotalCosts(monthlyBondPayments)} size='medium' />
           </StyledExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container direction='column'>
@@ -96,7 +101,7 @@ class RoiCalculationsTab extends PureComponent {
                 handleChangeChecked={(value) => this.setState({ rates_and_taxes_included: value })}
                 handleChangeSlider={(value) => this.setState({ rates_and_taxes: value })}
               >
-                <Price disabled={!this.state.rates_and_taxes_included} value={this.state.rates_and_taxes} size='small' />
+                <Price display={this.props.premium_user} disabled={!this.state.rates_and_taxes_included} value={this.state.rates_and_taxes} size='small' />
               </CheckableSlider>
               <div style={{ height: 20 }} />
               <CheckableSlider
@@ -108,7 +113,7 @@ class RoiCalculationsTab extends PureComponent {
                 handleChangeChecked={(value) => this.setState({ levies_included: value })}
                 handleChangeSlider={(value) => this.setState({ levies: value })}
               >
-                <Price disabled={!this.state.levies_included} value={this.state.levies} size='small' />
+                <Price display={this.props.premium_user} disabled={!this.state.levies_included} value={this.state.levies} size='small' />
               </CheckableSlider>
               <div style={{ height: 20 }} />
               <CheckableSlider
@@ -120,7 +125,7 @@ class RoiCalculationsTab extends PureComponent {
                 handleChangeChecked={(value) => this.setState({ repairs_costs_included: value })}
                 handleChangeSlider={(value) => this.setState({ repairs_costs: value })}
               >
-                <Price disabled={!this.state.repairs_costs_included} value={this.state.repairs_costs} size='small' />
+                <Price display={this.props.premium_user} disabled={!this.state.repairs_costs_included} value={this.state.repairs_costs} size='small' />
               </CheckableSlider>
               <div style={{ height: 20 }} />
               <CheckableSlider
@@ -132,7 +137,7 @@ class RoiCalculationsTab extends PureComponent {
                 handleChangeChecked={(value) => this.setState({ managing_agent_costs_included: value })}
                 handleChangeSlider={(value) => this.setState({ managing_agent_costs: value })}
               >
-                <Price disabled={!this.state.managing_agent_costs_included} value={this.state.managing_agent_costs} size='small' />
+                <Price display={this.props.premium_user} disabled={!this.state.managing_agent_costs_included} value={this.state.managing_agent_costs} size='small' />
               </CheckableSlider>
             </Grid>
           </ExpansionPanelDetails>
@@ -141,11 +146,63 @@ class RoiCalculationsTab extends PureComponent {
     )
   }
 
+  renderBondCalculations = (monthlyBondPayments) => {
+    return (
+      <Grid style={{ flex: 1, marginLeft: -10, marginRight: -10, paddingTop: 20 }}>
+        <StyledExpansionPanel defaultExpanded>
+          <StyledExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Price display={this.props.premium_user} label='Bond payments' value={monthlyBondPayments} size='medium' />
+          </StyledExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Grid container direction='column'>
+              <div style={{ width: '100%', height: 10 }} />
+              <Percentage display={this.props.premium_user} label='Interest rate' value={this.state.interest_rate} decimal={2} size='small' />
+              <div style={{ width: '100%', height: 10 }} />
+              <StyledSlider
+                value={this.state.interest_rate}
+                onChange={(event, value) => this.setState({ interest_rate: value })}
+                min={0}
+                max={1}
+                step={0.00001}
+              />
+              <div style={{ width: '100%', height: 10 }} />
+              <Period display={this.props.premium_user} label='Period' value={this.state.period} decimal={1} size='small' />
+              <div style={{ width: '100%', height: 10 }} />
+              <StyledSlider
+                value={this.state.period}
+                onChange={(event, value) => this.setState({ period: value })}
+                min={0}
+                max={20}
+                step={0.5}
+              />
+            </Grid>
+          </ExpansionPanelDetails>
+        </StyledExpansionPanel>
+      </Grid>
+    )
+  }
+
   render () {
+    const price = this.props.item.price
+
+    const perAnnumIncome = calcPerAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid)
+    const grossYield = calcGrossYield(perAnnumIncome, price)
+    const loanPresentValue = calcLoanPresentValue(this.state.deposit_percentage, price)
+    const monthlyBondPayments = calcMonthlyBondPayments(loanPresentValue, this.state.period, this.state.interest_rate)
+    const perAnnumProfit = perAnnumIncome - this.calcTotalCosts(monthlyBondPayments)
+    const nettYield = calcNettYield(perAnnumIncome, this.calcTotalCosts(monthlyBondPayments), price)
+    const cashOnCash = calcCashOnCash(this.state.deposit_percentage * price, perAnnumProfit)
+
+    const totalInterest = monthlyBondPayments === 0 ? 0 : (monthlyBondPayments * 12 * this.state.period) - loanPresentValue
+    const totalIncome = (perAnnumIncome - this.calcCosts()) * this.state.period
+    const totalROI = ((totalIncome - totalInterest) / this.state.period) / price
+
+    console.log(totalIncome, totalInterest)
+
     return (
       <Grid container>
         <div style={{ width: '100%', height: 50 }} />
-        <Price label='Deposit' value={this.state.deposit_percentage * this.props.item.price} size='medium' />
+        <Price label='Deposit' value={this.state.deposit_percentage * price} size='medium' />
         <div style={{ width: '100%', height: 10 }} />
         <Percentage label='Deposit percentage' value={this.state.deposit_percentage} decimal={0} size='small' />
         <div style={{ width: '100%', height: 10 }} />
@@ -156,29 +213,8 @@ class RoiCalculationsTab extends PureComponent {
           max={1}
           step={0.01}
         />
-        <div style={{ width: '100%', height: 10 }} />
-        <Percentage label='Interest rate' value={this.state.interest_rate} decimal={0} size='small' />
-        <div style={{ width: '100%', height: 10 }} />
-        <StyledSlider
-          value={this.state.interest_rate}
-          onChange={(event, value) => this.setState({ interest_rate: value })}
-          min={0}
-          max={1}
-          step={0.01}
-        />
-        <div style={{ width: '100%', height: 10 }} />
-        <Period label='Period' value={this.state.period} decimal={1} size='small' />
-        <div style={{ width: '100%', height: 10 }} />
-        <StyledSlider
-          value={this.state.period}
-          onChange={(event, value) => this.setState({ period: value })}
-          min={0}
-          max={20}
-          step={0.5}
-        />
-        <div style={{ width: '100%', height: 10 }} />
-        <Price label='Monthly bond payments' value={monthlyBondPayments((1 - this.state.deposit_percentage) * this.props.item.price, this.state.period, this.state.interest_rate)} size='medium' />
-        <div style={{ width: '100%', height: 10 }} />
+        {this.renderBondCalculations(monthlyBondPayments)}
+        <div style={{ width: '100%', height: 30 }} />
         <Price label='Estimated monthly rent' value={this.state.estimatedRent} size='medium' />
         <div style={{ width: '100%', height: 10 }} />
         <StyledSlider
@@ -199,45 +235,46 @@ class RoiCalculationsTab extends PureComponent {
           step={0.01}
         />
         <div style={{ width: '100%', height: 10 }} />
-        <Price label='Income per annum' value={perAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid)} size='small' />
+        <Price display={this.props.premium_user} label='Income per annum' value={perAnnumIncome} size='small' />
         <div style={{ width: '100%', height: 10 }} />
-        <Percentage label='Gross yield' decimal={1} value={grossYield(perAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid), this.props.item.price)} size='small' />
+        <Percentage display={this.props.premium_user} label='Gross yield' decimal={1} value={grossYield} size='small' />
         <div style={{ width: '100%', height: 10 }} />
-        {this.renderCosts()}
+        {this.renderCosts(monthlyBondPayments)}
         <div style={{ width: '100%', height: 20 }} />
-        <Price label='Profit per annum' value={perAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid) - this.calcTotalCosts()} size='small' />
+        <Price display={this.props.premium_user} label='Profit per annum' value={perAnnumProfit} size='small' />
         <div style={{ width: '100%', height: 10 }} />
         <Percentage
           label='Nett yield'
+          display={this.props.premium_user}
           decimal={1}
-          value={
-            nettYield(
-              perAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid),
-              this.calcTotalCosts(),
-              this.props.item.price)
-          }
-          size='large'
+          value={nettYield}
+          size='small'
         />
         <div style={{ width: '100%', height: 10 }} />
         <Percentage
-          label='Bond yield'
+          label='Cash-on-cash return'
+          display={this.props.premium_user}
+          decimal={1}
+          value={cashOnCash}
+          size='small'
+        />
+        <div style={{ width: '100%', height: 10 }} />
+        {/*
+        <Percentage
+          label='Impact on solvency'
           decimal={1}
           value={
             ((1 - this.state.deposit_percentage) / this.state.deposit_percentage) / this.state.period
           }
           size='medium'
         />
+        */}
         <div style={{ width: '100%', height: 10 }} />
         <Percentage
-          label='Total'
+          label='Total ROI'
+          display={this.props.premium_user}
           decimal={1}
-          value={
-            (((1 - this.state.deposit_percentage) / this.state.deposit_percentage) / this.state.period) +
-            nettYield(
-              perAnnumIncome(this.state.estimatedRent, this.state.estimatedVoid),
-              this.calcTotalCosts(),
-              this.props.item.price)
-          }
+          value={totalROI}
           size='medium'
         />
         <div style={{ width: '100%', height: 60 }} />

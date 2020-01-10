@@ -5,6 +5,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import PostListings from './pages/PostListings'
 import GraphPlotter from './pages/GraphPlotter'
 import Feed from './pages/Feed'
+import Pricing from './pages/Pricing'
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 import './App.css'
 import ViewProperty from './pages/ViewProperty'
@@ -36,6 +37,7 @@ const Page = (props) => {
       {id === 'graph_plotter' && <GraphPlotter />}
       {id === 'feed' && <Feed feedState='search_results' width={props.width} height={props.height} />}
       {id === 'admin' && <Admin />}
+      {id === 'pricing' && <Pricing width={props.width} height={props.height} />}
       {id === 'view_property' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
     </div>
   )

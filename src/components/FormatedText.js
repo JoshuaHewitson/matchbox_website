@@ -1,6 +1,9 @@
 import React from 'react'
 import { styleConstants as sc } from '../config'
-import { Typography, Grid } from '@material-ui/core'
+import { Typography, Grid, Tooltip } from '@material-ui/core'
+import CheckIcon from '@material-ui/icons/Check'
+import CloseIcon from '@material-ui/icons/Close'
+import { BootstrapTooltip } from './StyledMaterialUI'
 
 const formatPrice = (price, decimalCount = 2, decimal = '.', thousands = ',') => {
   try {
@@ -51,11 +54,13 @@ const LableDisplay = (props) => {
     color = sc.SECONDARY_COLOR_DARK_2
   }
   return (
-    <Grid container justify='flex-end' alignItems='center' style={{ flex: 1 }}>
-      <Grid><Typography variant={variant} style={{ color: color }}>{props.label}: </Typography></Grid>
-      <Grid style={{ flex: 1, backgroundColor: sc.LIGHT_GREY, height: 1, margin: 10 }} />
-      {props.children}
-    </Grid>
+    <BootstrapTooltip title='hello this is a description of this thing thing'>
+      <Grid container justify='flex-end' alignItems='center' style={{ flex: 1 }}>
+        <Grid><Typography variant={variant} style={{ color: color }}>{props.label}: </Typography></Grid>
+        <Grid style={{ flex: 1, backgroundColor: sc.LIGHT_GREY, height: 1, margin: 10 }} />
+        {props.children}
+      </Grid>
+    </BootstrapTooltip>
   )
 }
 
@@ -64,22 +69,33 @@ const Display = (props) => {
   var variant = 'h4'
   if (props.size === 'medium') variant = 'h5'
   if (props.size === 'small') variant = 'body1'
-  const color = props.disabled ? sc.BODY_TEXT_COLOR : sc.PRIMARY_COLOR
+  const color = props.disabled ? sc.BODY_TEXT_COLOR : props.color
   if (props.label) {
     return (
       <LableDisplay {...props}>
-        <Typography variant={variant} style={{ color: color }}>
-          {props.children}
-        </Typography>
+        {props.display
+          ? <Typography variant={variant} style={{ color: color }}>
+            {props.children}
+            </Typography>
+          : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
+            Premium only
+            </Typography>}
       </LableDisplay>
     )
   } else {
-    return (
-      <Typography variant={variant} style={{ color: color }}>
+    return props.display
+      ? <Typography variant={variant} style={{ color: color }}>
         {props.children}
       </Typography>
-    )
+      : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
+          Premium only
+      </Typography>
   }
+}
+
+Display.defaultProps = {
+  display: true,
+  color: sc.PRIMARY_COLOR
 }
 
 export const Percentage = (props) => {
@@ -102,6 +118,19 @@ Price.defaultProps = {
 
 export const Period = (props) => {
   return <Display {...props}>{formatPeriod(props.value, props.type, props.decimal, '.')}</Display>
+}
+
+Period.defaultProps = {
+  size: 'large',
+  value: 0,
+  type: 'years'
+}
+
+export const IncludedItem = (props) => {
+  return <Display disabled={!props.included} {...props}>
+    {props.quantity ? props.quantity
+      : props.included ? <CheckIcon fontSize='large' /> : <CloseIcon fontSize='small' />}
+         </Display>
 }
 
 Period.defaultProps = {

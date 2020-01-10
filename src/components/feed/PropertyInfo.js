@@ -63,6 +63,7 @@ const PropertyInfo = (props) => {
             <Box style={{ maxHeight: descriptionHeight, maxWidth: 600, overflow: 'hidden' }}>
               {renderDescription(props.description)}
             </Box>
+            <Box style={{ height: 10 }} />
           </Box>
         </ButtonBase>
       </BootstrapTooltip>

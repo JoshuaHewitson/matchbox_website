@@ -135,7 +135,7 @@ const SearchFiltersTab = (props) => {
           />
         </Grid>
       </Grid>
-      <div style={{ height: 10 }} />
+      <div style={{ height: 20 }} />
       <ScatterPlot
         data={props.scatterPlotData}
         xVal='price' yVal='floor_size'
@@ -144,6 +144,7 @@ const SearchFiltersTab = (props) => {
         handleDotClick={(key) => props.scrollToRef(props.cardRefs[key])}
         {...graphSettings}
       />
+      <div style={{ height: 30 }} />
     </Grid>
 
   )

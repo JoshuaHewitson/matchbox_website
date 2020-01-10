@@ -167,8 +167,8 @@ export const GreyLinearProgress = withStyles(theme => ({
 
 export const StyledExpansionPanel = withStyles({
   root: {
-    border: '1px solid rgba(237,242,247, 1)',
-    boxShadow: '0 2px 1px rgba(47,137,128,0.3)',
+    border: '1px solid rgba(152, 164, 185, 0.3)',
+    boxShadow: '0 1px 1px rgba(47,137,128,0.4)',
     '&:not(:last-child)': {
       borderBottom: 0
     },

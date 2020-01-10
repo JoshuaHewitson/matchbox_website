@@ -18,8 +18,10 @@ const PropertyDetails = (props) => {
       <Divider />
       <Box style={{ height: 5 }} />
       {renderDescription(props.description)}
+      <Box style={{ height: 10 }} />
       <Divider />
       {props.children}
+      <Box style={{ height: 10 }} />
     </Box>
   )
 }

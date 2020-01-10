@@ -36,11 +36,11 @@ class SalesCompsTab extends PureComponent {
     return (
       <Grid container>
         <div style={{ width: '100%', height: 50 }} />
-        <Price label='Average comp price' value={this.props.averagePrice} size='small' />
+        <Price display={this.props.premium_user} label='Average comp price' value={this.props.averagePrice} size='small' />
         <div style={{ width: '100%', height: 10 }} />
-        <Price label='Average price per m²' value={this.props.averagePPSM} size='small' />
+        <Price display={this.props.premium_user} label='Average price per m²' value={this.props.averagePPSM} size='small' />
         <div style={{ width: '100%', height: 10 }} />
-        <Price label='CMA valuation' value={this.props.averagePPSM * this.props.item.floor_size} size='medium' />
+        <Price display={this.props.premium_user} label='CMA valuation' value={this.props.averagePPSM * this.props.item.floor_size} size='medium' />
         <div style={{ width: '100%', height: 30 }} />
         <ScatterPlot
           data={this.props.scatterPlotData}
@@ -50,6 +50,7 @@ class SalesCompsTab extends PureComponent {
           handleDotClick={(key) => this.props.scrollToRef(this.props.cardRefs[key])}
           {...graphSettings}
         />
+        <div style={{ height: 30 }} />
       </Grid>
 
     )

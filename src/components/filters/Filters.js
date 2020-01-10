@@ -38,6 +38,7 @@ class Filters extends PureComponent {
   render () {
     return (
       <Grid style={{ flex: 1 }}>
+        {/*
         {(this.props.filters.loading || this.props.feedLoading) && <StyledLinearProgress variant='query' />}
         <StyledTabs value={this.state.tabIndex} onChange={(event, value) => this.handleChangeTabs('tabIndex', event, value)} aria-label='styled tabs example'>
           <StyledTab label='Search results' />
@@ -49,6 +50,8 @@ class Filters extends PureComponent {
         <TabPanel value={this.state.tabIndex} index={1}>
                 Item Two
         </TabPanel>
+        */}
+        <SearchFiltersTab {...this.props} />
       </Grid>
     )
   }
