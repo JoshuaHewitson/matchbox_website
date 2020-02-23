@@ -6,6 +6,8 @@ import PriceSlider from './PriceSlider'
 
 import { styleConstants as sc } from '../../config'
 
+import { Price } from '../FormatedText'
+
 import {
   StyledMenuItem,
   StyledCheckBox,
@@ -102,7 +104,7 @@ const SearchFiltersTab = (props) => {
           value={props.filters.suburb}
           onChange={(event) => props.handleChangeSuburb(event.target.value)}
           selectId='suburbSelect'
-          />}
+        />}
       <div style={{ height: 70 }} />
       {
         (props.filters.loading)
@@ -110,7 +112,7 @@ const SearchFiltersTab = (props) => {
           : <PriceSlider
             onChangeCommitted={(pricerange) => props.handleChangePriceRange(pricerange)}
             defaultValue={props.filters.priceRange}
-            />
+          />
       }
       <div style={{ height: 10 }} />
       <Grid container flexDirection='row'>
@@ -141,10 +143,35 @@ const SearchFiltersTab = (props) => {
         xVal='price' yVal='floor_size'
         xLabel='Price in rands'
         yLabel='Floor size m²'
-        handleDotClick={(key) => props.scrollToRef(props.cardRefs[key])}
+        selected={props.item.key}
+        handleDotClick={(key) => props.handleScatterPlotDotClick(key)}
         {...graphSettings}
       />
-      <div style={{ height: 30 }} />
+      <div style={{ width: '100%', height: 30 }} />
+      <Price
+        display={props.premium_user}
+        label='Average comp price'
+        description='The average price of a similar property in this area'
+        value={props.averagePrice}
+        size='small'
+      />
+      <div style={{ width: '100%', height: 10 }} />
+      <Price
+        display={props.premium_user}
+        label='Average price per m²'
+        description='The average price of a square meter of property in this area'
+        value={props.averagePPSM}
+        size='small'
+      />
+      <div style={{ width: '100%', height: 10 }} />
+      <Price
+        display={props.premium_user}
+        label='CMA valuation'
+        description='Size of the property multiplied by the price per square meter in this area'
+        value={props.averagePPSM * props.item.floor_size}
+        size='medium'
+      />
+      <div style={{ width: '100%', height: 30 }} />
     </Grid>
 
   )

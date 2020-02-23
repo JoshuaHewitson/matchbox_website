@@ -1,6 +1,6 @@
 import React from 'react'
 import { styleConstants as sc } from '../config'
-import { Typography, Grid, Tooltip } from '@material-ui/core'
+import { Typography, Grid, Link } from '@material-ui/core'
 import CheckIcon from '@material-ui/icons/Check'
 import CloseIcon from '@material-ui/icons/Close'
 import { BootstrapTooltip } from './StyledMaterialUI'
@@ -54,7 +54,19 @@ const LableDisplay = (props) => {
     color = sc.SECONDARY_COLOR_DARK_2
   }
   return (
-    <BootstrapTooltip title='hello this is a description of this thing thing'>
+    <BootstrapTooltip
+      interactive={props.interactiveDescription}
+      title={props.description === '' ? ''
+        : <>
+          <Typography>{props.label}</Typography>
+          <em>{props.description}</em>
+          {/*
+          <Link color={sc.PRIMARY_COLOR} href='/'>
+            <ui>read more</ui>
+          </Link>
+          */}
+        </>}
+    >
       <Grid container justify='flex-end' alignItems='center' style={{ flex: 1 }}>
         <Grid><Typography variant={variant} style={{ color: color }}>{props.label}: </Typography></Grid>
         <Grid style={{ flex: 1, backgroundColor: sc.LIGHT_GREY, height: 1, margin: 10 }} />
@@ -76,26 +88,33 @@ const Display = (props) => {
         {props.display
           ? <Typography variant={variant} style={{ color: color }}>
             {props.children}
-            </Typography>
+          </Typography>
           : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
             Premium only
-            </Typography>}
+          </Typography>}
       </LableDisplay>
     )
   } else {
     return props.display
       ? <Typography variant={variant} style={{ color: color }}>
         {props.children}
-      </Typography>
+        </Typography>
       : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
           Premium only
-      </Typography>
+        </Typography>
   }
 }
 
 Display.defaultProps = {
   display: true,
-  color: sc.PRIMARY_COLOR
+  color: sc.PRIMARY_COLOR,
+  description: ''
+}
+
+const Quantity = (props) => {
+  return (
+    <Typography variant='h5'>{props.children}</Typography>
+  )
 }
 
 export const Percentage = (props) => {
@@ -128,9 +147,9 @@ Period.defaultProps = {
 
 export const IncludedItem = (props) => {
   return <Display disabled={!props.included} {...props}>
-    {props.quantity ? props.quantity
+    {props.quantity ? <Quantity>{props.quantity}</Quantity>
       : props.included ? <CheckIcon fontSize='large' /> : <CloseIcon fontSize='small' />}
-         </Display>
+  </Display>
 }
 
 Period.defaultProps = {

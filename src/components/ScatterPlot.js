@@ -159,7 +159,6 @@ class XYAxis extends React.Component {
 class RegressionLine extends React.Component {
   render () {
     const lg = calcLinear(this.props.data, this.props.xVal, this.props.yVal, this.props.xMin, this.props.yMin)
-    console.log(this.props.data, this.props.xVal, this.props.yVal, this.props.xMin, this.props.yMin)
     return (
       <g className='regression-line'>
         <line
@@ -167,7 +166,7 @@ class RegressionLine extends React.Component {
           y1={this.props.yScale(lg.ptA.y)}
           x2={this.props.xScale(lg.ptB.x)}
           y2={this.props.yScale(lg.ptB.y)}
-          stroke={sc.BODY_TEXT_COLOR} stroke-width='1' stroke-dasharray='10,5'
+          stroke={sc.BODY_TEXT_COLOR} stroke-width='1' strokeDasharray='10,5'
         />
       </g>
     )
@@ -178,6 +177,15 @@ class DataCircle extends React.Component {
   render () {
     if (isNaN(this.props.coords[0]) || isNaN(this.props.coords[1])) return null
     else {
+      var color = sc.PRIMARY_COLOR
+      var r = 5
+      var stroke = '0.5'
+      if (this.props.selected) color = sc.PRIMARY_COLOR
+      if (this.props.selected === this.props.item.key) {
+        r = 8
+        stroke = '1'
+        color = sc.SECONDARY_COLOR
+      }
       return (
         <g>
           <BootstrapTooltip arrow title={labelFormat(this.props.coords[0]) + ', ' + this.props.coords[1] + 'm²'}>
@@ -189,9 +197,9 @@ class DataCircle extends React.Component {
                   class='dot'
                   cx={this.props.xScale(this.props.coords[0])}
                   cy={this.props.yScale(this.props.coords[1])}
-                  fill={sc.PRIMARY_COLOR}
-                  stroke={sc.SECONDARY_COLOR_DARK_2} stroke-width='0.5'
-                  r={5}
+                  fill={color}
+                  stroke={sc.SECONDARY_COLOR_DARK_2} stroke-width={stroke}
+                  r={r}
                   key={Math.random() * 1}
                 />
                 <circle

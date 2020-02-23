@@ -6,49 +6,54 @@ import PostListings from './pages/PostListings'
 import GraphPlotter from './pages/GraphPlotter'
 import Feed from './pages/Feed'
 import Pricing from './pages/Pricing'
+import ContactUs from './pages/ContactUs'
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 import './App.css'
-import ViewProperty from './pages/ViewProperty'
-import { TopNavigationBar } from './components'
+import { TopNavigationBar, TopFiller } from './components'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as AuthActions from './redux/actions/AuthActions'
+import * as UserActions from './redux/actions/UserActions'
 
 import fire from './config/Firebase'
 import Admin from './pages/Admin'
 
-const changePath = (props, path) => {
-  window.scrollTo(0, 0)
-  props.history.push(path)
+const TopBar = (props) => {
+  return (
+    <>
+      <TopNavigationBar
+        authActions={props.authActions}
+        userActions={props.UserActions}
+        userDetails={props.userDetails}
+        position='fixed'
+      />
+      <TopFiller />
+    </>
+  )
 }
 
 const Page = (props) => {
   const { id, id2 } = useParams()
   return (
     <div>
-      {/*
-      <TopNavigationBar value={id} position='static' onChange={id => changePath(props, id)} />
-      <TopNavigationBar value={id} position='fixed' />
-        */}
-      {id === 'terms_of_use' && <TermsOfUse />}
-      {id === 'privacy_policy' && <PrivacyPolicy />}
-      {id === 'post_listing' && <PostListings />}
-      {id === 'graph_plotter' && <GraphPlotter />}
-      {id === 'feed' && <Feed feedState='search_results' width={props.width} height={props.height} />}
+      <TopBar {...props} />
+      {id === 'terms-of-use' && <TermsOfUse />}
+      {id === 'privacy-policy' && <PrivacyPolicy />}
+      {id === 'post-listing' && <PostListings />}
+      {id === 'graph-plotter' && <GraphPlotter />}
+      {id === 'feed' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
       {id === 'admin' && <Admin />}
       {id === 'pricing' && <Pricing width={props.width} height={props.height} />}
-      {id === 'view_property' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
+      {id === 'contact-us' && <ContactUs width={props.width} height={props.height} />}
     </div>
   )
 }
 
 const HomePage = (props) => {
-  const { id } = useParams()
   return (
     <div>
-      <TopNavigationBar value={id} position='static' onChange={id => changePath(props, id)} />
-      <TopNavigationBar value={id} position='fixed' />
+      <TopBar {...props} />
       <Home width={props.width} height={props.height} />
     </div>
   )
@@ -66,10 +71,18 @@ class Matchbox extends PureComponent {
   authListener () {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.props.actions.authActions.loadAppData(false)
+        if (!user.isAnonymous) {
+          this.props.actions.userActions.loadUserDetails()
+        }
+        const userDataLocal = {
+          first_name: 'anon',
+          last_name: 'user',
+          premium_user: false
+        }
+        this.props.actions.userActions.setUserDetails(userDataLocal)
+        this.props.actions.authActions.loadAppData(this.props.user.new_anon)
       } else {
-        console.log('anon login')
-        this.props.actions.auth.createAnonymousUser()
+        this.props.actions.authActions.createAnonymousUser()
         // this.setState({ user: null })
         // localStorage.removeItem('user')
       }
@@ -93,9 +106,36 @@ class Matchbox extends PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path='/' exact render={() => <HomePage width={this.state.width} height={this.state.height} />} />
-          <Route path='/:id' exact render={() => <Page width={this.state.width} height={this.state.height} />} />
-          <Route path='/:id/:id2' render={() => <Page width={this.state.width} height={this.state.height} />} />
+          <Route
+            path='/' exact render={() =>
+              <HomePage
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                width={this.state.width}
+                height={this.state.height}
+              />}
+          />
+          <Route
+            path='/:id' exact render={() =>
+              <Page
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                width={this.state.width}
+                height={this.state.height}
+              />}
+          />
+          <Route
+            path='/:id/:id2' render={() =>
+              <Page
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                width={this.state.width}
+                height={this.state.height}
+              />}
+          />
         </Switch>
       </BrowserRouter>
     )
@@ -103,11 +143,13 @@ class Matchbox extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.get('user')
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    authActions: bindActionCreators(AuthActions, dispatch)
+    authActions: bindActionCreators(AuthActions, dispatch),
+    userActions: bindActionCreators(UserActions, dispatch)
   }
 })
 

@@ -21,7 +21,7 @@ const renderBedroomsAndBathrooms = (value1, value2) => {
     if (value2 === -1) value2 = 'no set'
     return (
       <Grid style={{ flexDirection: 'row' }}>
-        <Typography variant='boddy1' style={{ color: sc.BODY_TEXT_COLOR }}>
+        <Typography variant='body1' style={{ color: sc.BODY_TEXT_COLOR }}>
           {value1} bedrooms, {value2} bathrooms
         </Typography>
       </Grid>
@@ -48,8 +48,8 @@ const PropertyInfo = (props) => {
   const descriptionHeight = props.full ? 5000 : 110
   return (
     <Box style={{ flex: 1, padding: 20, overflow: 'hidden' }}>
-      <BootstrapTooltip title='Click to view more' placement='bottom-end'>
-        <ButtonBase onClick={props.onClick}>
+      <BootstrapTooltip title='Click to select' placement='bottom-end'>
+        <ButtonBase disableRipple onClick={props.onClick}>
           <Box style={{ textAlign: 'left', width: '100%' }}>
             <Price value={props.price} size='large' />
             <Box style={{ height: 10 }} />

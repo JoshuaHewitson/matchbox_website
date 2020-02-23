@@ -7,6 +7,7 @@ import {
   setFeedAveragePrice,
   setFeedAveragePPSM,
   setFeedCount,
+  setFeedSelectedCard,
   setFeedLoading,
   setFeedLoadingFailed
 } from '../actions/FeedActions'
@@ -53,7 +54,7 @@ function * sagaLoadSearchResults () {
         filteredData.push(item)
         priceTotal += item.price
         if (item.floor_size) {
-          console.log(item.floor_size)
+          // console.log(item.floor_size)
           ppsmTotal += item.price / item.floor_size
           ppsmCount++
         }
@@ -65,6 +66,7 @@ function * sagaLoadSearchResults () {
     yield put(setFeedCount(count))
     yield put(setFeedAveragePrice(priceTotal / count))
     yield put(setFeedAveragePPSM(ppsmTotal / ppsmCount))
+    yield put(setFeedSelectedCard(filteredData[0]))
     yield put(setFeedLoading(false))
   } catch (e) {
     yield put(setFeedLoading(false))
@@ -81,13 +83,14 @@ function * sagaFilterData (action) {
   var ppsmTotal = 0
   const data = yield select((state) => state.get('feed').data)
   const { priceRange, bedrooms, bathrooms } = action.payload
+  const values = data.valueSeq()
   for (var i = 0; i < data.size; i++) {
-    const item = data.valueSeq().get(i)
+    const item = values.get(i)
     if (filterItem(item, priceRange, bedrooms, bathrooms)) {
       filteredData.push(item)
       priceTotal += item.price
       if (item.floor_size) {
-        console.log(item.floor_size)
+        // console.log(item.floor_size)
         ppsmTotal += item.price / item.floor_size
         ppsmCount++
       }

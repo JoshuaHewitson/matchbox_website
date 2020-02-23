@@ -1,5 +1,5 @@
 import * as types from '../actions/Types'
-import { Record, List } from 'immutable'
+import { Record } from 'immutable'
 
 const initialState = Record({
   loading: true,
@@ -7,11 +7,13 @@ const initialState = Record({
     houses: false,
     apartments: true
   },
-  priceRange: [0, 20000000],
+  priceRange: [10000000, 25000000],
+  price_min: 10000000,
+  price_max: 25000000,
   bedrooms: ['any'],
   bathrooms: ['any'],
-  suburb: '',
-  suburbs: [],
+  suburb: 'green_point',
+  suburbs: { green_point: true },
   blocks: {}
 })
 
@@ -29,7 +31,7 @@ const filters = (state = initialState(), action) => {
       return state.set('bedrooms', action.payload.bedrooms)
     case types.SET_BATHROOMS:
       return state.set('bathrooms', action.payload.bathrooms)
+    default: return state
   }
-  return state
 }
 export default filters

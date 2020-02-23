@@ -327,7 +327,7 @@ class PostListings extends Component {
           {this.state.success && this.renderSuccess(this.state.success)}
           <div style={{ height: 50 }} />
           <Button onClick={() => this.changePostingType('prop24')}>Change posting method</Button>
-          <Button onClick={() => this.props.history.push('/graph_plotter')}>Plot a graph</Button>
+          <Button onClick={() => this.props.history.push('/graph-plotter')}>Plot a graph</Button>
         </TextContainer>
       )
       : (
@@ -350,7 +350,7 @@ class PostListings extends Component {
           {this.state.success && this.renderSuccess(this.state.success)}
           <div style={{ height: 50 }} />
           <Button onClick={() => this.changePostingType('manual')}>Change posting method</Button>
-          <Button onClick={() => this.props.history.push('/graph_plotter')}>Plot a graph</Button>
+          <Button onClick={() => this.props.history.push('/graph-plotter')}>Plot a graph</Button>
         </TextContainer>
       )
   }

@@ -3,14 +3,15 @@ import { Grid, Typography, ExpansionPanelDetails } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { Price, Percentage, Period } from '../FormatedText'
-import CheckableSlider from './CheckableSlider'
+import PriceSlider from './PriceSlider'
 
 import { styleConstants as sc } from '../../config'
 
 import {
   StyledSlider,
   StyledExpansionPanel,
-  StyledExpansionPanelSummary
+  StyledExpansionPanelSummary,
+  GreyLinearProgress
 } from '../StyledMaterialUI'
 import ScatterPlot from '../ScatterPlot'
 
@@ -36,6 +37,15 @@ class SalesCompsTab extends PureComponent {
     return (
       <Grid container>
         <div style={{ width: '100%', height: 50 }} />
+        {
+          (this.props.filters.loading)
+            ? <GreyLinearProgress variant='query' />
+            : <PriceSlider
+              onChangeCommitted={(pricerange) => this.props.handleChangePriceRange(pricerange, this.props.item)}
+              defaultValue={this.props.filters.priceRange}
+            />
+        }
+        <div style={{ width: '100%', height: 20 }} />
         <Price display={this.props.premium_user} label='Average comp price' value={this.props.averagePrice} size='small' />
         <div style={{ width: '100%', height: 10 }} />
         <Price display={this.props.premium_user} label='Average price per m²' value={this.props.averagePPSM} size='small' />
@@ -47,6 +57,7 @@ class SalesCompsTab extends PureComponent {
           xVal='price' yVal='floor_size'
           xLabel='Price in rands'
           yLabel='Floor size m²'
+          selected={this.props.item.key}
           handleDotClick={(key) => this.props.scrollToRef(this.props.cardRefs[key])}
           {...graphSettings}
         />

@@ -106,7 +106,7 @@ html {
 }
 
 .dot { transition: all .1s ease-in-out }
-.dot:hover { fill: #2fe6a6; stroke-width: 1.5 }
+.dot:hover { stroke-width: 1.5 }
 
 .labelText {
   transition: all .1s ease-in-out;

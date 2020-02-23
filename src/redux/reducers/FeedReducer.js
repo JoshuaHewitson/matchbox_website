@@ -4,6 +4,7 @@ import { Record } from 'immutable'
 const initialState = Record({
   data: [],
   filtered_data: [],
+  selected_card: { price: 0, images: [{ src: '' }] },
   count: 0,
   average_price: 0,
   average_ppsm: 0,
@@ -27,12 +28,14 @@ const feed = (state = initialState(), action) => {
       return state.set('loading', action.payload.feedState)
     case types.SET_FEED_LOADING_FAILED:
       return state.set('loading_failed', action.payload.feedState)
+    case types.SET_FEED_SELECTED_CARD:
+      return state.set('selected_card', action.payload.card)
     case types.SET_BLOCK:
       var data = state.get('data').mergeDeep({ [action.payload.key]: { block: action.payload.block } })
       console.log(data.get(action.payload.key))
       // var newData = data.set(action.payload.key, data.get()).block = action.payload.block
       return state.set('data', data)
+    default: return state
   }
-  return state
 }
 export default feed

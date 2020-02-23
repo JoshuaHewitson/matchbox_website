@@ -46,17 +46,17 @@ const Footer = (props) => {
               </FooterButton>
             </Grid>
             <Grid container>
-              <FooterButton onClick={() => changePath(props, '/privacy_policy')}>
+              <FooterButton onClick={() => changePath(props, '/privacy-policy')}>
               Privacy policy
               </FooterButton>
             </Grid>
             <Grid container>
-              <FooterButton onClick={() => changePath(props, '/terms_of_use')}>
+              <FooterButton onClick={() => changePath(props, '/terms-of-use')}>
               Terms of use
               </FooterButton>
             </Grid>
             <Grid container>
-              <FooterButtonHidden onClick={() => changePath(props, '/post_listing')}>
+              <FooterButtonHidden onClick={() => changePath(props, '/post-listing')}>
               Post listing
               </FooterButtonHidden>
             </Grid>

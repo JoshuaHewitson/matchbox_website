@@ -1,18 +1,16 @@
-import { put, call, takeLatest, all } from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects'
 
 import * as types from '../actions/Types'
 import { loadFeed } from '../actions/FeedActions'
-import { sagaSetFilters } from './FiltersSagas'
+import { sagaLoadFilters } from './FiltersSagas'
+import { setUserNewAnon } from '../actions/UserActions'
 
 function * sagaLoadDataSaga (action) {
-  if (action.isAnonymous) {
-    yield call(sagaSetFilters)
-  } else {
-    yield all([
-      call(sagaSetFilters)
-    ])
+  if (!action.newAnon) {
+    yield call(sagaLoadFilters)
     yield put(loadFeed())
   }
+  yield put(setUserNewAnon(false))
 }
 
 export default function * watchers () {

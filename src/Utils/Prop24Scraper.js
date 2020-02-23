@@ -70,6 +70,9 @@ const scrape = () => {
     }
 
     console.log(JSON.stringify(data, null, 2))
+
+    setTimeout(() => document.querySelector('.fa-angle-right').click(), 2000)
+    setTimeout(() => scrape(), 4000)
     /*
     const xhr = new XMLHttpRequest()
     const url = 'https://jsonplaceholder.typicode.com/posts' // TODO: replace with firebase endpoint

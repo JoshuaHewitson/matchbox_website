@@ -10,7 +10,7 @@ const renderBedroomsAndBathrooms = (value1, value2) => {
     if (value2 === -1) value2 = 'no set'
     return (
       <Grid style={{ flexDirection: 'row' }}>
-        <Typography variant='boddy1' style={{ color: sc.BODY_TEXT_COLOR }}>
+        <Typography variant='body1' style={{ color: sc.BODY_TEXT_COLOR }}>
           {value1} bedrooms, {value2} bathrooms
         </Typography>
       </Grid>

@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import { styleConstants as sc } from '../../config'
 import { Grid } from '@material-ui/core'
 import SearchFiltersTab from './SearchFiltersTab'
+import RoiCalculationsTab from './RoiCalculationsTab'
+import PropertyProfileBar from '../feed/PropertyProfileBar'
 
 import {
   StyledTab,
-  StyledTabs,
-  StyledLinearProgress
+  StyledTabs
 } from '../StyledMaterialUI'
 
 const TabPanel = (props) => {
@@ -51,7 +52,17 @@ class Filters extends PureComponent {
                 Item Two
         </TabPanel>
         */}
-        <SearchFiltersTab {...this.props} />
+        <PropertyProfileBar item={this.props.item} handleBackButton={() => this.props.handleBackButton()} thumb={this.props.item.images[0].src} />
+        <StyledTabs value={this.state.tabIndex} onChange={(event, value) => this.handleChangeTabs('tabIndex', event, value)} aria-label='styled tabs example'>
+          <StyledTab label='Search filters' />
+          <StyledTab label='ROI Calculations' />
+        </StyledTabs>
+        <TabPanel value={this.state.tabIndex} index={0}>
+          <SearchFiltersTab {...this.props} />
+        </TabPanel>
+        <TabPanel value={this.state.tabIndex} index={1}>
+          <RoiCalculationsTab {...this.props} />
+        </TabPanel>
       </Grid>
     )
   }

@@ -1,27 +1,17 @@
 import React, { Component } from 'react'
-import { Grid, Paper, Box, Container, FormControlLabel, FormGroup, Typography, Button } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import {
   SidePanel,
   Filters,
-  CardFocusedPanel,
   Footer,
-  ScatterPlot,
-  ContentContainer,
-  TextContainer,
   FeedList,
   FeedCard,
+  CardExpanded,
   ImageViewer,
   PropertyInfo,
-  TopNavigationBar,
-  PriceSlider,
-  PercentageSlider,
-  Price
+  ViewDetails,
+  RequestReport
 } from '../components'
-
-import {
-  StyledMenuItem,
-  StyledCheckBox
-} from '../components/StyledMaterialUI'
 
 import { styleConstants as sc } from '../config'
 import { withRouter } from 'react-router-dom'
@@ -31,7 +21,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as FiltersActions from '../redux/actions/FiltersActions'
 import * as FeedActions from '../redux/actions/FeedActions'
-import PropertyDetails from '../components/filters/PropertyDetails'
+import * as ListingDetailsActions from '../redux/actions/ListingDetailsActions'
+import * as AuthActions from '../redux/actions/AuthActions'
+import * as PaymentActions from '../redux/actions/PaymentActions'
 
 const FeedCards = (props) => {
   return (
@@ -41,17 +33,29 @@ const FeedCards = (props) => {
       alignItems='center'
       style={{ flex: 2 }}
     >
-      <FeedList data={props.data} renderItem={(item) => <props.Card item={item} expanded={props.expanded} cardRefs={props.cardRefs} onClick={props.handleCardClick} />} />
+      <FeedList
+        data={props.data} renderItem={(item) =>
+          <props.Card
+            item={item}
+            key={item.key}
+            selected={props.selected}
+            expanded={props.expanded}
+            cardRefs={props.cardRefs}
+            onClick={props.handleCardClick}
+            handleViewDetails={(value, key) => props.handleViewDetails(value, key)}
+            handleRequestReport={(value, key) => props.handleRequestReport(value, key)}
+          />}
+      />
     </Grid>
   )
 }
 
 const Card = (props) => {
   return (
-    <FeedCard expanded={props.expanded} item={props.item} key={props.item.key} addRef={(ref, key) => { props.cardRefs[key] = ref }}>
+    <FeedCard selected={props.selected} expanded={props.expanded} item={props.item} key={props.item.key} addRef={(ref, key) => { props.cardRefs[key] = ref }}>
       <ImageViewer numBedrooms={props.item.num_bedrooms} numBathrooms={props.item.num_bathrooms} floorSize={props.item.floor_size} images={props.item.images} />
       <PropertyInfo onClick={() => props.onClick(props.item.key)} {...props.item}>
-        <Grid container flexDirection='row' alignItems='center' justify='center'>
+        <Grid container flexDirection='row' alignItems='center'>
           {/*
           <FormGroup style={{ marginTop: 10, marginRight: 10 }}>
             <FormControlLabel
@@ -67,40 +71,38 @@ const Card = (props) => {
             />
           </FormGroup>
             */}
-          <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginTop: 10, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => {}}>Request Report</Button>
+          <Button
+            textTransform='none'
+            style={{
+              color: 'white',
+              borderRadius: 2,
+              paddingLeft: 20,
+              paddingRight: 20,
+              marginTop: 10,
+              marginRight: 20,
+              backgroundColor: sc.SECONDARY_COLOR_DARK_2
+            }}
+            onClick={() => props.handleViewDetails(true, props.item.key)}
+          >Veiw Details
+          </Button>
+          {/*
+          <Button
+            style={{
+              color: 'white',
+              borderRadius: 2,
+              paddingLeft: 20,
+              paddingRight: 20,
+              marginTop: 10,
+              marginRight: 10,
+              backgroundColor: sc.PRIMARY_COLOR,
+              boxShadow: `0 3px 5px 2px ${sc.PRIMARY_COLOR_OPACITY}`
+            }}
+            onClick={() => props.handleRequestReport(true, props.item.key)}
+          >Request Report
+          </Button>
+          */}
         </Grid>
       </PropertyInfo>
-    </FeedCard>
-  )
-}
-
-const CardExpanded = (props) => {
-  return (
-    <FeedCard expanded={props.expanded} item={props.item} key={props.item.key} addRef={(ref, key) => { props.cardRefs[key] = ref }}>
-      <Grid container>
-        <ImageViewer numBedrooms={props.item.num_bedrooms} numBathrooms={props.item.num_bathrooms} floorSize={props.item.floor_size} images={props.item.images} />
-      </Grid>
-      <Grid container flexDirection='row' alignItems='center' style={{ padding: 20, paddingBottom: 10 }}>
-        {/*
-        <FormGroup style={{ marginRight: 10 }}>
-          <FormControlLabel
-            control={
-              <StyledCheckBox
-                // checked={item.shortlisted}
-                // onChange={(event) => { item.shortlisted = true }}
-                // value={item.shortlisted}
-                color={sc.PRIMARY_COLOR}
-              />
-            }
-            label='Shortlist'
-          />
-        </FormGroup>
-        */}
-        <Button style={{ color: 'white', borderRadius: 20, paddingLeft: 20, paddingRight: 20, marginRight: 10, backgroundColor: sc.PRIMARY_COLOR }} onClick={() => {}}>Request Report</Button>
-      </Grid>
-      <Grid container>
-        <PropertyDetails {...props.item} />
-      </Grid>
     </FeedCard>
   )
 }
@@ -109,7 +111,6 @@ class Feed extends Component {
   constructor (props) {
     super(props)
     this.state = ({
-      premium_user: true,
       filterTabIndex: 0,
       cardFocusedTabIndex: 0,
       suburb: 'bantry_bay',
@@ -121,11 +122,17 @@ class Feed extends Component {
       y: '',
       data: [],
       scatterPlotData: [],
-      resultsCount: 0
+      resultsCount: 0,
+      viewDetails: false,
+      requestReport: false
     })
     this.variables = ['price', 'floor_size', 'num_bedrooms', 'num_bathrooms']
     this.numRoomsOptions = ['any', '1', '2', '3', '4', '5', '6+']
     this.cardRefs = {}
+  }
+
+  componentDidMount () {
+    // if (this.props.id) this.props.actions.feed.setFeedSelectedCard(this.props.id)
   }
 
   scrollToRef = (ref) => window.scrollTo(0, ref.offsetTop - 73)
@@ -142,6 +149,12 @@ class Feed extends Component {
 
   handleChangeTabs = (name, value) => {
     this.setState({ [name]: value })
+  }
+
+  handleChangeCardFocusedTab = (value, item) => {
+    this.setState({ cardFocusedTabIndex: value })
+    console.log(item)
+    this.props.actions.feed.filterFeedData(this.props.filters.priceRange, [item.num_bedrooms], [item.num_bathrooms])
   }
 
   handleChangeRooms = (name, value) => {
@@ -171,6 +184,10 @@ class Feed extends Component {
     this.props.actions.filters.setPriceRange(priceRange)
   }
 
+  handleChangeCompsPriceRange = (priceRange, item) => {
+    this.props.actions.feed.filterFeedData(priceRange, [item.num_bedrooms], [item.num_bathrooms])
+  }
+
   handleChangeMultiple = (name, event) => {
     const { options } = event.target
     const value = []
@@ -188,108 +205,95 @@ class Feed extends Component {
     this.setState({ extra_filters: filters })
   }
 
-  renderFeedStateContent = (state) => {
-    switch (state) {
-      case 'search_results':
-        return (
-          <Grid container justify='center'>
-            <Grid item xs={4}>
-              <SidePanel height={this.props.height}>
-                <Filters
-                  filters={this.props.filters}
-                  premium_user={this.state.premium_user}
-                  feedLoading={this.props.feed.loading}
-                  feedCount={this.props.feed.count}
-                  scatterPlotData={this.props.feed.filtered_data}
-                  handleChangeSuburb={(suburb) => this.handleChangeSuburb(suburb)}
-                  handleChangePriceRange={(priceRange) => this.handleChangePriceRange(priceRange)}
-                  handleChangeRooms={(name, value) => this.handleChangeRooms(name, value)}
-                  scrollToRef={(ref) => this.scrollToRef(ref)}
-                  cardRefs={this.cardRefs}
-                />
-              </SidePanel>
-            </Grid>
-            <Grid item xs={8} style={{ paddingRight: 10 }}>
-              <FeedCards
-                data={this.props.feed.filtered_data}
-                Card={Card}
-                cardRefs={this.cardRefs}
-                handleCardClick={(key) => this.props.history.push('/view_property/' + key)}
-              />
-              <Footer width={this.state.width} />
-            </Grid>
-          </Grid>
-        )
-      case 'shortlist':
-        return (
-          <div>
-            {this.renderFilters()}
-            {this.renderFeedCards()}
-          </div>
-        )
-      case 'card_focused':
-        return (
-          this.props.feed.loading
-            ? <Grid container justify='center'>
-              <Grid item xs={4}>
-                <SidePanel height={this.props.height}>
-                  <CardFocusedPanel
-                    filters={this.props.filters}
-                    premium_user={this.state.premium_user}
-                    feedLoading={this.props.feed.loading}
-                    handleBackButton={() => this.props.history.push('/feed')}
-                    scatterPlotData={[]}
-                  />
-                </SidePanel>
-              </Grid>
-              <Grid item xs={8}>
-                <FeedCards data={[]} expanded />
-              </Grid>
-            </Grid>
-            : <Grid container justify='center'>
-              <Grid item xs={4}>
-                <SidePanel height={this.props.height}>
-                  <CardFocusedPanel
-                    filters={this.props.filters}
-                    premium_user={this.state.premium_user}
-                    item={this.props.feed.data.get(this.props.id)}
-                    averagePrice={this.props.feed.average_price}
-                    averagePPSM={this.props.feed.average_ppsm}
-                    feedLoading={this.props.feed.loading}
-                    scatterPlotData={this.props.feed.filtered_data}
-                    scrollToRef={(ref) => this.scrollToRef(ref)}
-                    cardRefs={this.cardRefs}
-                    handleBackButton={() => this.props.history.push('/feed')}
-                    handleChangeTabs={(value) => this.handleChangeTabs('cardFocusedTabIndex', value)}
-                  />
-                </SidePanel>
-              </Grid>
-              <Grid item xs={8}>
-                {this.state.cardFocusedTabIndex === 0
-                  ? <FeedCards
-                    data={[this.props.feed.data.get(this.props.id)]}
-                    Card={CardExpanded}
-                    cardRefs={this.cardRefs}
-                    handleCardClick={() => {}}
-                    />
-                  : <FeedCards
-                    data={this.props.feed.filtered_data}
-                    Card={Card}
-                    cardRefs={this.cardRefs}
-                    handleCardClick={(key) => this.props.history.push('/view_property/' + key)}
-                    />}
-              </Grid>
-            </Grid>
-        )
+  handleCardClick = (key) => {
+    this.props.actions.feed.setFeedSelectedCard(this.props.feed.data.get(key))
+    this.props.history.push('/feed/' + key)
+  }
+
+  handleScatterPlotDotClick = (key) => {
+    this.scrollToRef(this.cardRefs[key])
+    this.props.actions.feed.setFeedSelectedCard(this.props.feed.data.get(key))
+    this.props.history.push('/feed/' + key)
+  }
+
+  handleViewDetails = (value, key) => {
+    if (key) {
+      this.handleCardClick(key)
+      this.props.actions.listingDetails.loadListingDetails(key)
     }
+    this.setState({ viewDetails: value })
+  }
+
+  handleRequestReport = (value, key) => {
+    key && this.handleCardClick(key)
+    this.setState({ requestReport: value })
+  }
+
+  renderFeed = () => {
+    console.log('premium_user:', this.props.user.details)
+    return (
+      <Grid container justify='center'>
+        <Grid item xs={4}>
+          <SidePanel height={this.props.height}>
+            <Filters
+              filters={this.props.filters}
+              premium_user={this.props.user.details.premium_user}
+              feedLoading={this.props.feed.loading}
+              feedCount={this.props.feed.count}
+              scatterPlotData={this.props.feed.filtered_data}
+              handleChangeSuburb={(suburb) => this.handleChangeSuburb(suburb)}
+              handleChangePriceRange={(priceRange) => this.handleChangePriceRange(priceRange)}
+              handleChangeRooms={(name, value) => this.handleChangeRooms(name, value)}
+              handleScatterPlotDotClick={(key) => this.handleScatterPlotDotClick(key)}
+              scrollToRef={(ref) => this.scrollToRef(ref)}
+              cardRefs={this.cardRefs}
+              item={this.props.feed.selected_card}
+              averagePrice={this.props.feed.average_price}
+              averagePPSM={this.props.feed.average_ppsm}
+              handleBackButton={() => this.props.history.push('/feed')}
+              handleChangeTabs={(value, item) => this.handleChangeCardFocusedTab(value, item)}
+            />
+          </SidePanel>
+        </Grid>
+        <Grid item xs={8} style={{ paddingRight: 10 }}>
+          <FeedCards
+            data={this.props.feed.filtered_data}
+            Card={Card}
+            selected={this.props.id}
+            cardRefs={this.cardRefs}
+            handleCardClick={(key) => this.handleCardClick(key)}
+            handleViewDetails={(item, key) => this.handleViewDetails(item, key)}
+            handleRequestReport={(item, key) => this.handleRequestReport(item, key)}
+          />
+          <Footer width={this.state.width} />
+        </Grid>
+      </Grid>
+    )
   }
 
   render () {
     return (
       <div style={{ backgroundColor: sc.LIGHT_GREY }}>
-        <TopNavigationBar value='feed' position='static' onChange={id => this.handleChangePath(id)} />
-        <TopNavigationBar value='feed' position='fixed' />
-        {this.renderFeedStateContent(this.props.feedState)}
+        <ViewDetails
+          open={this.state.viewDetails}
+          item={this.props.feed.selected_card}
+          handleViewDetails={(value) => this.handleViewDetails(value)}
+        >
+          <CardExpanded
+            details={this.props.listingDetails.details}
+            cardRefs={this.cardRefs}
+            item={this.props.feed.selected_card}
+          />
+        </ViewDetails>
+        <RequestReport
+          item={this.props.feed.selected_card}
+          open={this.state.requestReport}
+          requestPayment={() => this.props.actions.paymentActions.requestPayment()}
+          handleRequestReport={(value) => this.handleRequestReport(value)}
+        >
+          {/* <CardExpanded cardRefs={this.cardRefs} item={this.props.feed.selected_card} /> */}
+        </RequestReport>
+        {this.renderFeed()}
       </div>
     )
   }
@@ -297,13 +301,18 @@ class Feed extends Component {
 
 const mapStateToProps = (state) => ({
   filters: state.get('filters'),
-  feed: state.get('feed')
+  feed: state.get('feed'),
+  listingDetails: state.get('listingDetails'),
+  user: state.get('user')
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
+    auth: bindActionCreators(AuthActions, dispatch),
     filters: bindActionCreators(FiltersActions, dispatch),
-    feed: bindActionCreators(FeedActions, dispatch)
+    feed: bindActionCreators(FeedActions, dispatch),
+    listingDetails: bindActionCreators(ListingDetailsActions, dispatch),
+    paymentActions: bindActionCreators(PaymentActions, dispatch)
   }
 })
 

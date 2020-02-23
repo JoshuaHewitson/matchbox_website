@@ -18,8 +18,7 @@ import {
   ContentContainer,
   HighlightLine,
   TextContainer,
-  PageSection,
-  Login
+  PageSection
 } from '../components'
 import TextField from '@material-ui/core/TextField'
 import { styleConstants as sc } from '../config'
@@ -206,7 +205,7 @@ class PostListings extends Component {
           <PageSection>
             <ContentContainer primary width={this.state.width}>
               <div>
-                {this.state.user ? this.renderGraphPlotter() : (<Login />)}
+                {this.renderGraphPlotter()}
               </div>
             </ContentContainer>
           </PageSection>

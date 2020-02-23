@@ -25,6 +25,13 @@ export const setFeedLoading = (feedState) => ({
   }
 })
 
+export const setFeedSelectedCard = (card) => ({
+  type: types.SET_FEED_SELECTED_CARD,
+  payload: {
+    card
+  }
+})
+
 export const setFeedCount = (count) => ({
   type: types.SET_FEED_COUNT,
   payload: {

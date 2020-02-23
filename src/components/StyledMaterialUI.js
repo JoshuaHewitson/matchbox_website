@@ -200,9 +200,6 @@ export const StyledExpansionPanelSummary = withStyles({
 })(ExpansionPanelSummary)
 
 const useStylesBootstrap = makeStyles(theme => ({
-  arrow: {
-    color: sc.SECONDARY_COLOR_DARK_2
-  },
   tooltip: {
     backgroundColor: sc.SECONDARY_COLOR_DARK_2
   }
@@ -211,5 +208,5 @@ const useStylesBootstrap = makeStyles(theme => ({
 export const BootstrapTooltip = (props) => {
   const classes = useStylesBootstrap()
 
-  return <Tooltip arrow classes={classes} {...props} />
+  return <Tooltip classes={classes} {...props} />
 }

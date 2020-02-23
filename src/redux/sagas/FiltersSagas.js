@@ -19,7 +19,7 @@ const pareseDBFilters = (docs) => {
   return filters
 }
 
-export function * sagaSetFilters () {
+export function * sagaLoadFilters () {
   try {
     yield put(setFiltersLoading(true))
     const filtersDocRef = getFiltersDocRef('sales')
@@ -29,6 +29,7 @@ export function * sagaSetFilters () {
       call([areasDocRef, areasDocRef.get])
     ])
     const filters = pareseDBFilters(responses)
+    console.log(filters)
     yield put(setFilters(filters))
     yield put(setFiltersLoading(false))
   } catch (e) {
@@ -63,7 +64,7 @@ function * sagaSaveBedroomsToDB (action) {
 
 export default function * watchers () {
   yield all([
-    takeLatest(types.LOAD_FILTERS, sagaSetFilters),
+    takeLatest(types.LOAD_FILTERS, sagaLoadFilters),
     takeLatest(types.SET_SUBURB, sagaSaveSuburbToDB),
     takeLatest(types.SET_PRICE_RANGE, sagaSavePriceRangeToDB),
     takeLatest(types.SET_BATHROOMS, sagaSaveBathroomsToDB),

@@ -49,7 +49,7 @@ const BORDER_COLOR = 'rgb(220,220,220)'
 const IOS_BOX_SHADOW =
 '0 3px 1px rgba(47,137,128,0.1),0 4px 8px rgba(15, 48, 44,0.2),0 0 0 1px rgba(47,137,128,0.05)'
 
-const TOP_BAR_HEIGHT = 50
+const TOP_BAR_HEIGHT = 70
 
 export const styleConstants = {
   PRIMARY_COLOR: PRIMARY_COLOR,

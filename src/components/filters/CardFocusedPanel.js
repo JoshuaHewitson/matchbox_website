@@ -11,7 +11,7 @@ import {
   StyledTabs,
   StyledLinearProgress
 } from '../StyledMaterialUI'
-import TopBar from './TopBar'
+import PropertyProfileBar from '../feed/PropertyProfileBar'
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props
@@ -37,14 +37,14 @@ class CardFocusedPanel extends PureComponent {
 
   handleChangeTabs = (name, event, value) => {
     this.setState({ [name]: value })
-    this.props.handleChangeTabs(value)
+    this.props.handleChangeTabs(value, this.props.item)
   }
 
   render () {
     return (
       <Grid style={{ flex: 1 }}>
         {(this.props.filters.loading || this.props.feedLoading) && <StyledLinearProgress variant='query' />}
-        <TopBar item={this.props.item} handleBackButton={() => this.props.handleBackButton()} thumb={this.props.feedLoading ? '' : this.props.item.images[0].src} />
+        <PropertyProfileBar item={this.props.item} handleBackButton={() => this.props.handleBackButton()} thumb={this.props.feedLoading ? '' : this.props.item.images[0].src} />
         <StyledTabs value={this.state.tabIndex} onChange={(event, value) => this.handleChangeTabs('tabIndex', event, value)} aria-label='styled tabs example'>
           <StyledTab label='ROI Calculations' />
           <StyledTab label='Sales Comps' />
