@@ -83,7 +83,7 @@ const Card = (props) => {
               backgroundColor: sc.SECONDARY_COLOR_DARK_2
             }}
             onClick={() => props.handleViewDetails(true, props.item.key)}
-          >Veiw Details
+          >View Details
           </Button>
           {/*
           <Button

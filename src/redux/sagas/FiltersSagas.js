@@ -15,7 +15,6 @@ const pareseDBFilters = (docs) => {
   filters.suburbs = suburbs
   filters.blocks = blocks
   filters.priceRange = [filters.price_min, filters.price_max]
-  console.log(filters)
   return filters
 }
 

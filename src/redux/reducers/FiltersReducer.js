@@ -12,8 +12,8 @@ const initialState = Record({
   price_max: 25000000,
   bedrooms: ['any'],
   bathrooms: ['any'],
-  suburb: 'green_point',
-  suburbs: { green_point: true },
+  suburb: 'foreshore',
+  suburbs: { foreshore: true },
   blocks: {}
 })
 

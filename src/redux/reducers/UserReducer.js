@@ -9,7 +9,7 @@ const initialState = Record({
 })
 
 const user = (state = initialState(), action) => {
-  console.log(state)
+  // console.log(state)
   switch (action.type) {
     case types.SET_USER_DETAILS:
       return state.set('details', action.payload.details)

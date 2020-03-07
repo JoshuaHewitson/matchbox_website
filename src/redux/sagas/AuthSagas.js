@@ -50,13 +50,13 @@ const defaultFilters = {
     houses: false,
     apartments: true
   },
-  priceRange: [10000000, 25000000],
-  price_min: 10000000,
-  price_max: 25000000,
+  priceRange: [5500000, 20000000],
+  price_min: 5500000,
+  price_max: 20000000,
   bedrooms: ['any'],
   bathrooms: ['any'],
-  suburb: 'green_point',
-  suburbs: { green_point: true },
+  suburb: 'foreshore',
+  suburbs: { foreshore: true },
   blocks: {}
 }
 
@@ -182,10 +182,10 @@ function * sagaEmailLogin (action) {
 
 export default function * watchers () {
   yield all([
-    yield takeLatest(types.AUTH_LOGOUT, sagaLogout),
-    yield takeLatest(types.CREATE_ANONYMOUS_USER, sagaCreateAnonymousUser),
-    yield takeLatest(types.AUTH_REGISTER, sagaUserRegistration),
-    yield takeLatest(types.AUTH_EMAIL_LOGIN, sagaEmailLogin),
-    yield takeLatest(types.AUTH_GOOGLE_LOGIN, sagaGoogleLogin)
+    takeLatest(types.AUTH_LOGOUT, sagaLogout),
+    takeLatest(types.CREATE_ANONYMOUS_USER, sagaCreateAnonymousUser),
+    takeLatest(types.AUTH_REGISTER, sagaUserRegistration),
+    takeLatest(types.AUTH_EMAIL_LOGIN, sagaEmailLogin),
+    takeLatest(types.AUTH_GOOGLE_LOGIN, sagaGoogleLogin)
   ])
 }

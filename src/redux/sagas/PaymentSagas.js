@@ -24,19 +24,19 @@ function * sagaPayfastSubscription (action) {
       // m_payment_id: '8787876'
     }
     console.log(data)
-    const response = yield fetch('https://us-central1-fire-matchbox.cloudfunctions.net/prop24Scraping', {
-      method: 'GET',
+    const response = yield fetch('https://us-central1-fire-matchbox.cloudfunctions.net/generateSubscriptionRequest', {
+      method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
-      }
-      // body: JSON.stringify(data)
+      },
+      body: JSON.stringify(data)
     })
     const payfastSubscriptionRequestURL = yield response.text()
     console.log(payfastSubscriptionRequestURL)
     // console.log('https://payfast.co.za/eng/process/?' + payfastSubscriptionRequestURL)
 
-    // window.location.href = 'https://www.payfast.co.za/eng/process/?' + payfastSubscriptionRequestURL
+    window.location.href = 'https://www.payfast.co.za/eng/process/?' + payfastSubscriptionRequestURL
   } catch (e) {
     console.log(e)
   }

@@ -6,6 +6,7 @@ import FeedSagas from './FeedSagas'
 import LoadDataSagas from './LoadDataSagas'
 import ListingDetailsSagas from './ListingDetailsSagas'
 import PaymentSagas from './PaymentSagas'
+import ScrapingSagas from './ScrapingSagas'
 
 function * rootSaga () {
   yield all([
@@ -15,7 +16,8 @@ function * rootSaga () {
     FeedSagas(),
     FiltersSagas(),
     ListingDetailsSagas(),
-    PaymentSagas()
+    PaymentSagas(),
+    ScrapingSagas()
   ])
 }
 

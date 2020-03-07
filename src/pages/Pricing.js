@@ -112,7 +112,7 @@ class Pricing extends PureComponent {
                 <div style={{ width: '100%', height: 30 }} />
                 {this.props.user.details.premium_user ? this.renderSubscribed()
                   : <Button
-                    disabled
+                    // disabled
                     style={{
                       minWidth: 150,
                       minHeight: 40,
@@ -127,8 +127,8 @@ class Pricing extends PureComponent {
                       this.setState({ button1Loading: true })
                       this.props.actions.paymentActions.requestSubscription('150')
                     }}
-                    >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'COMING SOON'}
-                  </Button>}
+                  >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'COMING SOON'}
+                    </Button>}
               </Grid>
             </Grid>
           </Grid>
