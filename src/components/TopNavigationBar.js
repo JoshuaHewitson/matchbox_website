@@ -59,7 +59,7 @@ class TopNavigationBar extends PureComponent {
     super(props)
     this.state = {
       loginForm: 'login',
-      loginFormOpen: false,
+      // loginFormOpen: false,
       loginLoading: false,
       loginFail: false,
       registrationLoading: false,
@@ -77,11 +77,13 @@ class TopNavigationBar extends PureComponent {
    }
 
    handleLoginButton = () => {
-     this.setState({ loginFormOpen: true })
+     // this.setState({ loginFormOpen: true })
+     this.props.authActions.setLoginDialogueOpen(true)
    }
 
    handleLoginFormClose = () => {
-     this.setState({ loginFormOpen: false })
+     // this.setState({ loginFormOpen: false })
+     this.props.authActions.setLoginDialogueOpen(false)
    }
 
    handleAttemptLogin = (email, password) => {
@@ -181,7 +183,7 @@ class TopNavigationBar extends PureComponent {
   renderLoginDialogue = () => {
     return (
       <Dialog
-        open={this.state.loginFormOpen}
+        open={this.props.auth.loginDialogueOpen}
         onClose={() => this.handleLoginFormClose()}
         aria-labelledby='form-dialog-title'
       >
@@ -232,7 +234,7 @@ class TopNavigationBar extends PureComponent {
   renderCreateAccountDialogue = () => {
     return (
       <Dialog
-        open={this.state.loginFormOpen}
+        open={this.props.auth.loginDialogueOpen}
         onClose={() => this.handleLoginFormClose()}
         aria-labelledby='form-dialog-title'
       >
@@ -376,6 +378,7 @@ class TopNavigationBar extends PureComponent {
                 </Grid>
                 {this.renderButton('find property', '/feed')}
                 {/* this.renderButton('admin', '/admin') */}
+                {this.renderButton('industry', '/industry')}
                 {this.renderButton('pricing', '/pricing')}
                 {this.renderButton('contact us', '/contact-us')}
               </Grid>

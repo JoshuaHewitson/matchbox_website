@@ -7,6 +7,10 @@ import GraphPlotter from './pages/GraphPlotter'
 import Feed from './pages/Feed'
 import Pricing from './pages/Pricing'
 import ContactUs from './pages/ContactUs'
+import Industry from './pages/Industry'
+import HowToSpotAGreatInvestment from './pages/blogs/HowToSpotAGreatInvestment'
+import SecretToPropertyInvestment from './pages/blogs/SecretToPropertyInvestment'
+import ForeignInvestors from './pages/blogs/ForeignInvestors'
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
 import './App.css'
 import { TopNavigationBar, TopFiller } from './components'
@@ -26,6 +30,7 @@ const TopBar = (props) => {
         authActions={props.authActions}
         userActions={props.UserActions}
         userDetails={props.userDetails}
+        auth={props.auth}
         position='fixed'
       />
       <TopFiller />
@@ -44,6 +49,10 @@ const Page = (props) => {
       {id === 'graph-plotter' && <GraphPlotter />}
       {id === 'feed' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
       {id === 'admin' && <Admin />}
+      {id === 'industry' && <Industry width={props.width} height={props.height} />}
+      {id === 'how-to-spot-a-great-investment' && <HowToSpotAGreatInvestment width={props.width} height={props.height} />}
+      {id === 'foreigner-investing-in-south-africa-5-things-you-should-know' && <ForeignInvestors width={props.width} height={props.height} />}
+      {id === 'the-secret-to-property-invesment-the-18-year-property-cycle' && <SecretToPropertyInvestment width={props.width} height={props.height} />}
       {id === 'pricing' && <Pricing width={props.width} height={props.height} />}
       {id === 'contact-us' && <ContactUs width={props.width} height={props.height} />}
     </div>
@@ -112,6 +121,7 @@ class Matchbox extends PureComponent {
                 authActions={this.props.actions.authActions}
                 userActions={this.props.actions.userActions}
                 userDetails={this.props.user.details}
+                auth={this.props.auth}
                 width={this.state.width}
                 height={this.state.height}
               />}
@@ -122,6 +132,7 @@ class Matchbox extends PureComponent {
                 authActions={this.props.actions.authActions}
                 userActions={this.props.actions.userActions}
                 userDetails={this.props.user.details}
+                auth={this.props.auth}
                 width={this.state.width}
                 height={this.state.height}
               />}
@@ -132,6 +143,7 @@ class Matchbox extends PureComponent {
                 authActions={this.props.actions.authActions}
                 userActions={this.props.actions.userActions}
                 userDetails={this.props.user.details}
+                auth={this.props.auth}
                 width={this.state.width}
                 height={this.state.height}
               />}
@@ -143,7 +155,8 @@ class Matchbox extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.get('user')
+  user: state.get('user'),
+  auth: state.get('auth')
 })
 
 const mapDispatchToProps = (dispatch) => ({

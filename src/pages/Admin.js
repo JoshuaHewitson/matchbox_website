@@ -21,7 +21,7 @@ class Admin extends Component {
 
   componentDidMount () {
     // this.authListener()
-    const initialURL = 'https://www.seeff.com/results/residential/for-sale/cape-town/green-point/house/66051/'
+    const initialURL = 'https://www.tysonprop.co.za/results/residential/for-sale/atlantic-seaboard/green-point/house/53609/' // 'https://www.seeff.com/results/residential/for-sale/cape-town/green-point/house/66051/'
     this.props.actions.ScrapingActions.getPageHTML(initialURL)
   }
 

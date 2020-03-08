@@ -22,7 +22,7 @@ function * sagaGetPageHTML (action) {
   const nameData = $('strong', '#sidebar-contact')
   const heading = $('#page-heading')[0].children[0].data
   const price = $('#heading-price')[0].children[0].data
-  const nextURL = $('.top-nav-counter-list')
+  const nextURL = $('.top-nav-prev')
   const agent1 = {
     name: nameData[0].children[0].data,
     numbers: [numberData[0].children[0].data, numberData[0].children[2].data]

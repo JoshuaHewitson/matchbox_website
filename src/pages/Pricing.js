@@ -10,6 +10,8 @@ import { styleConstants as sc } from '../config'
 
 import CheckIcon from '@material-ui/icons/Check'
 
+import { firebaseAuth } from '../services/Firebase'
+
 import {
   StyledSlider,
   StyledExpansionPanel,
@@ -19,6 +21,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as PaymentActions from '../redux/actions/PaymentActions'
+import * as AuthActions from '../redux/actions/AuthActions'
 
 class Pricing extends PureComponent {
   constructor (props) {
@@ -121,14 +124,18 @@ class Pricing extends PureComponent {
                       paddingLeft: 20,
                       paddingRight: 20,
                       margin: 10,
-                      backgroundColor: sc.BODY_TEXT_COLOR
+                      backgroundColor: sc.PRIMARY_COLOR
                     }}
                     onClick={() => {
-                      this.setState({ button1Loading: true })
-                      this.props.actions.paymentActions.requestSubscription('150')
+                      if (firebaseAuth.currentUser.isAnonymous) {
+                        this.props.actions.authActions.setLoginDialogueOpen(true)
+                      } else {
+                        this.setState({ button1Loading: true })
+                        this.props.actions.paymentActions.requestSubscription('150')
+                      }
                     }}
-                  >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'COMING SOON'}
-                    </Button>}
+                    >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'BUY NOW'}
+                  </Button>}
               </Grid>
             </Grid>
           </Grid>
@@ -231,7 +238,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    paymentActions: bindActionCreators(PaymentActions, dispatch)
+    paymentActions: bindActionCreators(PaymentActions, dispatch),
+    authActions: bindActionCreators(AuthActions, dispatch)
   }
 })
 

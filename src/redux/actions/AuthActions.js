@@ -40,3 +40,10 @@ export const googleAuthLogin = (onSuccess, onFail) => ({
   onSuccess,
   onFail
 })
+
+export const setLoginDialogueOpen = (state) => ({
+  type: types.SET_LOGIN_DIALOGUE_OPEN,
+  payload: {
+    state
+  }
+})
