@@ -174,13 +174,15 @@ class RoiCalculationsTab extends PureComponent {
               <Percentage
                 display={this.props.premium_user}
                 label='Interest rate'
-                interactiveDescription
+                // interactiveDescription
                 description={
                   <>
                   This is the unique interest rate the bank will offer you on your loan. The prime lending rate is 10%, but the bank may offer you a slightly higher or lower rate depending on certain factors. Read more about how banks determine interest rates
+                    {/*
                     <Link underline='always' style={{ color: sc.PRIMARY_COLOR }} href='/'>
                       {' '} here.
                     </Link>
+                    */}
                   </>
                 }
                 value={this.state.interest_rate}
@@ -338,16 +340,18 @@ class RoiCalculationsTab extends PureComponent {
         <div style={{ width: '100%', height: 20 }} />
         <Percentage
           label='Total ROI'
-          interactiveDescription
+          // interactiveDescription
           description={
             <>
             Total income over the mortgage period, minus your total interest paid over the period, divided by the price of the property.
               <br />
               <br />
               *These calculations do not take into account the future value of the property or any potential increase in rental income over the period.
+              {/*
               <Link underline='always' style={{ color: sc.PRIMARY_COLOR }} href='/'>
                 {' '} read more.
               </Link>
+              */}
             </>
           }
           display={this.props.premium_user}

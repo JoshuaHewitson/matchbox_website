@@ -48,6 +48,7 @@ const Page = (props) => {
       {id === 'post-listing' && <PostListings />}
       {id === 'graph-plotter' && <GraphPlotter />}
       {id === 'feed' && <Feed feedState='card_focused' id={id2} width={props.width} height={props.height} />}
+      {id === 'about' && <Home width={props.width} height={props.height} />}
       {id === 'admin' && <Admin />}
       {id === 'industry' && <Industry width={props.width} height={props.height} />}
       {id === 'how-to-spot-a-great-investment' && <HowToSpotAGreatInvestment width={props.width} height={props.height} />}
@@ -60,10 +61,11 @@ const Page = (props) => {
 }
 
 const HomePage = (props) => {
+  const { id } = useParams()
   return (
     <div>
       <TopBar {...props} />
-      <Home width={props.width} height={props.height} />
+      <Feed feedState='card_focused' id={id} width={props.width} height={props.height} />
     </div>
   )
 }
@@ -117,36 +119,15 @@ class Matchbox extends PureComponent {
         <Switch>
           <Route
             path='/' exact render={() =>
-              <HomePage
-                authActions={this.props.actions.authActions}
-                userActions={this.props.actions.userActions}
-                userDetails={this.props.user.details}
-                auth={this.props.auth}
-                width={this.state.width}
-                height={this.state.height}
-              />}
+              <HomePage {...this.props} width={this.state.width} height={this.state.height} />}
           />
           <Route
             path='/:id' exact render={() =>
-              <Page
-                authActions={this.props.actions.authActions}
-                userActions={this.props.actions.userActions}
-                userDetails={this.props.user.details}
-                auth={this.props.auth}
-                width={this.state.width}
-                height={this.state.height}
-              />}
+              <Page {...this.props} width={this.state.width} height={this.state.height} />}
           />
           <Route
             path='/:id/:id2' render={() =>
-              <Page
-                authActions={this.props.actions.authActions}
-                userActions={this.props.actions.userActions}
-                userDetails={this.props.user.details}
-                auth={this.props.auth}
-                width={this.state.width}
-                height={this.state.height}
-              />}
+              <Page {...this.props} width={this.state.width} height={this.state.height} />}
           />
         </Switch>
       </BrowserRouter>

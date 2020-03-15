@@ -367,16 +367,16 @@ class TopNavigationBar extends PureComponent {
                       // marginRight: 20
                     }}
                     onClick={() => {
-                      this.changePath('/')
+                      this.changePath('/about')
                     }}
                   >
                     <img alt='matchbox' src={logoText} style={{ height: 16 }} />
                   </MatchboxButton>
                   <Grid container justify='center'>
-                    {this.props.match.url === '/' && <HighlightLine />}
+                    {this.props.match.url === '/about' && <HighlightLine />}
                   </Grid>
                 </Grid>
-                {this.renderButton('find property', '/feed')}
+                {this.renderButton('find property', '/')}
                 {/* this.renderButton('admin', '/admin') */}
                 {this.renderButton('industry', '/industry')}
                 {this.renderButton('pricing', '/pricing')}

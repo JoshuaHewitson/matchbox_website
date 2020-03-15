@@ -67,18 +67,55 @@ class Pricing extends PureComponent {
                 <div style={{ width: '100%', height: 30 }} />
                 <Divider />
                 <div style={{ width: '100%', height: 30 }} />
+
                 <IncludedItem
-                  label='Full access to calculators'
-                  description='Allows you to calculate income, costs, interest payments, profits and yields on any property'
+                  label='Interactive market analysis'
+                  // description='Allows you to see size and pricing of all other properties on the market + how they compare to the property you have selected.'
                   included size='small'
                 />
                 <div style={{ width: '100%', height: 10 }} />
                 <IncludedItem
-                  label='Comparative market analysis'
-                  description='Allows you to see size and pricing of all other properties on the market + how it compares to the property you have selected.'
+                  label='Real time property comparisons'
+                  // description='Allows you to see size and pricing of all other properties on the market + how it compares to the property you have selected.'
                   included size='small'
                 />
-                <div style={{ width: '100%', height: 20 }} />
+                <div style={{ width: '100%', height: 10 }} />
+
+                <div style={{ display: 'flex', flex: 1 }}>
+                  <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}>Calculators for: </Typography>
+                </div>
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Cash on cash return'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Total return on investment'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Bond calculator'
+                  included size='small'
+                />
+                {/*
+                <IncludedItem
+                  label='Rental calculators'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Market-to-rent ratio'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Loan-to-value ratio'
+                  included size='small'
+                />
+                */}
+
                 {/*
                 <IncludedItem
                   label='Individual property report'
@@ -134,8 +171,8 @@ class Pricing extends PureComponent {
                         this.props.actions.paymentActions.requestSubscription('150')
                       }
                     }}
-                    >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'BUY NOW'}
-                  </Button>}
+                  >{this.state.button1Loading ? <CircularProgress color='white' size={20} /> : 'BUY NOW'}
+                    </Button>}
               </Grid>
             </Grid>
           </Grid>
@@ -153,15 +190,8 @@ class Pricing extends PureComponent {
                 <Divider />
                 <div style={{ width: '100%', height: 30 }} />
                 <IncludedItem
-                  label='Full access to calculators'
-                  description='Allows you to calculate income, costs, interest payments, profits and yields on any property'
-                  included
-                  size='small'
-                />
-                <div style={{ width: '100%', height: 10 }} />
-                <IncludedItem
-                  label='Comparative market analysis'
-                  description='Allows you to see size and pricing of all other properties on the market + how it compares to the property you have selected.'
+                  label='Premium investor plan'
+                  description='Full access to all items listed in premium investor plan'
                   included
                   size='small'
                 />
@@ -182,6 +212,30 @@ class Pricing extends PureComponent {
                   included
                   quantity={2}
                   size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <div style={{ display: 'flex', flex: 1 }}>
+                  <Typography variant='subtitle1' style={{ color: sc.BODY_TEXT_COLOR }}>Including: </Typography>
+                </div>
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Municipal valuation'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Last sold price'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Projected rental income'
+                  included size='small'
+                />
+                <div style={{ width: '100%', height: 10 }} />
+                <IncludedItem
+                  label='Projected Airbnb income'
+                  included size='small'
                 />
                 <div style={{ width: '100%', height: 30 }} />
                 {/*

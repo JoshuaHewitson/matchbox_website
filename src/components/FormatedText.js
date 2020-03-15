@@ -65,7 +65,7 @@ const LableDisplay = (props) => {
             <ui>read more</ui>
           </Link>
           */}
-        </>}
+          </>}
     >
       <Grid container justify='flex-end' alignItems='center' style={{ flex: 1 }}>
         <Grid><Typography variant={variant} style={{ color: color }}>{props.label}: </Typography></Grid>
@@ -88,20 +88,20 @@ const Display = (props) => {
         {props.display
           ? <Typography variant={variant} style={{ color: color }}>
             {props.children}
-          </Typography>
+            </Typography>
           : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
-            Premium only
-          </Typography>}
+            <Link style={{ color: sc.BODY_TEXT_COLOR }} href='/pricing'>Premium only</Link>
+            </Typography>}
       </LableDisplay>
     )
   } else {
     return props.display
       ? <Typography variant={variant} style={{ color: color }}>
         {props.children}
-        </Typography>
+      </Typography>
       : <Typography variant='caption' style={{ color: sc.BODY_TEXT_COLOR }}>
-          Premium only
-        </Typography>
+        <Link style={{ color: sc.BODY_TEXT_COLOR }} href='/pricing'>Premium only</Link>
+      </Typography>
   }
 }
 
@@ -148,8 +148,8 @@ Period.defaultProps = {
 export const IncludedItem = (props) => {
   return <Display disabled={!props.included} {...props}>
     {props.quantity ? <Quantity>{props.quantity}</Quantity>
-      : props.included ? <CheckIcon fontSize='large' /> : <CloseIcon fontSize='small' />}
-  </Display>
+      : props.included ? <CheckIcon fontSize='medium' /> : <CloseIcon fontSize='small' />}
+         </Display>
 }
 
 Period.defaultProps = {
