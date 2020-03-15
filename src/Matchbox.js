@@ -119,15 +119,37 @@ class Matchbox extends PureComponent {
         <Switch>
           <Route
             path='/' exact render={() =>
-              <HomePage {...this.props} width={this.state.width} height={this.state.height} />}
+              <HomePage
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                auth={this.props.auth}
+                width={this.state.width}
+                height={this.state.height}
+
+              />}
           />
           <Route
             path='/:id' exact render={() =>
-              <Page {...this.props} width={this.state.width} height={this.state.height} />}
+              <Page
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                auth={this.props.auth}
+                width={this.state.width}
+                height={this.state.height}
+              />}
           />
           <Route
             path='/:id/:id2' render={() =>
-              <Page {...this.props} width={this.state.width} height={this.state.height} />}
+              <Page
+                authActions={this.props.actions.authActions}
+                userActions={this.props.actions.userActions}
+                userDetails={this.props.user.details}
+                auth={this.props.auth}
+                width={this.state.width}
+                height={this.state.height}
+              />}
           />
         </Switch>
       </BrowserRouter>
